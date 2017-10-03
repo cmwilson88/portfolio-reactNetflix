@@ -1,3 +1,5 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 
 ::-webkit-scrollbar {
   width: 0px;
@@ -28,8 +30,8 @@
 }
 
 .testMovie {
-  height: 309px;
-  width: 550px;
+  height: 253px;
+  width: 400px;
   background-size: 100% 100%;
   margin: 10px 10px;
 
