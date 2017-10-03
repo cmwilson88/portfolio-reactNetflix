@@ -1,32 +1,39 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import './App.css';
+import MovieSlider from './MovieSlider/MovieSlider'
 
-import {getPopularMovies} from '../services/movieLists'
+import {getPopularMovies, getUpcomingMovies} from '../services/movieLists'
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      movies: ['Movie 1', 'Movie 2', 'Movie 3']
+      movies: [],
+      upcoming: []
     }
   }
 
   componentWillMount() {
-    getPopular().then(response => {
+    getPopularMovies().then(response => {
       this.setState({
         movies: response
+      })
+    })
+    getUpcomingMovies().then(response => {
+      this.setState({
+        upcoming: response
       })
     })
   }
 
   render() {
-    const movies = this.state.movies.map(movie => {
-      return (
-        <div>{movie}</div>
-      )
-    })
+    // const movies = this.state.movies.map((movie, index) => {
+    //   return (
+    //     <div className="testMovie" key={index} style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`}}></div>
+    //   )
+    // })
     return (
       <div className="App">
         <header className="App-header">
@@ -36,7 +43,14 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        {movies}
+        <div className='movieCategoryList'>
+          <h3>Trending</h3>
+            <MovieSlider movies={this.state.movies}/>
+        </div>
+        <div className='movieCategoryList'>
+          <h3>Upcoming</h3>
+            <MovieSlider movies={this.state.upcoming}/>
+        </div>
       </div>
     );
   }

@@ -1,3 +1,8 @@
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
 .App {
   text-align: center;
 }
@@ -20,6 +25,23 @@
 
 .App-intro {
   font-size: large;
+}
+
+.testMovie {
+  height: 309px;
+  width: 550px;
+  background-size: 100% 100%;
+  margin: 10px 10px;
+
+  flex-shrink: 0;
+}
+
+.moviesCarousel {
+  display: flex;
+  margin: 0 auto;
+  padding: 5px 20px;
+  width: 90%;
+  overflow-x: scroll;
 }
 
 @keyframes App-logo-spin {
