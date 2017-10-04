@@ -2,7 +2,7 @@
 @import "~slick-carousel/slick/slick-theme.css";
 
 ::-webkit-scrollbar {
-  width: 0px;
+  display: none;
 }
 
 .App {
@@ -29,21 +29,110 @@
   font-size: large;
 }
 
-.testMovie {
-  height: 253px;
-  width: 400px;
-  background-size: 100% 100%;
-  margin: 10px 10px;
 
-  flex-shrink: 0;
+.row {
+  width: 95%;
+  margin: 0 auto;
+  overflow: scroll;
 }
 
 .moviesCarousel {
-  display: flex;
-  margin: 0 auto;
-  padding: 5px 20px;
-  width: 90%;
-  overflow-x: scroll;
+  transition: 450ms transform;
+  font-size: 0;
+  white-space: nowrap;
+  margin: 50px 0;
+}
+
+.movieTile {
+  position: relative;
+  display: inline-block;
+  width: 250px;
+  height: 140.625px;
+  margin-right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 450ms all;
+  transform-origin: center left;
+}
+
+.tile_img {
+  width: 250px;
+  height: 140.625px;
+  object-fit: cover;
+}
+
+.tile__details {
+  position: absolute;
+  color: white;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  font-size: 10px;
+  opacity: 0;
+  background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  -webkit-transition: 450ms opacity;
+  transition: 450ms opacity;
+}
+.tile__details:after,
+.tile__details:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: #000;
+}
+.tile__details:after {
+  margin-top: -25px;
+  margin-left: -25px;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #ecf0f1;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1;
+}
+.tile__details:before {
+  content: '▶';
+  left: 0;
+  width: 100%;
+  font-size: 30px;
+  margin-left: 7px;
+  margin-top: -18px;
+  text-align: center;
+  z-index: 2;
+}
+.movieTile:hover .tile__details {
+  opacity: 1;
+}
+.tile__title {
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+}
+
+.row:hover {
+  overflow-y: visible;
+  z-index: 999;
+}
+
+.moviesCarousel:hover {
+  transform: translate3d(-62.5px, 0, 0);
+  z-index: 999;
+}
+.moviesCarousel:hover .movieTile {
+  opacity: .3;
+}
+
+.moviesCarousel:hover .movieTile:hover {
+  transform: scale(1.5);
+  opacity: 1;
+}
+.movieTile:hover ~ .movieTile {
+  transform: translate3d(125px, 0, 0);
 }
 
 @keyframes App-logo-spin {

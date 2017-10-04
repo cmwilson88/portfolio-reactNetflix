@@ -29,11 +29,7 @@ class App extends Component {
   }
 
   render() {
-    // const movies = this.state.movies.map((movie, index) => {
-    //   return (
-    //     <div className="testMovie" key={index} style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`}}></div>
-    //   )
-    // })
+
     return (
       <div className="App">
         <header className="App-header">
@@ -45,11 +41,19 @@ class App extends Component {
         </p>
         <div className='movieCategoryList'>
           <h3>Trending</h3>
-            <MovieSlider movies={this.state.movies}/>
+          <div className="row">
+            <div className="moviesCarousel">
+              <MovieSlider movies={this.state.movies}/>
+            </div>
+          </div>
         </div>
         <div className='movieCategoryList'>
           <h3>Upcoming</h3>
-            <MovieSlider movies={this.state.upcoming}/>
+          <div className="row">
+            <div className="moviesCarousel">
+              <MovieSlider movies={this.state.upcoming}/>
+            </div>
+          </div>
         </div>
       </div>
     );
