@@ -11,8 +11,12 @@ class App extends Component {
 
     this.state = {
       movies: [],
-      upcoming: []
+      upcoming: [],
+      leftMargin: -400
     }
+
+    this.moveRowRight = this.moveRowRight.bind(this)
+    this.moveRowLeft = this.moveRowLeft.bind(this)
   }
 
   componentWillMount() {
@@ -25,6 +29,23 @@ class App extends Component {
       this.setState({
         upcoming: response
       })
+    })
+  }
+
+  moveRowRight() {
+    let newMargin = this.state.leftMargin - 400
+    this.setState({
+      leftMargin: newMargin
+    })
+  }
+
+  moveRowLeft() {
+    let newMargin = this.state.leftMargin + 400
+    if(newMargin > 0) {
+      newMargin = 0
+    }
+    this.setState({
+      leftMargin: newMargin
     })
   }
 
@@ -42,9 +63,11 @@ class App extends Component {
         <div className='movieCategoryList'>
           <h3>Trending</h3>
           <div className="row">
-            <div className="moviesCarousel">
+            <button onClick={() => this.moveRowLeft()}>Left</button>
+            <div className="moviesCarousel" style={{marginLeft: `${this.state.leftMargin}px`}}>
               <MovieSlider movies={this.state.movies}/>
             </div>
+            <button onClick={() => this.moveRowRight()}>Right</button>
           </div>
         </div>
         <div className='movieCategoryList'>

@@ -37,7 +37,8 @@
 }
 
 .moviesCarousel {
-  transition: 450ms transform;
+  transition: 450ms 150ms transform,
+              600ms margin-left;
   font-size: 0;
   white-space: nowrap;
   margin: 50px 0;
@@ -51,7 +52,7 @@
   margin-right: 10px;
   font-size: 20px;
   cursor: pointer;
-  transition: 450ms all;
+  transition: 450ms 150ms all;
   transform-origin: center left;
 }
 
@@ -127,10 +128,20 @@
   opacity: .3;
 }
 
+.moviesCarousel:hover .movieTile:first-child:hover {
+  transform: scale(1.5) translateX(50px);
+  opacity: 1;
+}
+
 .moviesCarousel:hover .movieTile:hover {
   transform: scale(1.5);
   opacity: 1;
 }
+
+.movieTile:first-child:hover ~ .movieTile {
+  transform: translate(200px);
+}
+
 .movieTile:hover ~ .movieTile {
   transform: translate3d(125px, 0, 0);
 }
