@@ -1,16 +1,19 @@
 import React, {Component} from 'react'
+import {CSSTransitionGroup} from 'react-transition-group'
 import MovieSlider from './MovieSlider/MovieSlider'
-
+import '../App.css'
 class MovieCarousel extends Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			leftMargin: 0
+			leftMargin: 0,
+			moreInfoActive: false
 		}
 
     	this.moveRowRight = this.moveRowRight.bind(this)
     	this.moveRowLeft = this.moveRowLeft.bind(this)
+    	this.displayMoreInfo = this.displayMoreInfo.bind(this)
 	}
 
 	moveRowRight() {
@@ -30,8 +33,14 @@ class MovieCarousel extends Component {
     })
   }
 
+  displayMoreInfo() {
+  	this.setState({
+  		moreInfoActive: !this.state.moreInfoActive
+  	})
+  }
+
 	render() {
-		const testMovie = this.props.movies[1]
+		const testMovie = this.props.movies[0]
 		return testMovie ? (
 			<div className='movieCategoryRow'>
 	          <h3 className="rowHeader">{this.props.category}</h3>
@@ -44,7 +53,7 @@ class MovieCarousel extends Component {
 		          
 		          <div className="row">
 		            <div className="moviesCarousel" style={{marginLeft: `${this.state.leftMargin}px`}}>
-		              <MovieSlider movies={this.props.movies}/>
+		              <MovieSlider displayMoreInfo={this.displayMoreInfo} movies={this.props.movies}/>
 		            </div>
 		          </div>
 		          
@@ -56,15 +65,24 @@ class MovieCarousel extends Component {
 		          </span>
 	          
 	          </div>
-	     		
-	     		<section 
-	     			className="moreInfo" 
-	     			style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${testMovie.backdrop_path})`}}
-	     			>
-	     			<div className="moreInfoOverlay">
+	     			<CSSTransitionGroup
+				      transitionName="example"
+				      // transitionAppear={true}
+				      // transitionAppearTimeout={500}
+				      transitionEnterTimeout={500}
+				      transitionLeaveTimeout={500}>
+	     				{this.state.moreInfoActive ? (
+			     		<section 
+			     			className="moreInfo" 
+			     			key={testMovie.id} 
+			     			style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${testMovie.backdrop_path})`}}
+			     			>
+			     			<div className="moreInfoOverlay">
 
-	  				</div>
-	     		</section>
+			  				</div>
+			     		</section>
+	     		) : null}
+		     		</CSSTransitionGroup>
 	     </div>
 		) : 'Loading'
 	}

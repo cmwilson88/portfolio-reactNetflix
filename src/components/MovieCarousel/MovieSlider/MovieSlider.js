@@ -5,6 +5,7 @@ function MovieSlider(props) {
     const movies = props.movies.map((movie, index) => {
       return (
         <div 
+          onClick={props.displayMoreInfo}
           className="movieTile" 
           key={index}>
             <div className="tile_media">
