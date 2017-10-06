@@ -3,7 +3,7 @@ import logo from '../logo.svg';
 import './App.css';
 import MovieCarousel from './MovieCarousel/MovieCarousel'
 
-import {getPopularMovies, getUpcomingMovies} from '../services/movieLists'
+import {getPopularMovies, getUpcomingMovies, getTopFantasyMovies} from '../services/movieLists'
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +11,8 @@ class App extends Component {
 
     this.state = {
       movies: [],
-      upcoming: []
+      upcoming: [],
+      fantasy: []
     }
   }
 
@@ -26,61 +27,43 @@ class App extends Component {
         upcoming: response
       })
     })
+    getTopFantasyMovies().then(response => {
+      this.setState({
+        fantasy: response
+      })
+    })
   }
-
-        //  <div className='movieCategoryRow'>
-        //   <h3 className="rowHeader">Trending</h3>
-        //   <div className="movieRow">
-        //   <button 
-        //     className="leftRowButton"
-        //     onClick={() => this.moveRowLeft()}>Left</button>
-        //   <div className="row">
-        //     <div className="moviesCarousel" style={{marginLeft: `${this.state.leftMargin}px`}}>
-        //       <MovieSlider movies={this.state.movies}/>
-        //     </div>
-        //   </div>
-        //   <button 
-        //     className="rightRowButton"
-        //     onClick={() => this.moveRowRight()}>Right</button>
-        //   </div>
-        // </div>
-        // <div className='movieCategoryRow'>
-        //   <h3 className="rowHeader">Upcoming</h3>
-        //   <div className="movieRow">
-        //   <button 
-        //     className="leftRowButton"
-        //     onClick={() => this.moveRowLeft()}>Left</button>
-        //   <div className="row">
-        //     <div className="moviesCarousel" style={{marginLeft: `${this.state.leftMargin}px`}}>
-        //       <MovieSlider movies={this.state.upcoming}/>
-        //     </div>
-        //   </div>
-        //   <button 
-        //     className="rightRowButton"
-        //     onClick={() => this.moveRowRight()}>Right</button>
-        //   </div>
-        // </div>
 
 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <MovieCarousel
-          category={'Trending'}
-          movies={this.state.movies} />
-        <MovieCarousel
-          category={'Upcoming'}
-          movies={this.state.upcoming} />
+    let topMovie;
+    if(this.state.movies) {
+      topMovie = this.state.upcoming[1]
+    } 
 
+    return topMovie ? (
+      <div className="App">
+        <div style={{backgroundImage: `url(https://image.tmdb.org/t/p/w1280${topMovie.backdrop_path})`}} className="hero">
+          <div className="hero_overlay">
+            <h1 className="hero_title">
+              {topMovie.title}
+            </h1>
+          </div>
+        </div>
+        <div className="moviesContainer">
+          <MovieCarousel
+            category={'Trending'}
+            movies={this.state.movies} />
+          <MovieCarousel
+            category={'Upcoming'}
+            movies={this.state.upcoming} />
+          <MovieCarousel
+            category={'Fantasy'}
+            movies={this.state.fantasy} />
+        </div>
       </div>
-    );
+    )
+    : 'Loading'
   }
 }
 

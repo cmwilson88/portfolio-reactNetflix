@@ -1,12 +1,11 @@
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
-
 ::-webkit-scrollbar {
   display: none;
 }
 
 .App {
-  text-align: center;
+  font-family: 'Lato';
+  min-height: 100vh;
+  background-color: black;
 }
 
 .App-logo {
@@ -14,6 +13,29 @@
   height: 80px;
 }
 
+.hero {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60vh;
+  background-size: 100% 150%, 100%, 100%;
+  background-repeat: no-repeat;
+  background-position: top center;  
+}
+
+.hero_overlay {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 110%);
+}
+
+.hero_title {
+  margin-left: 5vw;
+  font-size: 5em;
+  font-size: bold;
+  line-height: 2.5;
+  color: #fff;
+}
 .App-header {
   background-color: #222;
   height: 150px;
@@ -29,8 +51,13 @@
   font-size: large;
 }
 
+.moviesContainer {
+  margin-top: -100px;
+}
+
+
 .movieCategoryRow {
-  margin: 50px 0;
+  margin: 25px 0;
   overflow-y:visible;
 }
 
@@ -38,6 +65,10 @@
   text-align: left;
   padding-left: 4vw;
   margin-bottom: -60px;
+
+  font-size: 1.35em;
+  font-weight: bold;
+  color: #fff;
 }
 
 .movieRow {
@@ -48,9 +79,16 @@
 
 .leftRowButton,
 .rightRowButton {
-  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 140.625px;
+  width: 4vw;
   position: absolute;
   z-index: 200;
+
+  color: #fff;
+  background-color: rgba(0,0,0,.45);
 }
 
 .leftRowButton {
@@ -98,6 +136,10 @@
 }
 
 .tile__details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   color: white;
   bottom: 0;
@@ -111,7 +153,37 @@
   -webkit-transition: 450ms opacity;
   transition: 450ms opacity;
 }
-.tile__details:after,
+
+.tile__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border: 1px solid rgba(255,255,255,.4);
+  border-radius: 50%;
+  background: rgba(0,0,0,.4);
+}
+
+.tile__button .fa {
+  color: rgba(255,255,255,.4);
+}
+
+.tile__title {
+  margin-top: .25em;
+  font-size: 1.7em;
+  white-space: pre-wrap;
+}
+
+.tile__rating {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  padding: 0 15px 15px 0 ;
+  font-size: 1.3em;
+}
+/*.tile__details:after,
 .tile__details:before {
   content: '';
   position: absolute;
@@ -141,47 +213,49 @@
   text-align: center;
   z-index: 2;
 }
+*/
 .movieTile:hover .tile__details {
   opacity: 1;
 }
-.tile__title {
+
+/*.tile__title {
   position: absolute;
   bottom: 0;
   padding: 10px;
 }
-
+*/
 .row:hover {
   overflow-y: visible;
 }
 
 .moviesCarousel:hover {
-  transform: translate3d(-62.5px, 0, 0);
+  transform: translate3d(-187.5px, 0, 0);
 }
 .moviesCarousel:hover .movieTile {
   opacity: .3;
 }
 
 .moviesCarousel:hover .movieTile:first-child:hover {
-  transform: scale(1.5) translateX(50px);
+  transform: scale(2.5) translateX(75px);
   opacity: 1;
 }
 
 .moviesCarousel:hover .movieTile:last-child:hover {
-  transform: scale(1.5) translateX(-50px);
+  transform: scale(2.5) translateX(-75px);
   opacity: 1;
 }
 
 .moviesCarousel:hover .movieTile:hover {
-  transform: scale(1.5);
+  transform: scale(2.5);
   opacity: 1;
 }
 
 .movieTile:first-child:hover ~ .movieTile {
-  transform: translate(200px);
+  transform: translate(565px);
 }
 
 .movieTile:hover ~ .movieTile {
-  transform: translate3d(125px, 0, 0);
+  transform: translate3d(375px, 0, 0);
 }
 
 @keyframes App-logo-spin {
