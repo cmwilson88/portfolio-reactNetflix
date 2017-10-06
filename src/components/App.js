@@ -3,7 +3,9 @@ import logo from '../logo.svg';
 import './App.css';
 import MovieCarousel from './MovieCarousel/MovieCarousel'
 
-import {getPopularMovies, getUpcomingMovies, getTopFantasyMovies} from '../services/movieLists'
+import {
+  getPopularMovies, getUpcomingMovies, getTopFantasyMovies, 
+  getTopComedyMovies, getTopHorrorMovies, getTopMysteryMovies} from '../services/movieLists'
 
 class App extends Component {
   constructor(props) {
@@ -12,7 +14,10 @@ class App extends Component {
     this.state = {
       movies: [],
       upcoming: [],
-      fantasy: []
+      fantasy: [],
+      comedy: [],
+      horror: [],
+      mystery: []
     }
   }
 
@@ -30,6 +35,21 @@ class App extends Component {
     getTopFantasyMovies().then(response => {
       this.setState({
         fantasy: response
+      })
+    })
+    getTopComedyMovies().then(response => {
+      this.setState({
+        comedy: response
+      })
+    })
+    getTopHorrorMovies().then(response => {
+      this.setState({
+        horror: response
+      })
+    })
+    getTopMysteryMovies().then(response => {
+      this.setState({
+        mystery: response
       })
     })
   }
@@ -60,6 +80,15 @@ class App extends Component {
           <MovieCarousel
             category={'Fantasy'}
             movies={this.state.fantasy} />
+          <MovieCarousel
+            category={'Comedy'}
+            movies={this.state.comedy} />
+          <MovieCarousel
+            category={'Horror'}
+            movies={this.state.horror} />
+          <MovieCarousel
+            category={'Mystery'}
+            movies={this.state.mystery} />
         </div>
       </div>
     )

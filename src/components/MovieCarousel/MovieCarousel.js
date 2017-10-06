@@ -31,7 +31,8 @@ class MovieCarousel extends Component {
   }
 
 	render() {
-		return (
+		const testMovie = this.props.movies[1]
+		return testMovie ? (
 			<div className='movieCategoryRow'>
 	          <h3 className="rowHeader">{this.props.category}</h3>
 	          <div className="movieRow">
@@ -55,8 +56,17 @@ class MovieCarousel extends Component {
 		          </span>
 	          
 	          </div>
-	        </div>
-		)
+	     		
+	     		<section 
+	     			className="moreInfo" 
+	     			style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${testMovie.backdrop_path})`}}
+	     			>
+	     			<div className="moreInfoOverlay">
+
+	  				</div>
+	     		</section>
+	     </div>
+		) : 'Loading'
 	}
 }
 
