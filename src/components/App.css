@@ -29,19 +29,54 @@
   font-size: large;
 }
 
+.movieCategoryRow {
+  margin: 50px 0;
+  overflow-y:visible;
+}
 
+.rowHeader {
+  text-align: left;
+  padding-left: 4vw;
+  margin-bottom: -60px;
+}
+
+.movieRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.leftRowButton,
+.rightRowButton {
+  height: 140px;
+  position: absolute;
+  z-index: 200;
+}
+
+.leftRowButton {
+  left: 0;
+}
+
+.rightRowButton {
+  right: 0;
+}
 .row {
+  display: flex;
+  position: relative;
+  z-index: 2;
   width: 95%;
-  margin: 0 auto;
-  overflow: scroll;
+  padding: 70px 70px 70px 4vw;
+  overflow-x: visible;
+  overflow-y: visible;
 }
 
 .moviesCarousel {
+  width: 80%;
   transition: 450ms 150ms transform,
               600ms margin-left;
   font-size: 0;
   white-space: nowrap;
-  margin: 50px 0;
+  overflow-y: visible;
 }
 
 .movieTile {
@@ -49,7 +84,7 @@
   display: inline-block;
   width: 250px;
   height: 140.625px;
-  margin-right: 10px;
+  margin-right: 2px;
   font-size: 20px;
   cursor: pointer;
   transition: 450ms 150ms all;
@@ -117,12 +152,10 @@
 
 .row:hover {
   overflow-y: visible;
-  z-index: 999;
 }
 
 .moviesCarousel:hover {
   transform: translate3d(-62.5px, 0, 0);
-  z-index: 999;
 }
 .moviesCarousel:hover .movieTile {
   opacity: .3;
@@ -130,6 +163,11 @@
 
 .moviesCarousel:hover .movieTile:first-child:hover {
   transform: scale(1.5) translateX(50px);
+  opacity: 1;
+}
+
+.moviesCarousel:hover .movieTile:last-child:hover {
+  transform: scale(1.5) translateX(-50px);
   opacity: 1;
 }
 
