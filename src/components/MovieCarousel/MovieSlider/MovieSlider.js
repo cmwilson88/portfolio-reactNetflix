@@ -1,11 +1,11 @@
 import React from 'react'
-import Slider from 'react-slick'
 
 function MovieSlider(props) {
     const movies = props.movies.map((movie, index) => {
       return (
         <div 
-          onClick={props.displayMoreInfo}
+          onMouseEnter={() => props.mouseEnterInfo(props.movies[index])}
+          onClick={() => props.displayMoreInfo(props.movies[index])}
           className="movieTile" 
           key={index}>
             <div className="tile_media">
