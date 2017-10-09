@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {CSSTransitionGroup} from 'react-transition-group'
 import MovieSlider from './MovieSlider/MovieSlider'
+import MovieMoreInfo from './MovieMoreInfo/MovieMoreInfo'
 import '../App.css'
+
 class MovieCarousel extends Component {
 	constructor(props) {
 		super(props)
@@ -51,9 +53,8 @@ class MovieCarousel extends Component {
   }
 
 	render() {
-		const testMovie = this.props.movies[0]
 		const displayMovie = this.state.moreInfoMovie
-		return testMovie ? (
+		return this.props.movies.length ? (
 			<div className='movieCategoryRow'>
 	          <h3 className="rowHeader">{this.props.category}</h3>
 	          <div className="movieRow">
@@ -64,8 +65,14 @@ class MovieCarousel extends Component {
 		            </span>
 		          
 		          <div className="row">
-		            <div className={this.state.moreInfoActive ? 'moviesCarousel-active' : 'moviesCarousel'} style={{marginLeft: `${this.state.leftMargin}px`}}>
-		              <MovieSlider moreInfoActive={this.state.moreInfoActive} mouseEnterInfo={this.moreInfoMouseEnter} displayMoreInfo={this.displayMoreInfo} movies={this.props.movies}/>
+		            <div 
+		            	className={this.state.moreInfoActive ? 'moviesCarousel-active' : 'moviesCarousel'} 
+		            	style={{marginLeft: `${this.state.leftMargin}px`}}>
+		              <MovieSlider 
+		              	moreInfoActive={this.state.moreInfoActive} 
+		              	mouseEnterInfo={this.moreInfoMouseEnter} 
+		              	displayMoreInfo={this.displayMoreInfo} 
+		              	movies={this.props.movies}/>
 		            </div>
 		          </div>
 		          
@@ -79,24 +86,13 @@ class MovieCarousel extends Component {
 	          </div>
 	     			<CSSTransitionGroup
 				      transitionName="example"
-				      transitionAppear={true}
-				      transitionAppearTimeout={500}
+				      transitionEnter={true}
 				      transitionEnterTimeout={500}
-				      transitionLeave={false}
-				      transitionLeaveTimeout={500}>
+				      transitionLeave={false}>
 	     				{this.state.moreInfoActive ? (
-			     		<section 
-			     			className="moreInfo" 
-			     			key={this.state.moreInfoMovie.id} 
-			     			>
-			     			<div className="moreInfoBG"
-			     				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${displayMovie.backdrop_path})`}}>
-				     			<div className="moreInfoOverlay">
-				     				<h1 className="hero_title">{displayMovie.title}</h1>
-				     				<p>{displayMovie.overview}</p>
-				  				</div>
-			     			</div>
-			     		</section>
+	     					<MovieMoreInfo
+	     						displayMovie={this.state.moreInfoMovie}
+	     					/>
 	     		) : null}
 		     		</CSSTransitionGroup>
 	     </div>

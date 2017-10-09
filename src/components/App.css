@@ -219,35 +219,14 @@
   width: 30%;
 }
 
-.example-appear {
-  opacity: 0.01;
-  transform: translateY(-20px);
-}
-
-.example-appear.example-appear-active {
-  opacity: 1;
-  transform: translateY(0px);
-  transition: all 500ms ease-in;
-}
 .example-enter {
-  /*transform: translateY(-20px);*/
+  transform: translateY(-20px);
   opacity: 0.01;
 }
 
 .example-enter.example-enter-active {
   opacity: 1;
-  /*transform: translateY(0px);*/
-  transition: all 500ms ease-in;
-}
-
-.example-leave {
-  opacity: 1;
-  /*transform: translateY(0px);*/
-}
-
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  /*transform: translateY(-20px);*/
+  transform: translateY(0px);
   transition: all 500ms ease-in;
 }
 
