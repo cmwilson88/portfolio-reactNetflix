@@ -5,7 +5,7 @@ class MovieMoreInfo extends Component {
 		super(props) 
 
 		this.state = {
-			detailedMovie: null
+			detailedMovie: props.displayMovie
 		}
 	}
 

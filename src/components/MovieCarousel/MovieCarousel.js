@@ -14,10 +14,12 @@ class MovieCarousel extends Component {
 			moreInfoMovie: null
 		}
 
-    	this.moveRowRight = this.moveRowRight.bind(this)
-    	this.moveRowLeft = this.moveRowLeft.bind(this)
-    	this.moreInfoMouseEnter = this.moreInfoMouseEnter.bind(this)
-    	this.displayMoreInfo = this.displayMoreInfo.bind(this)
+		let timeout = null;
+  	
+  	this.moveRowRight = this.moveRowRight.bind(this)
+  	this.moveRowLeft = this.moveRowLeft.bind(this)
+  	this.moreInfoMouseEnter = this.moreInfoMouseEnter.bind(this)
+  	this.displayMoreInfo = this.displayMoreInfo.bind(this)
 	}
 
 	moveRowRight() {
@@ -45,15 +47,19 @@ class MovieCarousel extends Component {
   }
 
   moreInfoMouseEnter(movie) {
-		setTimeout(() => {
+  	if(this.timeout) {
+  		clearTimeout(this.timeout)
+  	}
+
+		this.timeout = setTimeout(() => {
 			this.setState({
 				moreInfoMovie: movie
 			})
+			this.timeout = null;
 		}, 500)
   }
 
 	render() {
-		const displayMovie = this.state.moreInfoMovie
 		return this.props.movies.length ? (
 			<div className='movieCategoryRow'>
 	          <h3 className="rowHeader">{this.props.category}</h3>
@@ -86,12 +92,12 @@ class MovieCarousel extends Component {
 	          </div>
 	     			<CSSTransitionGroup
 				      transitionName="example"
-				      transitionEnter={true}
 				      transitionEnterTimeout={500}
 				      transitionLeave={false}>
-	     				{this.state.moreInfoActive ? (
+	     			{this.state.moreInfoActive ? (
 	     					<MovieMoreInfo
 	     						displayMovie={this.state.moreInfoMovie}
+	     						key={this.state.moreInfoMovie.id}
 	     					/>
 	     		) : null}
 		     		</CSSTransitionGroup>

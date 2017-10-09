@@ -191,6 +191,7 @@
   height: 500px;
   width: 100%;
   margin: -60px auto 0;
+
 }
 
 .moreInfoBG {
@@ -199,6 +200,7 @@
   background-repeat: no-repeat;
   
   height: 100%;
+  transition: 500ms background;
 }
 
 .moreInfoOverlay {
@@ -230,6 +232,14 @@
   transition: all 500ms ease-in;
 }
 
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: all 500ms ease-in;
+}
 
 
 
