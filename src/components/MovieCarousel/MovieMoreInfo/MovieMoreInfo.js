@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {getMovieInfo} from '../../../services/moreInfo'
 
 class MovieMoreInfo extends Component {
 	constructor(props) {
@@ -7,6 +8,17 @@ class MovieMoreInfo extends Component {
 		this.state = {
 			detailedMovie: props.displayMovie
 		}
+	}
+
+	componentDidMount() {
+		getMovieInfo(this.props.displayMovie.id).then(response => {
+			console.log(this.props.displayMovie.id)
+			console.log('Get movie info')
+			console.log(response)
+			this.setState({
+				detailedMovie: response
+			})
+		}).catch(err => console.log(err))
 	}
 
 	render() {
