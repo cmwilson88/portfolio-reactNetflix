@@ -47,7 +47,7 @@ class MovieCarousel extends Component {
 			this.setState({
 				moreInfoMovie: movie
 			})
-		}, 750)
+		}, 500)
   }
 
 	render() {
@@ -79,18 +79,23 @@ class MovieCarousel extends Component {
 	          </div>
 	     			<CSSTransitionGroup
 				      transitionName="example"
+				      transitionAppear={true}
+				      transitionAppearTimeout={500}
 				      transitionEnterTimeout={500}
+				      transitionLeave={false}
 				      transitionLeaveTimeout={500}>
 	     				{this.state.moreInfoActive ? (
 			     		<section 
 			     			className="moreInfo" 
 			     			key={this.state.moreInfoMovie.id} 
-			     			style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${displayMovie.backdrop_path})`}}
 			     			>
-			     			<div className="moreInfoOverlay">
-			     				<h1 className="hero_title">{displayMovie.title}</h1>
-			     				<p>{displayMovie.overview}</p>
-			  				</div>
+			     			<div className="moreInfoBG"
+			     				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${displayMovie.backdrop_path})`}}>
+				     			<div className="moreInfoOverlay">
+				     				<h1 className="hero_title">{displayMovie.title}</h1>
+				     				<p>{displayMovie.overview}</p>
+				  				</div>
+			     			</div>
 			     		</section>
 	     		) : null}
 		     		</CSSTransitionGroup>

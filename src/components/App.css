@@ -6,6 +6,7 @@
   font-family: 'Lato';
   height: 100%;
   background-color: black;
+  overflow-x: hidden;
 }
 
 .App-logo {
@@ -190,12 +191,14 @@
   height: 500px;
   width: 100%;
   margin: -60px auto 0;
-  background-color: #333;
+}
+
+.moreInfoBG {
   background-size: 70% 100%;
   background-position: center right;
   background-repeat: no-repeat;
-
-  transition: 500ms all;
+  
+  height: 100%;
 }
 
 .moreInfoOverlay {
@@ -215,26 +218,37 @@
   margin-left: 4vw;
   width: 30%;
 }
-.example-enter {
+
+.example-appear {
+  opacity: 0.01;
   transform: translateY(-20px);
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: all 500ms ease-in;
+}
+.example-enter {
+  /*transform: translateY(-20px);*/
   opacity: 0.01;
 }
 
 .example-enter.example-enter-active {
   opacity: 1;
-  transform: translateY(0px);
-  transition: all .5s ease-in;
+  /*transform: translateY(0px);*/
+  transition: all 500ms ease-in;
 }
 
 .example-leave {
   opacity: 1;
-  transform: translateY(0px);
+  /*transform: translateY(0px);*/
 }
 
 .example-leave.example-leave-active {
   opacity: 0.01;
-  transform: translateY(-20px);
-  transition: all 300ms ease-in;
+  /*transform: translateY(-20px);*/
+  transition: all 500ms ease-in;
 }
 
 
@@ -272,7 +286,7 @@
   opacity: 1;
 }
 
-.moviesCarousel: hover .movieTile:first-child:hover ~ .movieTile {
+.moviesCarousel:hover .movieTile:first-child:hover ~ .movieTile {
   transform: translate(565px);
 }
 
