@@ -75,6 +75,7 @@ class MovieCarousel extends Component {
 		            	className={this.state.moreInfoActive ? 'moviesCarousel-active' : 'moviesCarousel'} 
 		            	style={{marginLeft: `${this.state.leftMargin}px`}}>
 		              <MovieSlider 
+		              	moreInfoMovie={this.state.moreInfoMovie}
 		              	moreInfoActive={this.state.moreInfoActive} 
 		              	mouseEnterInfo={this.moreInfoMouseEnter} 
 		              	displayMoreInfo={this.displayMoreInfo} 

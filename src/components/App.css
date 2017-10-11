@@ -104,17 +104,16 @@
   display: inline-block;
   width: 250px;
   height: 140.625px;
-  margin-right: 2px;
+  margin-right: 3px;
+  margin-left: 3px;
+
+  background-size: cover;
+
   font-size: 20px;
   cursor: pointer;
-  transition: 450ms 150ms all;
+  transition: 450ms 150ms transform,
+              450ms 150ms opacity;
   transform-origin: center left;
-}
-
-.tile_img {
-  width: 250px;
-  height: 140.625px;
-  object-fit: cover;
 }
 
 .tile__details {
@@ -170,7 +169,7 @@
 .moreInfo {
   height: 500px;
   width: 100%;
-  margin: -60px auto 0;
+  margin: -68px auto 0;
 
 }
 
@@ -197,7 +196,7 @@
 
 
 .example-enter {
-  transform: translateY(-20px);
+  transform: translateY(-5px);
   opacity: 0.01;
 }
 
