@@ -99,7 +99,8 @@
   overflow-y: visible;
 }
 
-.movieTile {
+.movieTile,
+.movieTile-active {
   position: relative;
   display: inline-block;
   width: 250px;
@@ -114,6 +115,21 @@
   transition: 450ms 150ms transform,
               450ms 150ms opacity;
   transform-origin: center left;
+}
+
+.movieTile-active {
+  outline: 3px solid #fff;
+}
+
+.movieTile-active:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -11px;
+    margin-left: -10px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #fff;
 }
 
 .tile__details {
@@ -169,7 +185,7 @@
 .moreInfo {
   height: 500px;
   width: 100%;
-  margin: -68px auto 0;
+  margin: -69px auto 0;
 
 }
 
