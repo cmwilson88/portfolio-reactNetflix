@@ -242,6 +242,37 @@
 }
 
 
+.movie_info {
+  display: flex;
+  color: #888;
+}
+
+.movie_info li {
+  display: inline-block;
+  margin-left: 2px;
+}
+
+.movie_info li a {
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.movie_info li a:hover {
+  text-decoration: underline;
+}
+
+.movies_info_overview {
+
+}
+
+.movie_info_label {
+  font-weight: bold;
+}
+
+
+
+
 
 /*REFACTOR ALL OF THIS WITH SCSS LATER*/
 .movieTile:hover .tile__details {

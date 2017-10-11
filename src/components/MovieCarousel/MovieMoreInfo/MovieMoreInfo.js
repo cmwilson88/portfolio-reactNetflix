@@ -15,10 +15,9 @@ class MovieMoreInfo extends Component {
 
 	componentDidMount() {
 		getMovieInfo(this.props.displayMovie.id).then(response => {
-			console.log(response)
 			this.setState({
 				detailedMovie: response,
-				cast: response.credits.cast,
+				cast: response.credits.cast.splice(0,5),
 				directors: response.credits.crew
 						.filter(item => item.job === 'Director'),
 				genres: response.genres
@@ -26,21 +25,42 @@ class MovieMoreInfo extends Component {
 		}).catch(err => console.log(err))
 	}
 
+	calculateRuntime(x) {
+		let minutes = 0;
+		let hours = 0;
+		while (x >= 60) {
+			x = x-60
+			hours++
+		}
+		minutes = Math.ceil(x);
+		return `${hours}h${minutes}m`
+	};
+
 	render() {
 		const detailedMovie = this.state.detailedMovie
 		const releaseYear = detailedMovie.release_date.substr(0,4)
 		
+		let runtime = this.calculateRuntime(detailedMovie.runtime)
 		let cast;
 		let directors;
 		let genres;
 		
+		if(this.state.runtime) {
+			runtime = this.state.runtime
+		}		
+		
 		if(this.state.cast) {
-			cast = this.state.cast.splice(0,5)
-							.map(castMember => {
-								return (
-									<li key={castMember.id}>{castMember.name}</li>
-								)
-							})	
+			cast = this.state.cast
+				.map((castMember, index) => {
+					return (
+						<li key={castMember.id}>
+							<a href="#">
+								{castMember.name}{index < this.state.cast.length -1 ? ',\u00A0' : ''}
+							</a>
+						</li>
+					)
+				})
+			console.log(cast)	
 		}
 
 		if(this.state.directors) {
@@ -68,14 +88,14 @@ class MovieMoreInfo extends Component {
 	     			<div className="moreInfoOverlay">
 	     				<h1 className="hero_title">{detailedMovie.title}</h1>
 	     				<section className="movie_info">
-	     					<span>{detailedMovie.runtime}</span>
+	     					<span>{runtime}</span>
 	     					<span>{releaseYear}</span>
 	     				</section>
-	     				<p>{detailedMovie.overview}</p>
+	     				<p className="movie_info_overview">{detailedMovie.overview}</p>
 	     				<br/>
 	     				{cast ? (
 		     				<section className="movie_info">
-		     					<span>Cast:</span>
+		     					<span className="movie_info_label">Cast:</span>
 			     					<ul>
 			     						{cast}
 			     					</ul>
@@ -84,9 +104,9 @@ class MovieMoreInfo extends Component {
      					{directors ? (
 	     					<section className="movie_info">
 	     						{directors.length > 1 ? (
-	     							<span>Directors:</span>
+	     							<span className="movie_info_label">Directors:</span>
 	     						 ) : (
-	     						 	<span>Director:</span>
+	     						 	<span className="movie_info_label">Director:</span>
 	     						)} 
 	     						<ul>
 	     							{directors}
@@ -96,9 +116,9 @@ class MovieMoreInfo extends Component {
 	     				{genres ? (
 	     					<section className="movie_info">
 	     						{genres.length > 1 ? (
-	     							<span>Genres:</span>
+	     							<span className="movie_info_label">Genres:</span>
 	     						) : (
-	     							<span>Genre:</span>
+	     							<span className="movie_info_label">Genre:</span>
 	     						)}
 	     						<ul>
 	     							{genres}
