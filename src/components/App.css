@@ -3,15 +3,10 @@
 }
 
 .App {
-  font-family: 'Lato';
+  font-family: Helvetica;
   height: 100%;
   background-color: black;
   overflow-x: hidden;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
 }
 
 .hero {
@@ -33,29 +28,14 @@
 
 .hero_title {
   margin-left: 5vw;
-  font-size: 5em;
-  font-size: bold;
+  font-size: 2.5em;
+  font-weight: bold;
   color: #fff;
-}
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
 }
 
 .moviesContainer {
   margin-top: -100px;
 }
-
 
 .movieCategoryRow {
   margin: 25px 0;
@@ -204,22 +184,17 @@
 }
 
 .moreInfoOverlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
   width: 100%;
   background: linear-gradient(to left, rgba(0,0,0,0) 0%,rgba(0,0,0,1)  70%);
   color: #fff;
   padding-top: 3em;
 }
-.moreInfoOverlay h1 {
-  width: 30%;
-  font-size: 2.5em;
-  line-height: 1.2;
-}
 
-.moreInfoOverlay p  {
-  margin-left: 4vw;
-  width: 30%;
-}
+
 
 .example-enter {
   transform: translateY(-20px);
@@ -241,33 +216,84 @@
   transition: all 500ms ease-in;
 }
 
-
 .movie_info {
-  display: flex;
-  color: #888;
+  width: 40vw;
+  margin-left: 5vw;
 }
 
-.movie_info li {
+.mi_section {
+  color: #888;
+  margin-bottom: 15px;
+}
+
+.mi_cast_crew {
+  display: flex;
+  margin-bottom: 2px;
+}
+
+.mi_cast_crew span {
+  margin-right: 2px;
+}
+
+.mi_year_time {
+  font-weight: bold;
+}
+
+.mi_year_time span {
+  margin-right: .5em;
+}
+
+.movie_info_title {
+  font-size: 2.5em;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.mi_section li {
   display: inline-block;
   margin-left: 2px;
 }
 
-.movie_info li a {
+.mi_section li a {
   text-decoration: none;
   color: #fff;
   cursor: pointer;
 }
 
-.movie_info li a:hover {
+.mi_section li a:hover {
   text-decoration: underline;
 }
 
-.movies_info_overview {
-
-}
 
 .movie_info_label {
   font-weight: bold;
+}
+
+.movie_info_overview {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.moreInfoNav {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+}
+
+.moreInfoNav li {
+  padding: 10px;
+  border-bottom: 2.5px solid transparent;
+
+  color: #888;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.moreInfoNav li:hover {
+  color: #fff;
+  border-bottom: 2.5px solid red;
 }
 
 

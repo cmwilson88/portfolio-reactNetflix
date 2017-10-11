@@ -33,7 +33,7 @@ class MovieMoreInfo extends Component {
 			hours++
 		}
 		minutes = Math.ceil(x);
-		return `${hours}h${minutes}m`
+		return `${hours}h ${minutes}m`
 	};
 
 	render() {
@@ -41,13 +41,11 @@ class MovieMoreInfo extends Component {
 		const releaseYear = detailedMovie.release_date.substr(0,4)
 		
 		let runtime = this.calculateRuntime(detailedMovie.runtime)
+		let match = detailedMovie.vote_average * 10
 		let cast;
 		let directors;
 		let genres;
-		
-		if(this.state.runtime) {
-			runtime = this.state.runtime
-		}		
+			
 		
 		if(this.state.cast) {
 			cast = this.state.cast
@@ -55,8 +53,9 @@ class MovieMoreInfo extends Component {
 					return (
 						<li key={castMember.id}>
 							<a href="#">
-								{castMember.name}{index < this.state.cast.length -1 ? ',\u00A0' : ''}
+								{castMember.name}
 							</a>
+							{index < this.state.cast.length -1 ? ',\u00A0' : ''}
 						</li>
 					)
 				})
@@ -64,17 +63,27 @@ class MovieMoreInfo extends Component {
 		}
 
 		if(this.state.directors) {
-			directors = this.state.directors.map(director => {
+			directors = this.state.directors.map((director,index) => {
 				return (
-					<li key={director.id}>{director.name}</li>
+					<li key={director.id}>
+						<a href="#">
+							{director.name}
+						</a>
+						{index < this.state.directors.length -1 ? ',\u00A0' : ''}
+					</li>
 				)
 			})
 		}
 
 		if(this.state.genres) {
-			genres = this.state.genres.map(genre => {
+			genres = this.state.genres.map((genre, index) => {
 				return (
-					<li key={genre.id}>{genre.name}</li>
+					<li key={genre.id}>
+						<a href="#">
+							{genre.name}
+						</a>
+						{index < this.state.genres.length -1 ? ',\u00A0' : ''}
+					</li>
 				)
 			})
 		}
@@ -86,46 +95,66 @@ class MovieMoreInfo extends Component {
 	 			<div className="moreInfoBG"
 	 				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${this.props.displayMovie.backdrop_path})`}}>
 	     			<div className="moreInfoOverlay">
-	     				<h1 className="hero_title">{detailedMovie.title}</h1>
-	     				<section className="movie_info">
-	     					<span>{runtime}</span>
-	     					<span>{releaseYear}</span>
-	     				</section>
-	     				<p className="movie_info_overview">{detailedMovie.overview}</p>
-	     				<br/>
-	     				{cast ? (
-		     				<section className="movie_info">
-		     					<span className="movie_info_label">Cast:</span>
-			     					<ul>
-			     						{cast}
-			     					</ul>
+	     				<div className="movie_info">
+		     				<h1 className="movie_info_title">{detailedMovie.title}</h1>
+		     				<section className="mi_section mi_year_time">
+		     					<span style={{
+                    				color: match >= 70 
+                    				? 'green' 
+                    				: match >= 40
+                    				? 'orange' 
+                    				: 'red'
+                  					}}>
+                  					{match}% Match
+                  				</span>
+		     					<span>{releaseYear}</span>
+		     					<span>{runtime}</span>
 		     				</section>
-	     				): null}
-     					{directors ? (
-	     					<section className="movie_info">
-	     						{directors.length > 1 ? (
-	     							<span className="movie_info_label">Directors:</span>
-	     						 ) : (
-	     						 	<span className="movie_info_label">Director:</span>
-	     						)} 
-	     						<ul>
-	     							{directors}
-	     						</ul>
-	     					</section>
-	     				) : null}
-	     				{genres ? (
-	     					<section className="movie_info">
-	     						{genres.length > 1 ? (
-	     							<span className="movie_info_label">Genres:</span>
-	     						) : (
-	     							<span className="movie_info_label">Genre:</span>
-	     						)}
-	     						<ul>
-	     							{genres}
-	     						</ul>
-	     					</section>
-	     				) : null}
-	     				<p>{detailedMovie.tagline}</p>
+		     				<p className="mi_section movie_info_overview">{detailedMovie.overview}</p>
+		     				<br/>
+		     				<div className="mi_section">
+			     				{cast ? (
+				     				<section className="mi_cast_crew">
+				     					<span className="movie_info_label">Cast:</span>
+					     					<ul>
+					     						{cast}
+					     					</ul>
+				     				</section>
+			     				): null}
+		     					{directors ? (
+			     					<section className="mi_cast_crew">
+			     						{directors.length > 1 ? (
+			     							<span className="movie_info_label">Directors:</span>
+			     						 ) : (
+			     						 	<span className="movie_info_label">Director:</span>
+			     						)} 
+			     						<ul>
+			     							{directors}
+			     						</ul>
+			     					</section>
+			     				) : null}
+			     				{genres ? (
+			     					<section className="mi_cast_crew">
+			     						{genres.length > 1 ? (
+			     							<span className="movie_info_label">Genres:</span>
+			     						) : (
+			     							<span className="movie_info_label">Genre:</span>
+			     						)}
+			     						<ul>
+			     							{genres}
+			     						</ul>
+			     					</section>
+			     				) : null}
+		     				</div>
+		     				<p className="mi_section">{detailedMovie.tagline}</p>
+	     				</div>
+
+
+	     				<ul className="moreInfoNav">
+	     					<li>Overview</li>
+	     					<li>More Like This</li>
+	     					<li>Details</li>
+	     				</ul>
 	  				</div>
 	 			</div>
 	 		</section>
