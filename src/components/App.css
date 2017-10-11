@@ -105,8 +105,8 @@
   display: inline-block;
   width: 250px;
   height: 140.625px;
-  margin-right: 3px;
-  margin-left: 3px;
+  margin-right: 4px;
+  margin-left: 4px;
 
   background-size: cover;
 
@@ -117,8 +117,12 @@
   transform-origin: center left;
 }
 
+.movieTile:first-child {
+  margin-left: 0;
+}
+
 .movieTile-active {
-  outline: 3px solid #fff;
+  outline: 4px solid #fff;
 }
 
 .movieTile-active:after {
@@ -185,7 +189,7 @@
 .moreInfo {
   height: 500px;
   width: 100%;
-  margin: -69px auto 0;
+  margin: -66px auto 0;
 
 }
 
