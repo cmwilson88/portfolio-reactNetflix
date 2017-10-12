@@ -134,6 +134,7 @@
 .moreInfoNavItemActive {
   color: #fff;
   border-bottom: 2.5px solid red;
+  transition: 750ms all;
 }
 
 

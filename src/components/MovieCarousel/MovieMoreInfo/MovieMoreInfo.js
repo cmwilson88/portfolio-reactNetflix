@@ -14,7 +14,9 @@ class MovieMoreInfo extends Component {
 
 			cast: null,
 			directors: null,
-			genres: null
+			genres: null,
+
+			similar: null
 
 
 		}
@@ -27,7 +29,8 @@ class MovieMoreInfo extends Component {
 				cast: response.credits.cast.splice(0,5),
 				directors: response.credits.crew
 						.filter(item => item.job === 'Director'),
-				genres: response.genres
+				genres: response.genres,
+				similar: response.similar.results.sort((a,b) => b.vote_average - a.vote_average)
 			})
 		}).catch(err => console.log(err))
 	}
