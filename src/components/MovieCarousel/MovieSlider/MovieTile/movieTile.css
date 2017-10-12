@@ -1,0 +1,89 @@
+.movieTile,
+.movieTile-active {
+  position: relative;
+  display: inline-block;
+  width: 250px;
+  height: 140.625px;
+  margin-right: 4px;
+  margin-left: 4px;
+
+  background-size: cover;
+
+  font-size: 20px;
+  cursor: pointer;
+  transition: 450ms 150ms transform,
+              450ms 150ms opacity;
+  transform-origin: center left;
+}
+
+.movieTile:first-child {
+  margin-left: 0;
+}
+
+.movieTile-active {
+  outline: 4px solid #fff;
+}
+
+.movieTile-active:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -11px;
+    margin-left: -20px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 10px solid #fff;
+}
+
+.tile__details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: white;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  font-size: 10px;
+  opacity: 0;
+  background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  -webkit-transition: 450ms opacity;
+  transition: 450ms opacity;
+}
+
+.tile__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border: 1px solid rgba(255,255,255,.4);
+  border-radius: 50%;
+  background: rgba(0,0,0,.4);
+}
+
+.tile__button .fa {
+  color: rgba(255,255,255,.4);
+}
+
+.tile__title {
+  margin-top: .25em;
+  font-size: 1.7em;
+  white-space: pre-wrap;
+}
+
+.tile__rating {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  padding: 0 15px 15px 0 ;
+  font-size: .95em;
+}
+
+.movieTile:hover .tile__details {
+  opacity: 1;
+}
