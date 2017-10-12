@@ -168,27 +168,33 @@ class MovieMoreInfo extends Component {
 	     			) : null}
 
 	     				<ul className="moreInfoNav">
-	     					<li onClick={() => {
-	     						this.setState({
-	     							overview: true,
-	     							recommended: false,
-	     							details: false
-	     						})
-	     					}}>Overview</li>
-	     					<li onClick={() => {
-	     						this.setState({
-	     							overview: false,
-	     							recommended: true,
-	     							details: false
-	     						})
-	     					}}>More Like This</li>
-	     					<li onClick={() => {
-	     						this.setState({
-	     							overview: false,
-	     							recommended: false,
-	     							details: true
-	     						})
-	     					}}>Details</li>
+	     					<li className={this.state.overview ? 'moreInfoNavItemActive' : 'moreInfoNavItem'}
+	     						onClick={() => {
+		     						this.setState({
+		     							overview: true,
+		     							recommended: false,
+		     							details: false
+		     						})
+	     						}}
+	     					>Overview</li>
+	     					<li className={this.state.recommended ? 'moreInfoNavItemActive' : 'moreInfoNavItem'}
+	     						onClick={() => {
+		     						this.setState({
+		     							overview: false,
+		     							recommended: true,
+		     							details: false
+		     						})
+	     						}}
+	     					>More Like This</li>
+	     					<li className={this.state.details ? 'moreInfoNavItemActive' : 'moreInfoNavItem'}
+	     						onClick={() => {
+		     						this.setState({
+		     							overview: false,
+		     							recommended: false,
+		     							details: true
+		     						})
+	     						}}
+	     					>Details</li>
 	     				</ul>
 	  				</div>
 	 			</div>

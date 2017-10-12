@@ -112,26 +112,28 @@
   align-self: center;
 }
 
-.moreInfoNav li,
-.moreInfoNav-active li {
+.moreInfoNavItem,
+.moreInfoNavItemActive {
   padding: 10px;
-  border-bottom: 2.5px solid transparent;
 
-  color: #888;
   font-weight: bold;
   text-transform: uppercase;
 
   cursor: pointer;
 }
 
-.moreInfoNav-active li {
-  color: #fff;
-  border-bottom: 2px solid red;
+.moreInfoNavItem {
+  color: #888;
+  border-bottom: 2.5px solid transparent;
 }
 
-.moreInfoNav li:hover {
+.moreInfoNavItem:hover {
   color: #fff;
 }
 
+.moreInfoNavItemActive {
+  color: #fff;
+  border-bottom: 2.5px solid red;
+}
 
 
