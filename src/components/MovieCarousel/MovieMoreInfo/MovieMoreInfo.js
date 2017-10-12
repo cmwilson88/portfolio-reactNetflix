@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {getMovieInfo} from '../../../services/moreInfo'
+import './movieMoreInfo.css'
 
 class MovieMoreInfo extends Component {
 	constructor(props) {
