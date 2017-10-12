@@ -112,7 +112,8 @@
   align-self: center;
 }
 
-.moreInfoNav li {
+.moreInfoNav li,
+.moreInfoNav-active li {
   padding: 10px;
   border-bottom: 2.5px solid transparent;
 
@@ -123,9 +124,14 @@
   cursor: pointer;
 }
 
+.moreInfoNav-active li {
+  color: #fff;
+  border-bottom: 2px solid red;
+}
+
 .moreInfoNav li:hover {
   color: #fff;
-  border-bottom: 2.5px solid red;
 }
+
 
 

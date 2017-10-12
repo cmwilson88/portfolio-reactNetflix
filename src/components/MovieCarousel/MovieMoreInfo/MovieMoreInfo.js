@@ -8,9 +8,15 @@ class MovieMoreInfo extends Component {
 
 		this.state = {
 			detailedMovie: props.displayMovie,
+			overview: true,
+			recommended: false,
+			details: false,
+
 			cast: null,
 			directors: null,
 			genres: null
+
+
 		}
 	}
 
@@ -96,6 +102,8 @@ class MovieMoreInfo extends Component {
 	 			<div className="moreInfoBG"
 	 				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${this.props.displayMovie.backdrop_path})`}}>
 	     			<div className="moreInfoOverlay">
+	     			{this.state.overview ? (
+
 	     				<div className="movie_info">
 		     				<h1 className="movie_info_title">{detailedMovie.title}</h1>
 		     				<section className="mi_section mi_year_time">
@@ -149,12 +157,38 @@ class MovieMoreInfo extends Component {
 		     				</div>
 		     				<p className="mi_section">{detailedMovie.tagline}</p>
 	     				</div>
+	     			) : null}
 
+	     			{this.state.recommended ? (
+	     				<h1> Recommended Titles </h1>
+	     			) : null}
+
+	     			{this.state.details ? (
+	     				<h1> Details</h1>
+	     			) : null}
 
 	     				<ul className="moreInfoNav">
-	     					<li>Overview</li>
-	     					<li>More Like This</li>
-	     					<li>Details</li>
+	     					<li onClick={() => {
+	     						this.setState({
+	     							overview: true,
+	     							recommended: false,
+	     							details: false
+	     						})
+	     					}}>Overview</li>
+	     					<li onClick={() => {
+	     						this.setState({
+	     							overview: false,
+	     							recommended: true,
+	     							details: false
+	     						})
+	     					}}>More Like This</li>
+	     					<li onClick={() => {
+	     						this.setState({
+	     							overview: false,
+	     							recommended: false,
+	     							details: true
+	     						})
+	     					}}>Details</li>
 	     				</ul>
 	  				</div>
 	 			</div>
