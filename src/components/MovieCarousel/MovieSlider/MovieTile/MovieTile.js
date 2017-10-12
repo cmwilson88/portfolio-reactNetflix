@@ -12,29 +12,40 @@ class movieTile extends Component {
     }
 
     setActiveMovieTile() {
-      if(this.props.moreInfoActive) {
+      if(this.props.moreInfo) {
         this.setState({
           tileActive: true
         })
       } else {
         this.setState({
-          tileActive: true
+          tileActive: false
         })
       }
     }
+
+    componentWillReceiveProps(nextProps) {
+    	if(nextProps.moreInfoActive) {
+    		if(nextProps.moreInfoMovie.id === this.props.movie.id) {
+    			this.setState({
+    				tileActive: true
+    			})
+    		} 
+    	} else {
+    			this.setState({
+    				tileActive: false
+    			})
+    		}
+    }
+
     render() {
     	const props = this.props;
 		return (
 		  <section  
 		  	  onMouseEnter={() => {
 		  	  	props.mouseEnterInfo(props.movie)
-		  	  	if(props.moreInfoActive) {
-		  	  		this.setActiveMovieTile()
-		  	  	}
 		  	  }}
 		  	  onClick={() => {
 		  	  	props.displayMoreInfo(props.movie)
-		  	  	this.setActiveMovieTile()
 		  	  }}
 		  	  className={this.state.tileActive && props.moreInfoMovie.id === props.movie.id
 	                        ? 'movieTile-active' : 'movieTile'} 
