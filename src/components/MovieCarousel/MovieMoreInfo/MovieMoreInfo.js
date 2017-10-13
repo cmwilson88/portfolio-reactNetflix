@@ -38,7 +38,11 @@ class MovieMoreInfo extends Component {
 						.filter(item => item.job === 'Director'),
 				genres: response.genres,
 				similar: response.similar.results.sort((a,b) => b.vote_average - a.vote_average),
-				keywords: response.keywords.keywords,
+				keywords: response.keywords.keywords.map(keyword => {
+					return keyword.name.split(' ').map(keyword => {
+						return keyword[0].toUpperCase() + keyword.substr(1)
+					}).join(' ')
+				}),
 				reviews: response.reviews.results
 			})
 		}).catch(err => console.log(err))
@@ -66,7 +70,10 @@ class MovieMoreInfo extends Component {
 		let mainCast = [];
 		let moreCast = [];
 		let directors;
+		let detail_directors;
 		let genres;
+		let detail_genres;
+		let detail_keywords
 		let similar;
 			
 
@@ -109,6 +116,14 @@ class MovieMoreInfo extends Component {
 					</li>
 				)
 			})
+
+			detail_directors = this.state.directors.map(director => {
+				return (
+					<li key={director.id}>
+						<a href="#">{director.name}</a>
+					</li>
+				)
+			})
 		}
 
 		if(this.state.genres) {
@@ -122,8 +137,29 @@ class MovieMoreInfo extends Component {
 					</li>
 				)
 			})
+
+			detail_genres = this.state.genres.map((genre,index) => {
+				return (
+					<li key={genre.id}>
+						<a href="#">
+							{genre.name}
+						</a>
+					</li>
+				)	
+			})
 		}
 
+		if(this.state.keywords) {
+			detail_keywords = this.state.keywords.map(keyword=>{
+				return (
+					<li key={keyword.id}>
+						<a href="#">
+							{keyword}
+						</a>
+					</li>
+				)
+			})
+		}
 		if(this.state.similar) {
 			similar = this.state.similar.map((movie, index) => {
 				return (
@@ -135,6 +171,8 @@ class MovieMoreInfo extends Component {
 				)
 			})
 		}
+
+
 
 
 
@@ -166,18 +204,41 @@ class MovieMoreInfo extends Component {
 			     			{this.state.details ? (
 			     				<section className="details_container">
 			     					<div className="details_column">
-				     					{directors.length > 1 ? (
+				     					{detail_directors.length > 1 ? (
 											<h1 className="movie_info_label">Directors:</h1>
 										) : (
 											<h1 className="movie_info_label">Director:</h1>
 										)}
 										<ul>
-											{directors}
+											{detail_directors}
 										</ul>
+
 			     						<h1>Cast</h1>
 			     						<ul>
 			     							{moreCast}
 			     						</ul>
+			     					
+			     					</div>
+			     					<div className="details_column">
+			     						{detail_genres.length > 1 ? (
+											<h1 className="movie_info_label">Genres:</h1>
+										) : (
+											<h1 className="movie_info_label">Genre:</h1>
+										)}
+										<ul>
+											{detail_genres}
+										</ul>
+
+
+			     						{detail_keywords.length > 1 ? (
+											<h1 className="movie_info_label">Keywords:</h1>
+										) : (
+											<h1 className="movie_info_label">Keyword:</h1>
+										)}
+										<ul>
+											{detail_keywords}
+										</ul>
+
 			     					</div>
 			     				</section>
 			     			) : null}
