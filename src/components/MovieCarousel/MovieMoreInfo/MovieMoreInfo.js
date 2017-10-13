@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {getMovieInfo} from '../../../services/moreInfo'
 import './movieMoreInfo.css'
 
+import MovieOverview from './MovieOverview/MovieOverview'
 
 class MovieMoreInfo extends Component {
 	constructor(props) {
@@ -17,9 +18,10 @@ class MovieMoreInfo extends Component {
 			directors: null,
 			genres: null,
 
-			similar: null
+			similar: null,
 
-
+			keywords: null,
+			reviews: null
 		}
 	}
 
@@ -27,11 +29,13 @@ class MovieMoreInfo extends Component {
 		getMovieInfo(this.props.displayMovie.id).then(response => {
 			this.setState({
 				detailedMovie: response,
-				cast: response.credits.cast.splice(0,5),
+				cast: response.credits.cast.splice(0,10),
 				directors: response.credits.crew
 						.filter(item => item.job === 'Director'),
 				genres: response.genres,
-				similar: response.similar.results.sort((a,b) => b.vote_average - a.vote_average)
+				similar: response.similar.results.sort((a,b) => b.vote_average - a.vote_average),
+				keywords: response.keywords.keywords,
+				reviews: response.reviews.results
 			})
 		}).catch(err => console.log(err))
 	}
@@ -53,25 +57,24 @@ class MovieMoreInfo extends Component {
 		
 		let runtime = this.calculateRuntime(detailedMovie.runtime)
 		let match = detailedMovie.vote_average * 10
-		let cast;
+		let mainCast = [];
+		let moreCast = [];
 		let directors;
 		let genres;
 		let similar;
 			
 		
 		if(this.state.cast) {
-			cast = this.state.cast
-				.map((castMember, index) => {
-					return (
-						<li key={castMember.id}>
+			for(let i = 0; i < 5; i++) {
+				mainCast.push(
+						<li key={this.state.cast[i].id}>
 							<a href="#">
-								{castMember.name}
+								{this.state.cast[i].name}
 							</a>
-							{index < this.state.cast.length -1 ? ',\u00A0' : ''}
+							{i < 4 ? ',\u00A0' : ''}
 						</li>
-					)
-				})
-			console.log(cast)	
+				)
+			}
 		}
 
 		if(this.state.directors) {
@@ -120,60 +123,16 @@ class MovieMoreInfo extends Component {
 	     			<div className="moreInfoOverlay">
 		     		<h1 className="movie_info_title">{detailedMovie.title}</h1>
 		     			<div className="moreInfoContent">
-
 			     			{this.state.overview ? (
-			     				<div className="movie_info">
-				     				<section className="mi_section mi_year_time">
-				     					<span style={{
-		                    				color: match >= 70 
-		                    				? 'green' 
-		                    				: match >= 40
-		                    				? 'orange' 
-		                    				: 'red'
-		                  					}}>
-		                  					{match}% Match
-		                  				</span>
-				     					<span>{releaseYear}</span>
-				     					<span>{runtime}</span>
-				     				</section>
-				     				<p className="mi_section movie_info_overview">{detailedMovie.overview}</p>
-				     				<br/>
-				     				<div className="mi_section">
-					     				{cast ? (
-						     				<section className="mi_cast_crew">
-						     					<span className="movie_info_label">Cast:</span>
-							     					<ul>
-							     						{cast}
-							     					</ul>
-						     				</section>
-					     				): null}
-				     					{directors ? (
-					     					<section className="mi_cast_crew">
-					     						{directors.length > 1 ? (
-					     							<span className="movie_info_label">Directors:</span>
-					     						 ) : (
-					     						 	<span className="movie_info_label">Director:</span>
-					     						)} 
-					     						<ul>
-					     							{directors}
-					     						</ul>
-					     					</section>
-					     				) : null}
-					     				{genres ? (
-					     					<section className="mi_cast_crew">
-					     						{genres.length > 1 ? (
-					     							<span className="movie_info_label">Genres:</span>
-					     						) : (
-					     							<span className="movie_info_label">Genre:</span>
-					     						)}
-					     						<ul>
-					     							{genres}
-					     						</ul>
-					     					</section>
-					     				) : null}
-				     				</div>
-				     				<p className="mi_section">{detailedMovie.tagline}</p>
-			     				</div>
+			     				<MovieOverview 
+			     					detailedMovie={detailedMovie}
+			     					releaseYear={releaseYear}
+			     					runtime={runtime}
+			     					match={match}
+			     					cast={mainCast}
+			     					directors={directors}
+			     					genres={genres}
+			     				/>
 			     			) : null}
 
 			     			{this.state.recommended ? (

@@ -57,7 +57,7 @@ class App extends Component {
   render() {
     let topMovie;
     if(this.state.movies) {
-      topMovie = this.state.upcoming[1]
+      topMovie = this.state.upcoming[0]
     } 
 
     return topMovie ? (

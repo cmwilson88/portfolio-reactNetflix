@@ -2,7 +2,7 @@
 .moreInfo {
   height: 500px;
   width: 100%;
-  margin: -66px auto 0;
+  margin: -66px auto 33px;
 
 }
 
@@ -53,68 +53,6 @@
   transition: all 500ms ease-in;
 }
 
-.movie_info {
-  width: 40vw;
-}
-
-.mi_section {
-  color: #888;
-  margin-bottom: 15px;
-}
-
-.mi_cast_crew {
-  display: flex;
-  margin-bottom: 2px;
-}
-
-.mi_cast_crew span {
-  margin-right: 2px;
-}
-
-.mi_year_time {
-  font-weight: bold;
-}
-
-.mi_year_time span {
-  margin-right: .5em;
-}
-
-.movie_info_title {
-  font-size: 2.5em;
-  line-height: 1.2;
-  margin-bottom: 10px;
-}
-
-.mi_section li {
-  display: inline-block;
-  margin-left: 2px;
-}
-
-.mi_section li a {
-  text-decoration: none;
-  color: #fff;
-  cursor: pointer;
-}
-
-.mi_section li a:hover {
-  text-decoration: underline;
-}
-
-
-.movie_info_label {
-  font-weight: bold;
-}
-
-.movie_info_overview {
-  font-size: 17px;
-  line-height: 1;
-}
-
-.moreInfoNav {
-  display: flex;
-  justify-content: space-between;
-  align-self: center;
-}
 
 .moreInfoNavItem,
 .moreInfoNavItemActive {

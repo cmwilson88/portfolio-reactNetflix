@@ -92,11 +92,11 @@
 .moviesCarousel,
 .moviesCarousel-active {
   width: 80%;
-  transition: 450ms 150ms transform,
-              600ms margin-left;
   font-size: 0;
   white-space: nowrap;
   overflow-y: visible;
+  transition: 450ms 150ms transform,
+              600ms margin-left;
 }
 
 
@@ -108,32 +108,32 @@
 }
 
 .moviesCarousel:hover {
-  transform: translate3d(-187.5px, 0, 0);
+  transform: translateX(-125px);
 }
 .moviesCarousel:hover .movieTile {
   opacity: .3;
 }
 
 .moviesCarousel:hover .movieTile:first-child:hover {
-  transform: scale(2.5) translateX(75px);
+  transform: scale(1.75) translateX(75px);
   opacity: 1;
 }
 
 .moviesCarousel:hover .movieTile:last-child:hover {
-  transform: scale(2.5) translateX(-75px);
+  transform: scale(1.75) translateX(-75px);
   opacity: 1;
 }
 
 .moviesCarousel:hover .movieTile:hover {
-  transform: scale(2.5);
+  transform: scale(1.75);
   opacity: 1;
 }
 
 .moviesCarousel:hover .movieTile:first-child:hover ~ .movieTile {
-  transform: translate(565px);
+  transform: translate(316px);
 }
 
 .moviesCarousel:hover .movieTile:hover ~ .movieTile {
-  transform: translate3d(375px, 0, 0);
+  transform: translate3d(187px, 0, 0);
 }
 
