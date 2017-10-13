@@ -10,6 +10,7 @@ class MovieMoreInfo extends Component {
 
 		this.state = {
 			detailedMovie: props.displayMovie,
+			images: null,
 			overview: true,
 			recommended: false,
 			details: false,
@@ -23,12 +24,15 @@ class MovieMoreInfo extends Component {
 			keywords: null,
 			reviews: null
 		}
+
 	}
 
 	componentDidMount() {
 		getMovieInfo(this.props.displayMovie.id).then(response => {
 			this.setState({
 				detailedMovie: response,
+				images: response.images.backdrops
+					.filter(img => img.width >1200 && img.width < 2000)[0],
 				cast: response.credits.cast.splice(0,10),
 				directors: response.credits.crew
 						.filter(item => item.job === 'Director'),
@@ -51,6 +55,8 @@ class MovieMoreInfo extends Component {
 		return `${hours}h ${minutes}m`
 	};
 
+
+
 	render() {
 		const detailedMovie = this.state.detailedMovie
 		const releaseYear = detailedMovie.release_date.substr(0,4)
@@ -63,7 +69,7 @@ class MovieMoreInfo extends Component {
 		let genres;
 		let similar;
 			
-		
+
 		if(this.state.cast) {
 			for(let i = 0; i < 5; i++) {
 				mainCast.push(
@@ -73,6 +79,16 @@ class MovieMoreInfo extends Component {
 							</a>
 							{i < 4 ? ',\u00A0' : ''}
 						</li>
+				)
+			}
+
+			for(let i = 0; i < 5; i++) {
+				moreCast.push(
+					<li key={this.state.cast[i].id}>
+						<a href="#">
+							{this.state.cast[i].name}
+						</a>
+					</li>
 				)
 			}
 		}
@@ -114,13 +130,16 @@ class MovieMoreInfo extends Component {
 				)
 			})
 		}
+
+
+
 		return (
 	 		<section 
 	 			className="moreInfo" 
 	 			>
 	 			<div className="moreInfoBG"
-	 				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${this.props.displayMovie.backdrop_path})`}}>
-	     			<div className="moreInfoOverlay">
+	 				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${detailedMovie.backdrop_path})`}}>
+	     			<div className={this.state.overview ? 'moreInfoOverlay' : 'moreInfoOverlayDark'}>
 		     		<h1 className="movie_info_title">{detailedMovie.title}</h1>
 		     			<div className="moreInfoContent">
 			     			{this.state.overview ? (
