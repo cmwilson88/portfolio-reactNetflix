@@ -15,6 +15,10 @@
   transition: 500ms background;
 }
 
+.moreInfoContent {
+  flex-grow: 1;
+}
+
 .moreInfoOverlay {
   display: flex;
   flex-direction: column;
@@ -24,6 +28,7 @@
   background: linear-gradient(to left, rgba(0,0,0,0) 0%,rgba(0,0,0,1)  70%);
   color: #fff;
   padding-top: 3em;
+  padding-left: 5vw;
 }
 
 
@@ -50,7 +55,6 @@
 
 .movie_info {
   width: 40vw;
-  margin-left: 5vw;
 }
 
 .mi_section {

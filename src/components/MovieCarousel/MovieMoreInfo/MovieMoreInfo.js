@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {getMovieInfo} from '../../../services/moreInfo'
 import './movieMoreInfo.css'
 
+
 class MovieMoreInfo extends Component {
 	constructor(props) {
 		super(props) 
@@ -55,6 +56,7 @@ class MovieMoreInfo extends Component {
 		let cast;
 		let directors;
 		let genres;
+		let similar;
 			
 		
 		if(this.state.cast) {
@@ -98,6 +100,17 @@ class MovieMoreInfo extends Component {
 			})
 		}
 
+		if(this.state.similar) {
+			similar = this.state.similar.map((movie, index) => {
+				return (
+					<div className="similar_tile">
+						<div 
+							className="similar_media"
+							style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}></div>
+					</div>
+				)
+			})
+		}
 		return (
 	 		<section 
 	 			className="moreInfo" 
@@ -105,70 +118,74 @@ class MovieMoreInfo extends Component {
 	 			<div className="moreInfoBG"
 	 				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${this.props.displayMovie.backdrop_path})`}}>
 	     			<div className="moreInfoOverlay">
-	     			{this.state.overview ? (
+		     		<h1 className="movie_info_title">{detailedMovie.title}</h1>
+		     			<div className="moreInfoContent">
 
-	     				<div className="movie_info">
-		     				<h1 className="movie_info_title">{detailedMovie.title}</h1>
-		     				<section className="mi_section mi_year_time">
-		     					<span style={{
-                    				color: match >= 70 
-                    				? 'green' 
-                    				: match >= 40
-                    				? 'orange' 
-                    				: 'red'
-                  					}}>
-                  					{match}% Match
-                  				</span>
-		     					<span>{releaseYear}</span>
-		     					<span>{runtime}</span>
-		     				</section>
-		     				<p className="mi_section movie_info_overview">{detailedMovie.overview}</p>
-		     				<br/>
-		     				<div className="mi_section">
-			     				{cast ? (
-				     				<section className="mi_cast_crew">
-				     					<span className="movie_info_label">Cast:</span>
-					     					<ul>
-					     						{cast}
-					     					</ul>
+			     			{this.state.overview ? (
+			     				<div className="movie_info">
+				     				<section className="mi_section mi_year_time">
+				     					<span style={{
+		                    				color: match >= 70 
+		                    				? 'green' 
+		                    				: match >= 40
+		                    				? 'orange' 
+		                    				: 'red'
+		                  					}}>
+		                  					{match}% Match
+		                  				</span>
+				     					<span>{releaseYear}</span>
+				     					<span>{runtime}</span>
 				     				</section>
-			     				): null}
-		     					{directors ? (
-			     					<section className="mi_cast_crew">
-			     						{directors.length > 1 ? (
-			     							<span className="movie_info_label">Directors:</span>
-			     						 ) : (
-			     						 	<span className="movie_info_label">Director:</span>
-			     						)} 
-			     						<ul>
-			     							{directors}
-			     						</ul>
-			     					</section>
-			     				) : null}
-			     				{genres ? (
-			     					<section className="mi_cast_crew">
-			     						{genres.length > 1 ? (
-			     							<span className="movie_info_label">Genres:</span>
-			     						) : (
-			     							<span className="movie_info_label">Genre:</span>
-			     						)}
-			     						<ul>
-			     							{genres}
-			     						</ul>
-			     					</section>
-			     				) : null}
-		     				</div>
-		     				<p className="mi_section">{detailedMovie.tagline}</p>
-	     				</div>
-	     			) : null}
+				     				<p className="mi_section movie_info_overview">{detailedMovie.overview}</p>
+				     				<br/>
+				     				<div className="mi_section">
+					     				{cast ? (
+						     				<section className="mi_cast_crew">
+						     					<span className="movie_info_label">Cast:</span>
+							     					<ul>
+							     						{cast}
+							     					</ul>
+						     				</section>
+					     				): null}
+				     					{directors ? (
+					     					<section className="mi_cast_crew">
+					     						{directors.length > 1 ? (
+					     							<span className="movie_info_label">Directors:</span>
+					     						 ) : (
+					     						 	<span className="movie_info_label">Director:</span>
+					     						)} 
+					     						<ul>
+					     							{directors}
+					     						</ul>
+					     					</section>
+					     				) : null}
+					     				{genres ? (
+					     					<section className="mi_cast_crew">
+					     						{genres.length > 1 ? (
+					     							<span className="movie_info_label">Genres:</span>
+					     						) : (
+					     							<span className="movie_info_label">Genre:</span>
+					     						)}
+					     						<ul>
+					     							{genres}
+					     						</ul>
+					     					</section>
+					     				) : null}
+				     				</div>
+				     				<p className="mi_section">{detailedMovie.tagline}</p>
+			     				</div>
+			     			) : null}
 
-	     			{this.state.recommended ? (
-	     				<h1> Recommended Titles </h1>
-	     			) : null}
+			     			{this.state.recommended ? (
+			     				<section>
+			     					<h1>More like {this.state.detailedMovie.title}</h1>
+			     				</section>
+			     			) : null}
 
-	     			{this.state.details ? (
-	     				<h1> Details</h1>
-	     			) : null}
+			     			{this.state.details ? (
+			     				<h1> Details</h1>
+			     			) : null}
+		     			</div>
 
 	     				<ul className="moreInfoNav">
 	     					<li className={this.state.overview ? 'moreInfoNavItemActive' : 'moreInfoNavItem'}
