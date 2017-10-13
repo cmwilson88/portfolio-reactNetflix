@@ -33,7 +33,7 @@ class MovieMoreInfo extends Component {
 				detailedMovie: response,
 				images: response.images.backdrops
 					.filter(img => img.width >1200 && img.width < 2000)[0],
-				cast: response.credits.cast.splice(0,10),
+				cast: response.credits.cast,
 				directors: response.credits.crew
 						.filter(item => item.job === 'Director'),
 				genres: response.genres,
@@ -81,8 +81,13 @@ class MovieMoreInfo extends Component {
 						</li>
 				)
 			}
-
-			for(let i = 0; i < 5; i++) {
+			let limit = 0;
+			if(this.state.cast.length >=10) {
+				limit = 10
+			} else {
+				limit = this.state.cast.length
+			}
+			for(let i = 0; i < limit; i++) {
 				moreCast.push(
 					<li key={this.state.cast[i].id}>
 						<a href="#">
@@ -155,13 +160,26 @@ class MovieMoreInfo extends Component {
 			     			) : null}
 
 			     			{this.state.recommended ? (
-			     				<section>
-			     					<h1>More like {this.state.detailedMovie.title}</h1>
-			     				</section>
+			     				<h1>Recommended</h1>
 			     			) : null}
 
 			     			{this.state.details ? (
-			     				<h1> Details</h1>
+			     				<section className="details_container">
+			     					<div className="details_column">
+				     					{directors.length > 1 ? (
+											<h1 className="movie_info_label">Directors:</h1>
+										) : (
+											<h1 className="movie_info_label">Director:</h1>
+										)}
+										<ul>
+											{directors}
+										</ul>
+			     						<h1>Cast</h1>
+			     						<ul>
+			     							{moreCast}
+			     						</ul>
+			     					</div>
+			     				</section>
 			     			) : null}
 		     			</div>
 

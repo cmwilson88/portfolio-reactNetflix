@@ -88,3 +88,23 @@
 }
 
 
+.details_container {
+  display: flex;
+}
+
+.details_column  {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.details_column h1 {
+  color: #888;
+  font-weight: bold;
+}
+
+.details_column li a {
+  text-decoration: none;
+  color: #fff;
+}
