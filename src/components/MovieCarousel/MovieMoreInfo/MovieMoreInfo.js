@@ -28,7 +28,9 @@ class MovieMoreInfo extends Component {
 	}
 
 	componentDidMount() {
-		getMovieInfo(this.props.displayMovie.id).then(response => {
+		getMovieInfo(this.props.displayMovie.id).then(response => 
+			{
+			console.log(response.reviews.results[0].content)
 			this.setState({
 				detailedMovie: response,
 				images: response.images.backdrops
@@ -75,6 +77,7 @@ class MovieMoreInfo extends Component {
 		let detail_genres;
 		let detail_keywords
 		let similar;
+		let reviews;
 			
 
 		if(this.state.cast) {
@@ -88,6 +91,7 @@ class MovieMoreInfo extends Component {
 						</li>
 				)
 			}
+
 			let limit = 0;
 			if(this.state.cast.length >=10) {
 				limit = 10
@@ -150,9 +154,9 @@ class MovieMoreInfo extends Component {
 		}
 
 		if(this.state.keywords) {
-			detail_keywords = this.state.keywords.map(keyword=>{
+			detail_keywords = this.state.keywords.map((keyword, index)=>{
 				return (
-					<li key={keyword.id}>
+					<li key={index}>
 						<a href="#">
 							{keyword}
 						</a>
@@ -163,12 +167,23 @@ class MovieMoreInfo extends Component {
 		if(this.state.similar) {
 			similar = this.state.similar.map((movie, index) => {
 				return (
-					<div className="similar_tile">
+					<div key={movie.id} className="similar_tile">
 						<div 
 							className="similar_media"
 							style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}></div>
 					</div>
 				)
+			})
+		}
+
+		if(this.state.reviews) {
+			reviews = this.state.reviews.map(review => {
+				return (
+					<li key={review.id}>
+						<p className="detail_review_content">{review.content}</p>
+						<p className="detail_review_author">{review.author}</p>
+					</li>
+				) 
 			})
 		}
 
@@ -239,6 +254,13 @@ class MovieMoreInfo extends Component {
 											{detail_keywords}
 										</ul>
 
+			     					</div>
+
+			     					<div className="details_column detail_reviews">
+			     						<h1>Member Reviews</h1>
+			     						<ul>
+			     							{reviews}
+			     						</ul>
 			     					</div>
 			     				</section>
 			     			) : null}

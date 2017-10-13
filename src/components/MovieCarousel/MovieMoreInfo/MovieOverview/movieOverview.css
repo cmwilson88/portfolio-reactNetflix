@@ -55,8 +55,3 @@
   line-height: 1;
 }
 
-.moreInfoNav {
-  display: flex;
-  justify-content: space-between;
-  align-self: center;
-}
