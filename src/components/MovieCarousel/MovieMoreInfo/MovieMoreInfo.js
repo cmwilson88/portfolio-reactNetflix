@@ -30,7 +30,7 @@ class MovieMoreInfo extends Component {
 	componentDidMount() {
 		getMovieInfo(this.props.displayMovie.id).then(response => 
 			{
-			console.log(response.reviews.results[0].content)
+			console.log(response)
 			this.setState({
 				detailedMovie: response,
 				images: response.images.backdrops
@@ -40,12 +40,15 @@ class MovieMoreInfo extends Component {
 						.filter(item => item.job === 'Director'),
 				genres: response.genres,
 				similar: response.similar.results.sort((a,b) => b.vote_average - a.vote_average),
-				keywords: response.keywords.keywords.map(keyword => {
+				keywords: response.keywords.keywords
+					.map(keyword => {
 					return keyword.name.split(' ').map(keyword => {
 						return keyword[0].toUpperCase() + keyword.substr(1)
 					}).join(' ')
 				}),
-				reviews: response.reviews.results
+				reviews: response.reviews.results.length 
+						? response.reviews.results 
+						: null
 			})
 		}).catch(err => console.log(err))
 	}
@@ -222,7 +225,7 @@ class MovieMoreInfo extends Component {
 			     			{this.state.details ? (
 			     				<section className="details_container">
 			     					<div className="details_column">
-				     					{detail_directors.length > 1 ? (
+				     					{detail_directors &&detail_directors.length > 1 ? (
 											<h1 className="movie_info_label">Directors:</h1>
 										) : (
 											<h1 className="movie_info_label">Director:</h1>
@@ -262,7 +265,12 @@ class MovieMoreInfo extends Component {
 			     					<div className="details_column">
 			     						<h1>Member Reviews</h1>
 			     						<div className="detail_reviews">
-			     							{reviews}
+			     						{reviews  
+			     							? (
+			     								{reviews}
+			     							) 
+			     							: 'There are no reviews for this movie!'
+			     						}
 			     						</div>
 			     					</div>
 			     				</section>
