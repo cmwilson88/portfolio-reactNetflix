@@ -176,14 +176,33 @@ class MovieMoreInfo extends Component {
 			})
 		}
 
+		let newArr=[]
+
 		if(this.state.reviews) {
+			// console.log(this.state.reviews)
+			// let arr = this.state.reviews
+			// for(let i = 0; i < arr.length; i++) {
+			// 	let newContent = arr[i].content.split('\r\n').map(item => {
+			// 		if(item.length) {
+			// 			return (
+			// 				<p>test</p>
+			// 			)
+			// 		} else {
+			// 			return (
+			// 				<br/>
+			// 			)
+			// 		}
+			// 	}).join(' ')
+
+			// 	arr[i].content = newContent
+			// }
+			// console.log(newArr)
 			reviews = this.state.reviews.map(review => {
 				return (
-					<li key={review.id}>
-						<p className="detail_review_content">{review.content}</p>
-						<p className="detail_review_author">{review.author}</p>
-					</li>
-				) 
+					<div key={review.id}>
+						<pre>{review.content}</pre>
+					</div>
+				)
 			})
 		}
 
@@ -256,11 +275,11 @@ class MovieMoreInfo extends Component {
 
 			     					</div>
 
-			     					<div className="details_column detail_reviews">
+			     					<div className="details_column">
 			     						<h1>Member Reviews</h1>
-			     						<ul>
+			     						<div className="detail_reviews">
 			     							{reviews}
-			     						</ul>
+			     						</div>
 			     					</div>
 			     				</section>
 			     			) : null}

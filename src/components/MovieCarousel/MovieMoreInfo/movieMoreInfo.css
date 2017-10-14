@@ -16,7 +16,7 @@
 }
 
 .moreInfoContent {
-  flex-grow: 1;
+  height: 360px;
 }
 
 .moreInfoOverlay,
@@ -105,7 +105,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
 
   margin-right: 30px;
 }
@@ -122,6 +121,11 @@
 }
 
 .detail_reviews {
-  flex-grow: 1;
+  height: 100%;
+  overflow-y: scroll;
 }
 
+pre {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
