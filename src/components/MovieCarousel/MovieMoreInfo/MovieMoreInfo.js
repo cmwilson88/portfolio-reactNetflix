@@ -78,7 +78,7 @@ class MovieMoreInfo extends Component {
 		let detail_directors;
 		let genres;
 		let detail_genres;
-		let detail_keywords
+		let detail_keywords = [];
 		let similar;
 		let reviews;
 			
@@ -157,15 +157,23 @@ class MovieMoreInfo extends Component {
 		}
 
 		if(this.state.keywords) {
-			detail_keywords = this.state.keywords.map((keyword, index)=>{
-				return (
-					<li key={index}>
+			
+			let limit = 0;
+			if(this.state.keywords.length >=10) {
+				limit = 10
+			} else {
+				limit = this.state.keywords.length
+			}
+			
+			for(let i = 0; i < limit; i++) {
+				detail_keywords.push(
+					<li key={i}>
 						<a href="#">
-							{keyword}
+							{this.state.keywords[i]}
 						</a>
 					</li>
-				)
-			})
+					)
+			}
 		}
 		if(this.state.similar) {
 			similar = this.state.similar.map((movie, index) => {
@@ -266,9 +274,7 @@ class MovieMoreInfo extends Component {
 			     						<h1>Member Reviews</h1>
 			     						<div className="detail_reviews">
 			     						{reviews  
-			     							? (
-			     								{reviews}
-			     							) 
+			     							? reviews
 			     							: 'There are no reviews for this movie!'
 			     						}
 			     						</div>

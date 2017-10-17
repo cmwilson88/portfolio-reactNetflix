@@ -2,11 +2,17 @@
   display: none;
 }
 
+body {
+  position: relative;
+  height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: #131313;
+  
+}
+
 .App {
   font-family: Helvetica;
-  height: 100%;
-  background-color: #131313;
-  overflow-x: hidden;
 }
 
 .hero {
