@@ -40,10 +40,13 @@ class MovieMoreInfo extends Component {
 				genres: response.genres,
 				similar: response.similar.results.sort((a,b) => b.vote_average - a.vote_average),
 				keywords: response.keywords.keywords
+					.splice(0,10)
 					.map(keyword => {
-					return keyword.name.split(' ').map(keyword => {
-						return keyword[0].toUpperCase() + keyword.substr(1)
-					}).join(' ')
+						return keyword.name
+								.split(' ')
+								.map(keyword => {
+									return keyword[0].toUpperCase() + keyword.substr(1)
+								}).join(' ')
 				}),
 				reviews: response.reviews.results.length 
 						? response.reviews.results 
