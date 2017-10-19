@@ -3,6 +3,7 @@ import {getMovieInfo} from '../../../services/moreInfo'
 import './movieMoreInfo.css'
 
 import MovieOverview from './MovieOverview/MovieOverview'
+import DetailsSection from './DetailsSection/DetailsSection'
 
 class MovieMoreInfo extends Component {
 	constructor(props) {
@@ -28,9 +29,7 @@ class MovieMoreInfo extends Component {
 	}
 
 	componentDidMount() {
-		getMovieInfo(this.props.displayMovie.id).then(response => 
-			{
-			console.log(response)
+		getMovieInfo(this.props.displayMovie.id).then(response => {
 			this.setState({
 				detailedMovie: response,
 				images: response.images.backdrops
@@ -73,14 +72,9 @@ class MovieMoreInfo extends Component {
 		let runtime = this.calculateRuntime(detailedMovie.runtime)
 		let match = detailedMovie.vote_average * 10
 		let mainCast = [];
-		let moreCast = [];
 		let directors;
-		let detail_directors;
 		let genres;
-		let detail_genres;
-		let detail_keywords = [];
 		let similar;
-		let reviews;
 			
 
 		if(this.state.cast) {
@@ -94,22 +88,6 @@ class MovieMoreInfo extends Component {
 						</li>
 				)
 			}
-
-			let limit = 0;
-			if(this.state.cast.length >=10) {
-				limit = 10
-			} else {
-				limit = this.state.cast.length
-			}
-			for(let i = 0; i < limit; i++) {
-				moreCast.push(
-					<li key={this.state.cast[i].id}>
-						<a href="#">
-							{this.state.cast[i].name}
-						</a>
-					</li>
-				)
-			}
 		}
 
 		if(this.state.directors) {
@@ -120,14 +98,6 @@ class MovieMoreInfo extends Component {
 							{director.name}
 						</a>
 						{index < this.state.directors.length -1 ? ',\u00A0' : ''}
-					</li>
-				)
-			})
-
-			detail_directors = this.state.directors.map(director => {
-				return (
-					<li key={director.id}>
-						<a href="#">{director.name}</a>
 					</li>
 				)
 			})
@@ -144,37 +114,9 @@ class MovieMoreInfo extends Component {
 					</li>
 				)
 			})
-
-			detail_genres = this.state.genres.map((genre,index) => {
-				return (
-					<li key={genre.id}>
-						<a href="#">
-							{genre.name}
-						</a>
-					</li>
-				)	
-			})
 		}
 
-		if(this.state.keywords) {
-			
-			let limit = 0;
-			if(this.state.keywords.length >=10) {
-				limit = 10
-			} else {
-				limit = this.state.keywords.length
-			}
-			
-			for(let i = 0; i < limit; i++) {
-				detail_keywords.push(
-					<li key={i}>
-						<a href="#">
-							{this.state.keywords[i]}
-						</a>
-					</li>
-					)
-			}
-		}
+		
 		if(this.state.similar) {
 			similar = this.state.similar.map((movie, index) => {
 				return (
@@ -186,24 +128,6 @@ class MovieMoreInfo extends Component {
 				)
 			})
 		}
-
-		if(this.state.reviews) {
-			reviews = this.state.reviews.map((review, index) => {
-				return (
-					<div key={review.id}>
-						<pre>{review.content}</pre>
-						<p className="detail_review_author">{review.author}</p>
-						{index < this.state.reviews.length -1 ? (
-							<div className="detail_hr"/>
-						) : null}
-					</div>
-				)
-			})
-		}
-
-
-
-
 
 		return (
 	 		<section 
@@ -231,55 +155,12 @@ class MovieMoreInfo extends Component {
 			     			) : null}
 
 			     			{this.state.details ? (
-			     				<section className="details_container">
-			     					<div className="details_column">
-				     					{detail_directors &&detail_directors.length > 1 ? (
-											<h1 className="movie_info_label">Directors:</h1>
-										) : (
-											<h1 className="movie_info_label">Director:</h1>
-										)}
-										<ul>
-											{detail_directors}
-										</ul>
-
-			     						<h1>Cast</h1>
-			     						<ul>
-			     							{moreCast}
-			     						</ul>
-			     					
-			     					</div>
-			     					<div className="details_column">
-			     						{detail_genres.length > 1 ? (
-											<h1 className="movie_info_label">Genres:</h1>
-										) : (
-											<h1 className="movie_info_label">Genre:</h1>
-										)}
-										<ul>
-											{detail_genres}
-										</ul>
-
-
-			     						{detail_keywords.length > 1 ? (
-											<h1 className="movie_info_label">Keywords:</h1>
-										) : (
-											<h1 className="movie_info_label">Keyword:</h1>
-										)}
-										<ul>
-											{detail_keywords}
-										</ul>
-
-			     					</div>
-
-			     					<div className="details_column">
-			     						<h1>Member Reviews</h1>
-			     						<div className="detail_reviews">
-			     						{reviews  
-			     							? reviews
-			     							: 'There are no reviews for this movie!'
-			     						}
-			     						</div>
-			     					</div>
-			     				</section>
+			     				<DetailsSection
+			     					directors={this.state.directors}
+			     					cast={this.state.cast}
+			     					genres={this.state.genres}
+			     					keywords={this.state.keywords}
+			     					reviews={this.state.reviews}/>
 			     			) : null}
 		     			</div>
 
