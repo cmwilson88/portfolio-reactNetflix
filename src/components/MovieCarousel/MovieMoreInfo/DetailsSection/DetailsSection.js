@@ -1,4 +1,5 @@
 import React from 'react'
+import './detailsSection.css'
 
 export default function DetailsSection(props) {
 	let moreCast = [];
@@ -48,6 +49,7 @@ export default function DetailsSection(props) {
 			</div>
 
 			<div className="details_column">
+				<h1>Member Reviews</h1>
 				<DetailReviews 
 					reviews={props.reviews}/>
 			</div>
@@ -95,14 +97,12 @@ function DetailReviews(props) {
 		})
 	}
 	return (
-		<div>
-			<h1>Member Reviews</h1>
-			<div className="detail_reviews">
-				{reviews  
-					? reviews
-					: 'There are no reviews for this movie!'
-				}
-			</div>	
-		</div>
+		<div className="detail_reviews">
+			{reviews  
+				? reviews
+				: 'There are no reviews for this movie!'
+			}
+		</div>	
+
 	) 
 }
