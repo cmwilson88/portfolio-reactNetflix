@@ -38,7 +38,9 @@ class MovieMoreInfo extends Component {
 				directors: response.credits.crew
 						.filter(item => item.job === 'Director'),
 				genres: response.genres,
-				similar: response.similar.results.sort((a,b) => b.vote_average - a.vote_average).splice(0,4),
+				similar: response.similar.results
+					// .sort((a,b) => b.vote_average - a.vote_average)
+					.splice(0,4),
 				keywords: response.keywords.keywords
 					.splice(0,10)
 					.map(keyword => {
