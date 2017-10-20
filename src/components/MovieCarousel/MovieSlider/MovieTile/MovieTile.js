@@ -55,13 +55,13 @@ class movieTile extends Component {
 		        <div className="tile__button">
 		            <i className="fa fa-play"></i>
 		        </div>
-		        <div className="tile__title">
+		        <div className={this.props.moreInfoActive ? "tile__title-active" : "tile__title" }>
 		          {props.movie.title}
 		        </div>
-		        <div className="tile__rating">
+		        <div className={this.props.moreInfoActive ? "tile__rating-active" : "tile__rating" }>
 		          <span
 		            style={{
-		              color: props.movie.vote_average >= 7 ? 'green' : props.movie.vote_average >= 4 ? 'orange' : 'red'
+		              color: props.movie.vote_average >= 7 ? 'green' : props.movie.vote_averrating= 4 ? 'orange' : 'red'
 		            }}>{props.movie.vote_average}</span> / 10
 		        </div> 
 		      </div>

@@ -137,8 +137,8 @@
 .similar_media_overlay .tile__button {
   visibility: hidden;
   opacity: 0.01;
-  height: 60px;
-  width: 60px;
+  height: 75px;
+  width: 75px;
   border: 3px solid rgba(255,255,255,1);
   border-radius: 50%;
   background: transparent;
