@@ -67,6 +67,19 @@ class App extends Component {
             <h1 className="hero_title">
               {topMovie.title}
             </h1>
+            <div className="hero_buttons">
+              <div className="hero_play">
+                <i className="fa fa-play"></i>
+                Play
+              </div>
+              <div className="hero_add">
+                <i className="fa fa-plus"></i>
+                My List
+              </div>
+            </div>
+            <p className="hero_description">
+              {topMovie.overview}
+            </p>
           </div>
         </div>
         <div className="moviesContainer">
