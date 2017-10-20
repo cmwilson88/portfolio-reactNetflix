@@ -130,7 +130,7 @@ class MovieMoreInfo extends Component {
 							style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}>
 						</div>
 						<p>{movie.title} - {releaseYear}</p>
-						<p className="similar_overview">{movie.taglne}</p>
+						<p className="similar_overview">{movie.overview.substr(0,150).trim() + '...'}</p>
 					</div>
 				)
 			})

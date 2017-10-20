@@ -105,7 +105,11 @@
 }
 
 .similar_tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 22.5%;
+  height: 80%;
 }
 
 .similar_media {
@@ -114,15 +118,10 @@
   background-size: cover;
 }
 
-.similar_overview {
-  height: 32px;
-  text-overflow: ellipsis;
-  overflow-y: auto;
-  position: relative;
+.similar_tile p {
+  color: #888;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
-.similar_overview:after { 
-  content: '...'; 
-  position: absolute; 
-  bottom: 0; 
-  right: 0; }
+
