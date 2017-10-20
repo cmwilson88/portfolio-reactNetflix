@@ -122,11 +122,15 @@ class MovieMoreInfo extends Component {
 		
 		if(this.state.similar) {
 			similar = this.state.similar.map((movie, index) => {
+				const releaseYear = movie.release_date.substr(0,4)
 				return (
 					<div key={movie.id} className="similar_tile">
 						<div 
 							className="similar_media"
-							style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}></div>
+							style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}>
+						</div>
+						<p>{movie.title} - {releaseYear}</p>
+						<p className="similar_overview">{movie.taglne}</p>
 					</div>
 				)
 			})

@@ -97,14 +97,32 @@
 
 .similar_container {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 100%;
+  padding-right: 5vw;
 }
 
 .similar_tile {
-  height: auto;
-  width: 16.66%;
+  width: 22.5%;
 }
 
 .similar_media {
-  height: 100%;
   width: 100%;
+  padding-bottom: 56.25%;
+  background-size: cover;
 }
+
+.similar_overview {
+  height: 32px;
+  text-overflow: ellipsis;
+  overflow-y: auto;
+  position: relative;
+}
+
+.similar_overview:after { 
+  content: '...'; 
+  position: absolute; 
+  bottom: 0; 
+  right: 0; }
