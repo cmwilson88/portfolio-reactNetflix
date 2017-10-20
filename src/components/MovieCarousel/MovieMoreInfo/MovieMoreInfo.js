@@ -38,8 +38,8 @@ class MovieMoreInfo extends Component {
 				directors: response.credits.crew
 						.filter(item => item.job === 'Director'),
 				genres: response.genres,
-				similar: response.similar.results
-					// .sort((a,b) => b.vote_average - a.vote_average)
+				similar: response.recommendations.results
+					// .sort((a,b) => b.popularity - a.popularity)
 					.splice(0,4),
 				keywords: response.keywords.keywords
 					.splice(0,10)
@@ -125,13 +125,24 @@ class MovieMoreInfo extends Component {
 		if(this.state.similar) {
 			similar = this.state.similar.map((movie, index) => {
 				const releaseYear = movie.release_date.substr(0,4)
+				const match = movie.vote_average * 10
 				return (
 					<div key={movie.id} className="similar_tile">
 						<div 
 							className="similar_media"
 							style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}>
+							<div className="similar_media_overlay"></div>
 						</div>
 						<p>{movie.title} - {releaseYear}</p>
+						<p style={{
+							color: match >= 70 
+							? 'green' 
+							: match >= 40
+							? 'orange' 
+							: 'red'
+								}}>
+								{match}% Match
+						</p>
 						<p className="similar_overview">{movie.overview.substr(0,150).trim() + '...'}</p>
 					</div>
 				)
