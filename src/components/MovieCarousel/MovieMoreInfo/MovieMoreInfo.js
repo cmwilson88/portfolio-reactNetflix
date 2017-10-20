@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {getMovieInfo} from '../../../services/moreInfo'
 import './movieMoreInfo.css'
+import {CSSTransitionGroup} from 'react-transition-group'
 
 import MovieOverview from './MovieOverview/MovieOverview'
 import DetailsSection from './DetailsSection/DetailsSection'
@@ -43,13 +44,16 @@ class MovieMoreInfo extends Component {
 					.splice(0,4),
 				keywords: response.keywords.keywords
 					.splice(0,10)
-					.map(keyword => {
-						return keyword.name
-								.split(' ')
-								.map(keyword => {
-									return keyword[0].toUpperCase() + keyword.substr(1)
-								}).join(' ')
-				}),
+					.map(keyword => ({
+						...keyword, 
+						name: keyword.name
+									.split(' ')
+									.map(word => {
+										return word[0].toUpperCase() 
+												+ word.substr(1)
+											})
+									.join(' ')
+				})),
 				reviews: response.reviews.results.length 
 						? response.reviews.results 
 						: null
@@ -131,7 +135,11 @@ class MovieMoreInfo extends Component {
 						<div 
 							className="similar_media"
 							style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}>
-							<div className="similar_media_overlay"></div>
+							<div className="similar_media_overlay">
+								<div className="tile__button">
+		            				<i className="fa fa-play"></i>
+		        				</div>
+							</div>
 						</div>
 						<p>{movie.title} - {releaseYear}</p>
 						<p style={{
@@ -158,6 +166,10 @@ class MovieMoreInfo extends Component {
 	     			<div className={this.state.overview ? 'moreInfoOverlay' : 'moreInfoOverlayDark'}>
 		     		<h1 className="movie_info_title">{detailedMovie.title}</h1>
 		     			<div className="moreInfoContent">
+		     			<CSSTransitionGroup
+		     				transitionName="transition_mInfoContent"
+		     				transitionEnterTimeout={400}
+		     				transitionLeave={false}>
 			     			{this.state.overview ? (
 			     				<MovieOverview 
 			     					detailedMovie={detailedMovie}
@@ -184,6 +196,7 @@ class MovieMoreInfo extends Component {
 			     					keywords={this.state.keywords}
 			     					reviews={this.state.reviews}/>
 			     			) : null}
+			     		</CSSTransitionGroup>
 		     			</div>
 
 	     				<ul className="moreInfoNav">

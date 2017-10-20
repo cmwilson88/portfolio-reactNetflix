@@ -28,6 +28,10 @@
   white-space: nowrap;
   color: #fff;
 }
+.details_column li a:hover {
+  text-decoration: underline;
+}
+
 
 .detail_reviews {
   padding-right: 10px;

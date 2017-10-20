@@ -62,6 +62,7 @@
   transition: all 500ms ease-in;
 }
 
+
 .moreInfoNav {
   position: absolute;
   bottom: 0;
@@ -102,6 +103,7 @@
 
   height: 100%;
   padding-right: 5vw;
+
 }
 
 .similar_tile {
@@ -113,6 +115,7 @@
 }
 
 .similar_media {
+  position: relative;
   width: 100%;
   padding-bottom: 56.25%;
   background-size: cover;
@@ -120,11 +123,46 @@
 }
 
 .similar_media_overlay {
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,1)
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0)
 }
 
+.similar_media_overlay .tile__button {
+  visibility: hidden;
+  opacity: 0.01;
+  height: 60px;
+  width: 60px;
+  border: 3px solid rgba(255,255,255,1);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.similar_media_overlay .fa-play {
+  transform: scale(1.5);
+  color: rgba(255,255,255,1);
+}
+
+.similar_tile:hover .tile__button {
+  opacity: 1;
+  visibility: visible;
+  transition: 500ms all;
+}
+
+.similar_tile:hover .tile__button:hover {
+  background: rgba(0,0,0,.4);
+  transform: scale(1.5);
+}
+
+.similar_tile:hover .tile__button:hover .fa-play {
+  color: red;
+}
 
 .similar_tile p {
   color: #888;
@@ -133,3 +171,11 @@
 }
 
 
+.transition_mInfoContent-enter {
+  opacity: 0.01;
+}
+
+.transition_mInfoContent-enter.transition_mInfoContent-enter-active {
+  opacity: 1;
+  transition: all 400ms ease-in;
+}
