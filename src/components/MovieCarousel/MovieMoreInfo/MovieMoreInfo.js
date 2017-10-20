@@ -4,6 +4,7 @@ import './movieMoreInfo.css'
 import {CSSTransitionGroup} from 'react-transition-group'
 
 import MovieOverview from './MovieOverview/MovieOverview'
+import SimilarTitles from './SimilarTitles/SimilarTitles'
 import DetailsSection from './DetailsSection/DetailsSection'
 
 class MovieMoreInfo extends Component {
@@ -83,7 +84,6 @@ class MovieMoreInfo extends Component {
 		let mainCast = [];
 		let directors;
 		let genres;
-		let similar;
 			
 
 		if(this.state.cast) {
@@ -125,37 +125,6 @@ class MovieMoreInfo extends Component {
 			})
 		}
 
-		
-		if(this.state.similar) {
-			similar = this.state.similar.map((movie, index) => {
-				const releaseYear = movie.release_date.substr(0,4)
-				const match = movie.vote_average * 10
-				return (
-					<div key={movie.id} className="similar_tile">
-						<div 
-							className="similar_media"
-							style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}>
-							<div className="similar_media_overlay">
-								<div className="tile__button">
-		            				<i className="fa fa-play"></i>
-		        				</div>
-							</div>
-						</div>
-						<p>{movie.title} - {releaseYear}</p>
-						<p style={{
-							color: match >= 70 
-							? 'green' 
-							: match >= 40
-							? 'orange' 
-							: 'red'
-								}}>
-								{match}% Match
-						</p>
-						<p className="similar_overview">{movie.overview.substr(0,150).trim() + '...'}</p>
-					</div>
-				)
-			})
-		}
 
 		return (
 	 		<section 
@@ -183,9 +152,8 @@ class MovieMoreInfo extends Component {
 			     			) : null}
 
 			     			{this.state.recommended ? (
-			     				<div className="similar_container">
-			     					{similar}
-			     				</div>
+			     				<SimilarTitles
+			     					similar={this.state.similar} />
 			     			) : null}
 
 			     			{this.state.details ? (
