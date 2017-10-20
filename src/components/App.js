@@ -62,7 +62,33 @@ class App extends Component {
 
     return topMovie ? (
       <div className="App">
-        <div style={{backgroundImage: `url(https://image.tmdb.org/t/p/w1280${topMovie.backdrop_path})`}} className="hero">
+        <nav className="navbar">
+          <div className="left_nav">
+            <div 
+              className="logo"
+              style={{backgroundImage: `url(../assets/netflix1600.png)`}}>
+            </div>
+            <span id="browse">Browse</span>
+            <span>Kids</span>
+            <span>DVD</span>
+          </div>
+          <div className="right_nav">
+            <div className="search">
+              <i className="fa fa-search"></i>
+              <span>Search</span>
+            </div>
+            
+            <i className="fa fa-bell"></i>
+            
+            <div className="nav_user">
+              <div className="nav_user_image"></div>
+              <span id="nav_user_name">Christopher</span>
+            </div>
+          </div>
+        </nav>
+        <div 
+          className="hero"
+          style={{backgroundImage: `url(https://image.tmdb.org/t/p/w1280${topMovie.backdrop_path})`}} >
           <div className="hero_overlay">
             <h1 className="hero_title">
               {topMovie.title}
