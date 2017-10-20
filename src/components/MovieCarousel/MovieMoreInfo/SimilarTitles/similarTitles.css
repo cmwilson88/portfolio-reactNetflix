@@ -22,6 +22,8 @@
   padding-bottom: 56.25%;
   background-size: cover;
   margin-bottom: 10px;
+
+  cursor: pointer;
 }
 
 .similar_media_overlay {
