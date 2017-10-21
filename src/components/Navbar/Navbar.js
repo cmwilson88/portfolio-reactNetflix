@@ -53,10 +53,10 @@ export default class Navbar extends Component {
 		return (
 			<nav className={this.state.scrolled ? 'navbar-scrolled' : 'navbar'}>
 	          <div className="left_nav">
-	            <div 
-	              className="logo"
-	              style={{backgroundImage: `url(../assets/netflix1600.png)`}}>
-	            </div>
+	            <a href="/"
+	              	className="logo"
+	              	style={{backgroundImage: `url(../assets/netflix1600.png)`}}>
+	            </a>
 	            <span id="browse">Browse</span>
 	            <span>Kids</span>
 	            <span>DVD</span>
