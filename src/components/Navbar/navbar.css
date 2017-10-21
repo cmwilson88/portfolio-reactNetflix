@@ -59,6 +59,7 @@
   border: none;
   background: 0 0;
   font-size: 1em;
+  transition-delay: 250ms;
 }
 
 
@@ -96,7 +97,6 @@
   box-sizing: border-box;
   padding: 7px 14px 7px 7px;
   font-size: 14px;
-  width: 212px;
   outline: 0;
   line-height: normal;
 }
@@ -146,3 +146,32 @@
   border-top: 5px solid #fff;
 
 }
+
+
+.search_transition-appear {
+  width: 50px;
+}
+
+.search_transition-appear.search_transition-appear-active {
+  width: 212px;
+  transition: width 250ms;
+}
+
+.search_transition-leave {
+  width: 212px;
+}
+
+.search_transition-leave.search_transition-leave-active {
+  width: 0px;
+  transition: width 250ms ease-out;
+}
+
+.searchbtn-appear {
+  transition-delay: 250ms;
+}
+
+.searchbtn-appear.searchbtn-appear-active {
+  /*opacity: 1;*/
+  /*transition: opacity 250ms;*/
+}
+

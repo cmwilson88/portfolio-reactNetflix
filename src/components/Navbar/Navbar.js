@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {CSSTransitionGroup} from 'react-transition-group'
 import './navbar.css'
 
 export default class Navbar extends Component {
@@ -7,11 +8,13 @@ export default class Navbar extends Component {
 
 		this.state = {
 			scrolled: false,
-			searchActive: false
+			searchActive: false,
+			searchTerm: ''
 		}
 
 		this.handleScroll = this.handleScroll.bind(this)
 		this.toggleSearch = this.toggleSearch.bind(this)
+		this.handleInput = this.handleInput.bind(this)
 	}
 
     componentDidMount() {
@@ -32,6 +35,12 @@ export default class Navbar extends Component {
     			scrolled: false
     		})
     	}
+    }
+
+    handleInput(event) {
+    	this.setState({
+    		searchTerm: event.target.value
+    	})
     }
 
     toggleSearch() {
@@ -55,13 +64,21 @@ export default class Navbar extends Component {
 	          <div className="right_nav">
 	            <div className="searchBox">
 	              {this.state.searchActive ? (
-	              		<div className="searchInput">
-	              			<span 
-	              				onClick={this.toggleSearch}
-	              				className="fa fa-search"></span>
-	              			<input 
-	              				placeholder="Titles, peoples, genres"/>
-	              		</div>
+		              	<CSSTransitionGroup
+		              		transitionName="search_transition"
+		              		transitionAppear={true}
+		              		transitionAppearTimeout={250}
+		              		transitionEnter={false}
+		              		transitionLeaveTimeout={250}>
+		              		<div className="searchInput">
+		              			<span 
+		              				onClick={this.toggleSearch}
+		              				className="fa fa-search"></span>
+		              			<input 
+		              				onChange={this.handleInput}
+		              				placeholder="Titles, peoples, genres"/>
+		              		</div>
+		              	</CSSTransitionGroup>
 	              	) : (
 	              		<button 
 	            	 		onClick={this.toggleSearch}
