@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {CSSTransitionGroup} from 'react-transition-group'
 import MovieSlider from './MovieSlider/MovieSlider'
 import MovieMoreInfo from './MovieMoreInfo/MovieMoreInfo'
-import '../App.css'
 
 class MovieCarousel extends Component {
 	constructor(props) {

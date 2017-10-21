@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getMovieInfo} from '../../../services/moreInfo'
+import {getMovieInfo} from '../../../../services/moreInfo'
 import './movieMoreInfo.css'
 import {CSSTransitionGroup} from 'react-transition-group'
 
