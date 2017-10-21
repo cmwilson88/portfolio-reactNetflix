@@ -6,10 +6,12 @@ export default class Navbar extends Component {
 		super()
 
 		this.state = {
-			scrolled: false
+			scrolled: false,
+			searchActive: false
 		}
 
 		this.handleScroll = this.handleScroll.bind(this)
+		this.toggleSearch = this.toggleSearch.bind(this)
 	}
 
     componentDidMount() {
@@ -32,6 +34,12 @@ export default class Navbar extends Component {
     	}
     }
 
+    toggleSearch() {
+    	this.setState({
+    		searchActive: !this.state.searchActive
+    	})
+    }
+
 	render() {
 		return (
 			<nav className={this.state.scrolled ? 'navbar-scrolled' : 'navbar'}>
@@ -45,9 +53,23 @@ export default class Navbar extends Component {
 	            <span>DVD</span>
 	          </div>
 	          <div className="right_nav">
-	            <div className="search">
-	              <i className="fa fa-search"></i>
-	              <span>Search</span>
+	            <div className="searchBox">
+	              {this.state.searchActive ? (
+	              		<div className="searchInput">
+	              			<span 
+	              				onClick={this.toggleSearch}
+	              				className="fa fa-search"></span>
+	              			<input 
+	              				placeholder="Titles, peoples, genres"/>
+	              		</div>
+	              	) : (
+	              		<button 
+	            	 		onClick={this.toggleSearch}
+	              			className="searchTab">
+	              			<span className="fa fa-search"></span>
+	              			<span className="label">Search</span>
+	              		</button>
+	              	)}
 	            </div>
 	            
 	            <i className="fa fa-bell"></i>

@@ -100,7 +100,7 @@ class MovieCarousel extends Component {
 	     						displayMovie={this.state.moreInfoMovie}
 	     						key={this.state.moreInfoMovie.id}
 	     					/>
-	     		) : null}
+	     			) : null}
 		     		</CSSTransitionGroup>
 	     </div>
 		) : 'Loading'
