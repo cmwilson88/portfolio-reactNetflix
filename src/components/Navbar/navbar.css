@@ -149,29 +149,14 @@
 
 
 .search_transition-appear {
-  width: 50px;
+  width: 100px;
+  opacity: 0.01;
 }
 
 .search_transition-appear.search_transition-appear-active {
   width: 212px;
-  transition: width 250ms;
+  opacity: 1;
+  transition: all 250ms;
 }
 
-.search_transition-leave {
-  width: 212px;
-}
-
-.search_transition-leave.search_transition-leave-active {
-  width: 0px;
-  transition: width 250ms ease-out;
-}
-
-.searchbtn-appear {
-  transition-delay: 250ms;
-}
-
-.searchbtn-appear.searchbtn-appear-active {
-  /*opacity: 1;*/
-  /*transition: opacity 250ms;*/
-}
 

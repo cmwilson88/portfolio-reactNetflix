@@ -4,18 +4,15 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
-    "pure-react-carousel": "^1.9.7",
     "react": "^16.0.0",
     "react-css-transition": "^0.7.4",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
-    "react-slick": "^0.15.4",
     "react-transition-group": "^1.2.1",
-    "react-whirligig": "^6.1.0",
     "redux": "^3.7.2",
-    "slick-carousel": "^1.7.1"
+    "redux-promise-middleware": "^4.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
