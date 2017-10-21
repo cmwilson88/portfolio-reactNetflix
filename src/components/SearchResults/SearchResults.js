@@ -8,7 +8,7 @@ export default class SearchResults extends Component {
 
 	render() {
 		return (
-			<h1>This is the results page</h1>
+			<h1 style={{marginTop: '100px'}}>This is the results page</h1>
 		)
 	}
 }
