@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import {CSSTransitionGroup} from 'react-transition-group'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {search} from '../../ducks/reducer'
 import './navbar.css'
 
-export default class Navbar extends Component {
+class Navbar extends Component {
 	constructor() {
 		super()
 
@@ -56,14 +58,11 @@ export default class Navbar extends Component {
     	if(event.charCode === 13) {
     		event.stopPropagation();
     		event.preventDefault();
-    		axios.get(`https://api.themoviedb.org/3/search/movie?api_key=d40da9ada52b07d2ef67b21c7fe1bfa1&language=en-US&query=${this.state.searchTerm}&page=1&include_adult=false`)
-    			.then(response => {
-    				this.setState({
-    					searchResults: response.data.results,
-    					searchTerm: '',
-    					searchActive: false
-    				})
-    			})	
+    		this.props.search(this.state.searchTerm)
+    		this.setState({
+    			searchTerm: '',
+    			searchActive: false
+    		})
     	}
     }
 
@@ -120,3 +119,9 @@ export default class Navbar extends Component {
 		)
 	}
 }
+
+function mapStateToProps(state) {
+
+}
+
+export default connect(null,{search})(Navbar);

@@ -35,8 +35,8 @@ function SearchResults(props) {
 	})	
 	
 	return (
-		<div style={{marginTop: '100px'}}>
-			<h1>This is the results page</h1>
+		<div id="search_content">
+			<h1 className="search_header">Results for {props.searchTerm}</h1>
 			<section className="searchresults">
 				{searchMovies}
 			</section>
@@ -46,7 +46,8 @@ function SearchResults(props) {
 
 function mapStateToProps(state) {
 	return {
-		searchMovies: state.searchMovies
+		searchMovies: state.searchMovies,
+		searchTerm: state.searchTerm
 	}
 }
 
