@@ -40,9 +40,7 @@ export default function reducer(state=initialState, action) {
 const SEARCH_MOVIES = 'SEARCH_MOVIES';
 
 export function search(term) {
-	console.log('search fired from reducer')
 	let promise = searchMovies(term)
-	console.log(`promise: ${promise}`)
 	return {
 		type: SEARCH_MOVIES,
 		payload: promise

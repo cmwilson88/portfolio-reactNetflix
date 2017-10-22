@@ -3,6 +3,7 @@ import {CSSTransitionGroup} from 'react-transition-group'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {search} from '../../ducks/reducer'
+import {Redirect} from 'react-router'
 import './navbar.css'
 
 class Navbar extends Component {
@@ -12,6 +13,7 @@ class Navbar extends Component {
 		this.state = {
 			scrolled: false,
 			searchActive: false,
+			searched: false,
 			searchTerm: '',
 			searchResults: []
 		}
@@ -61,7 +63,8 @@ class Navbar extends Component {
     		this.props.search(this.state.searchTerm)
     		this.setState({
     			searchTerm: '',
-    			searchActive: false
+    			searchActive: false,
+    			searched: true
     		})
     	}
     }
@@ -115,6 +118,9 @@ class Navbar extends Component {
 	              <span id="nav_user_name">Christopher</span>
 	            </div>
 	          </div>
+			{this.state.searched && (
+				<Redirect to="/search"/>
+			)}
 	        </nav>
 		)
 	}
