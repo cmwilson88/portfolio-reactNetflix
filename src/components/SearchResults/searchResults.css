@@ -6,15 +6,13 @@
 
 .searchresults {
 	display: flex;
-	justify-content: space-between;
 	flex-wrap: wrap;
-
-	padding-left: 5vw;
-	padding-right: 5vw;
 }
 
 .search_header {
   text-align: left;
+  padding-left: 1.25%;
+  margin-bottom: 12.5px;
 
   font-size: 1.35em;
   font-weight: bold;
@@ -22,5 +20,5 @@
 }
 
 .search_tile {
-	margin-bottom: 25px;
+	margin: 12.5px 1.25%;
 }

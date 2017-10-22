@@ -57,7 +57,7 @@ export default class Home extends Component {
   render() {
     let topMovie;
     if(this.state.movies) {
-      topMovie = this.state.upcoming[0]
+      topMovie = this.state.upcoming[1]
     } 
 
     return topMovie ? (

@@ -36,7 +36,9 @@ function SearchResults(props) {
 	
 	return (
 		<div id="search_content">
-			<h1 className="search_header">Results for {props.searchTerm}</h1>
+			<h1 className="search_header">
+				Found {props.searchMovies.length} results for {props.searchTerm}
+			</h1>
 			<section className="searchresults">
 				{searchMovies}
 			</section>

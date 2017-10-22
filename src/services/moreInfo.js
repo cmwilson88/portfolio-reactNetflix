@@ -8,5 +8,8 @@ export function getMovieInfo(id) {
 
 export function searchMovies(searchTerm) {
 	return axios.get(`${config.url}/3/search/movie?api_key=${config.API_KEY}&language=en-US&query=${searchTerm}&page=1&include_adult=false`)
-				.then(response => response.data.results).catch(err=> console.log(err))
+				.then(response => ({
+					searchTerm,
+					movies: response.data.results
+				})).catch(err=> console.log(err))
 }
