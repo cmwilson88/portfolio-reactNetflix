@@ -5,6 +5,7 @@ import './App.css';
 import Navbar from './Navbar/Navbar'
 import Home from './Home/Home'
 import SearchResults from './SearchResults/SearchResults'
+import MovieDisplay from './MovieDisplay/MovieDisplay'
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class App extends Component {
         <Navbar/>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/search" component={SearchResults} />
+          <Route exact path="/search" component={SearchResults} />
+          <Route path="/:id" component={MovieDisplay} />
         </Switch>
       </div>
     )
