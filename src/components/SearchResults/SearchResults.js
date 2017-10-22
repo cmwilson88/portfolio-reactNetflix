@@ -9,7 +9,7 @@ function SearchResults(props) {
 			const releaseYear = movie.release_date.substr(0,4)
 			const match = movie.vote_average * 10
 			return (
-				<div key={movie.id} className="similar_tile">
+				<div key={movie.id} className="similar_tile search_tile">
 					<div 
 						className="similar_media"
 						style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}>

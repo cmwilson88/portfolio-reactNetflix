@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {CSSTransitionGroup} from 'react-transition-group'
+import axios from 'axios'
 import './navbar.css'
 
 export default class Navbar extends Component {
@@ -9,12 +10,14 @@ export default class Navbar extends Component {
 		this.state = {
 			scrolled: false,
 			searchActive: false,
-			searchTerm: ''
+			searchTerm: '',
+			searchResults: []
 		}
 
 		this.handleScroll = this.handleScroll.bind(this)
 		this.toggleSearch = this.toggleSearch.bind(this)
 		this.handleInput = this.handleInput.bind(this)
+		this.searchMovies = this.searchMovies.bind(this)
 	}
 
     componentDidMount() {
@@ -49,6 +52,21 @@ export default class Navbar extends Component {
     	})
     }
 
+    searchMovies(event) {
+    	if(event.charCode === 13) {
+    		event.stopPropagation();
+    		event.preventDefault();
+    		axios.get(`https://api.themoviedb.org/3/search/movie?api_key=d40da9ada52b07d2ef67b21c7fe1bfa1&language=en-US&query=${this.state.searchTerm}&page=1&include_adult=false`)
+    			.then(response => {
+    				this.setState({
+    					searchResults: response.data.results,
+    					searchTerm: '',
+    					searchActive: false
+    				})
+    			})	
+    	}
+    }
+
 	render() {
 		return (
 			<nav className={this.state.scrolled ? 'navbar-scrolled' : 'navbar'}>
@@ -75,7 +93,9 @@ export default class Navbar extends Component {
 		              				onClick={this.toggleSearch}
 		              				className="fa fa-search"></span>
 		              			<input 
+		              				autoFocus
 		              				onChange={this.handleInput}
+		              				onKeyPress={this.searchMovies}
 		              				placeholder="Titles, peoples, genres"/>
 		              		</div>
 		              	</CSSTransitionGroup>

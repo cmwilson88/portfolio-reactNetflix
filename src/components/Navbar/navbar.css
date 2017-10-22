@@ -84,6 +84,7 @@
   background: rgba(0,0,0,.75);
   border: solid 1px rgba(255,255,255,.85);
   transition: 1000ms all;
+  overflow: hidden;
 }
 
 .searchInput .fa-search {
