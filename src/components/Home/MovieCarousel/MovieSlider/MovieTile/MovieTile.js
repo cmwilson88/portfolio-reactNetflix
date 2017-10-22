@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import './movieTile.css'
 
 class movieTile extends Component {
@@ -52,10 +53,12 @@ class movieTile extends Component {
 	                        ? 'movieTile-active' : 'movieTile'} 
 	          style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${props.movie.backdrop_path}`}}>
 		      <div className="tile__details">
-		        <div className="tile__button">
-		            <i className="fa fa-play"></i>
-		        </div>
-		        <div className={this.props.moreInfoActive ? "tile__title-active" : "tile__title" }>
+		        <Link to={`/${props.movie.id}`}> 
+              <div className="tile__button">
+  		            <i className="fa fa-play"></i>
+  		        </div>
+		        </Link>
+            <div className={this.props.moreInfoActive ? "tile__title-active" : "tile__title" }>
 		          {props.movie.title}
 		        </div>
 		        <div className={this.props.moreInfoActive ? "tile__rating-active" : "tile__rating" }>

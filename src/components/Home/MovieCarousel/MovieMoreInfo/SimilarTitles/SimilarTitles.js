@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import './similarTitles.css';
 
 export default function SimilarTitles(props) {
@@ -11,9 +12,11 @@ export default function SimilarTitles(props) {
 					className="similar_media"
 					style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}>
 					<div className="similar_media_overlay">
-						<div className="tile__button">
-            				<i className="fa fa-play"></i>
-        				</div>
+						<Link to={`/${movie.id}`}>
+							<div className="tile__button">
+	            				<i className="fa fa-play"></i>
+	        				</div>
+        				</Link>
 					</div>
 				</div>
 				<p>{movie.title} - {releaseYear}</p>

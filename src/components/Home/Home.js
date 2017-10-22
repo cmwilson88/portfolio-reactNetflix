@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 import MovieCarousel from './MovieCarousel/MovieCarousel'
 
@@ -71,10 +72,12 @@ export default class Home extends Component {
 	              {topMovie.title}
 	            </h1>
 	            <div className="hero_buttons">
-	              <div className="hero_play">
-	                <i className="fa fa-play"></i>
-	                Play
-	              </div>
+	              <Link className="hero_link" to={`/${topMovie.id}`}>
+		              <div className="hero_play">
+		                <i className="fa fa-play"></i>
+		                Play
+		              </div>
+	              </Link>
 	              <div className="hero_add">
 	                <i className="fa fa-plus"></i>
 	                My List

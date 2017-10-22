@@ -51,6 +51,9 @@ body {
   margin-bottom: 1.2em;
 }
 
+.hero_link {
+  text-decoration: none;
+}
 .hero_play,
 .hero_add {
   display: flex;
