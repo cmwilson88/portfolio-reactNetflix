@@ -3,10 +3,8 @@ import {searchMovies} from '../services/moreInfo'
 
 const initialState = {
 	searchMovies: [],
-	searchTerm: '',
-	selectedMovie: null
+	searchTerm: ''
 }
-
 
 export default function reducer(state=initialState, action) {
 	switch(action.type) {
