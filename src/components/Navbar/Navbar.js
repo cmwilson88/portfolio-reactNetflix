@@ -46,7 +46,7 @@ class Navbar extends Component {
 
     handleInput(event) {
     	this.setState({
-    		searchTerm: event.target.value
+    		searchTerm: event.target.value.trim()
     	})
     }
 
