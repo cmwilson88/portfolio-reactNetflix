@@ -53,7 +53,7 @@ class movieTile extends Component {
 	                        ? 'movieTile-active' : 'movieTile'} 
 	          style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${props.movie.backdrop_path}`}}>
 		      <div className="tile__details">
-		        <Link to={`/${props.movie.id}`}> 
+		        <Link className="video_link" to={`/${props.movie.id}`}> 
               <div className="tile__button">
   		            <i className="fa fa-play"></i>
   		        </div>

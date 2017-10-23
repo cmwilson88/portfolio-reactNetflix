@@ -72,7 +72,7 @@ export default class Home extends Component {
 	              {topMovie.title}
 	            </h1>
 	            <div className="hero_buttons">
-	              <Link className="hero_link" to={`/${topMovie.id}`}>
+	              <Link className="video_link" to={`/${topMovie.id}`}>
 		              <div className="hero_play">
 		                <i className="fa fa-play"></i>
 		                Play

@@ -12,7 +12,7 @@ export default function SimilarTitles(props) {
 					className="similar_media"
 					style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}>
 					<div className="similar_media_overlay">
-						<Link to={`/${movie.id}`}>
+						<Link className="video_link" to={`/${movie.id}`}>
 							<div className="tile__button">
 	            				<i className="fa fa-play"></i>
 	        				</div>
