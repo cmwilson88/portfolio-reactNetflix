@@ -1,4 +1,3 @@
-import axios from 'axios'
 import {searchMovies} from '../services/moreInfo'
 
 const initialState = {
@@ -9,7 +8,6 @@ const initialState = {
 export default function reducer(state=initialState, action) {
 	switch(action.type) {
 		case SEARCH_MOVIES + '_PENDING':
-			console.log('search movies pending');
 			return Object.assign(
 				{},
 				state,
@@ -18,7 +16,6 @@ export default function reducer(state=initialState, action) {
 				}
 			)	
 		case SEARCH_MOVIES + '_FULFILLED':
-			console.log(action.payload)
 			return Object.assign(
 				{}, 
 				state, 
@@ -29,7 +26,6 @@ export default function reducer(state=initialState, action) {
 										.join(' ')
 				}
 			)
-			break;
 		default: 
 			return state;
 	}

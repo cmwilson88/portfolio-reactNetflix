@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {CSSTransitionGroup} from 'react-transition-group'
-import axios from 'axios'
 import {connect} from 'react-redux'
 import {search} from '../../ducks/reducer'
 import {Redirect} from 'react-router'
@@ -135,8 +134,5 @@ class Navbar extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-
-}
 
 export default withRouter(connect(null,{search})(Navbar));

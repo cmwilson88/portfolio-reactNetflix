@@ -3,8 +3,6 @@ import './detailsSection.css'
 
 export default function DetailsSection(props) {
 	let moreCast = [];
-	let detail_keywords = [];
-
 	let limit = 0;
 	if(props) {
 		if(props.cast.length >=10) {
@@ -15,7 +13,7 @@ export default function DetailsSection(props) {
 		for(let i = 0; i < limit; i++) {
 			moreCast.push(
 				<li key={props.cast[i].id}>
-					<a href="#">
+					<a href="/">
 						{props.cast[i].name}
 					</a>
 				</li>
@@ -61,7 +59,7 @@ function DetailContent(props) {
 	let content = props.content.map((item,index) => {
 		return (
 			<li key={index}>
-				<a href="#">
+				<a href="/">
 					{item.name}
 				</a>
 			</li>

@@ -15,10 +15,10 @@ class MovieCarousel extends Component {
 
 		let timeout = null;
   	
-  	this.moveRowRight = this.moveRowRight.bind(this)
-  	this.moveRowLeft = this.moveRowLeft.bind(this)
-  	this.moreInfoMouseEnter = this.moreInfoMouseEnter.bind(this)
-  	this.displayMoreInfo = this.displayMoreInfo.bind(this)
+  		this.moveRowRight = this.moveRowRight.bind(this)
+  		this.moveRowLeft = this.moveRowLeft.bind(this)
+  		this.moreInfoMouseEnter = this.moreInfoMouseEnter.bind(this)
+  		this.displayMoreInfo = this.displayMoreInfo.bind(this)
 	}
 
 	moveRowRight() {

@@ -16,7 +16,7 @@ export default class MovieDisplay extends Component {
 		getMovieVideos(this.props.match.params.id).then(response => {
 			this.setState({
 				movieTitle: response.title,
-				movieVideo: response.videos.results.filter(video => video.site === 'YouTube' && video.type === 'Trailer' || video.type === 'Featurette')[0]
+				movieVideo: response.videos.results.filter(video => video.site === 'YouTube' && (video.type === 'Trailer' || video.type === 'Featurette'))[0]
 			})
 		})
 	}
@@ -26,6 +26,7 @@ export default class MovieDisplay extends Component {
 		return this.state.movieVideo.key ? (
 			<div style={{width: '100vw', height: '100vh'}}>
 				<iframe 
+					title="video_player"
 					width="100%" 
 					height="100%" 
 					src={`https://www.youtube.com/embed/${this.state.movieVideo.key}?autoplay=1&rel=0&showinfo=0`}

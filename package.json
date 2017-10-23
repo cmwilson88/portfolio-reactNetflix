@@ -1,10 +1,12 @@
 {
   "name": "react-netflix",
   "version": "0.1.0",
+  "main": "server/index.js",
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
     "classnames": "^2.2.5",
+    "express": "^4.16.2",
     "react": "^16.0.0",
     "react-css-transition": "^0.7.4",
     "react-dom": "^16.0.0",

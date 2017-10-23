@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import MovieTile from './MovieTile/MovieTile'
 
 function MovieSlider(props){

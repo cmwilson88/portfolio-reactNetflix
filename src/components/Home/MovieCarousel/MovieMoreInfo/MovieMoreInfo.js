@@ -90,7 +90,7 @@ class MovieMoreInfo extends Component {
 			for(let i = 0; i < 5; i++) {
 				mainCast.push(
 						<li key={this.state.cast[i].id}>
-							<a href="#">
+							<a href="/">
 								{this.state.cast[i].name}
 							</a>
 							{i < 4 ? ',\u00A0' : ''}
@@ -103,7 +103,7 @@ class MovieMoreInfo extends Component {
 			directors = this.state.directors.map((director,index) => {
 				return (
 					<li key={director.id}>
-						<a href="#">
+						<a href="/">
 							{director.name}
 						</a>
 						{index < this.state.directors.length -1 ? ',\u00A0' : ''}
@@ -116,7 +116,7 @@ class MovieMoreInfo extends Component {
 			genres = this.state.genres.map((genre, index) => {
 				return (
 					<li key={genre.id}>
-						<a href="#">
+						<a href="/">
 							{genre.name}
 						</a>
 						{index < this.state.genres.length -1 ? ',\u00A0' : ''}
