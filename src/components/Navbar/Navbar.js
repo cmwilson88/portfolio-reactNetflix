@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {CSSTransitionGroup} from 'react-transition-group'
 import {connect} from 'react-redux'
 import {search} from '../../ducks/reducer'
-import {Redirect} from 'react-router'
 import {Link, withRouter} from 'react-router-dom'
 import classNames from 'classnames'
 import './navbar.css'
@@ -14,7 +13,6 @@ class Navbar extends Component {
 		this.state = {
 			scrolled: false,
 			searchActive: false,
-			searched: false,
 			searchTerm: '',
 			searchResults: [],
 		}
@@ -65,8 +63,8 @@ class Navbar extends Component {
     		this.setState({
     			searchTerm: '',
     			searchActive: false,
-    			searched: true
     		})
+    		this.props.history.push('/search')
     	}
     }
 
@@ -76,7 +74,6 @@ class Navbar extends Component {
 			'navbar-scrolled': this.state.scrolled,
 			'navbar_video':  /\d/.test(this.props.location.pathname)
 		})
-		console.log(/\d/.test(this.props.location.pathname))
 		return (
 			<nav 
 				className={navbarClass}>
@@ -126,9 +123,6 @@ class Navbar extends Component {
 	              <span id="nav_user_name">Christopher</span>
 	            </div>
 	          </div>
-			{this.state.searched && (
-				<Redirect to="/search"/>
-			)}
 	        </nav>
 		)
 	}
