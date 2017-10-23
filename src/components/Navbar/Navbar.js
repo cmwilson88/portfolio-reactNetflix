@@ -4,6 +4,8 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {search} from '../../ducks/reducer'
 import {Redirect} from 'react-router'
+import {Link, withRouter} from 'react-router-dom'
+import classNames from 'classnames'
 import './navbar.css'
 
 class Navbar extends Component {
@@ -15,7 +17,7 @@ class Navbar extends Component {
 			searchActive: false,
 			searched: false,
 			searchTerm: '',
-			searchResults: []
+			searchResults: [],
 		}
 
 		this.handleScroll = this.handleScroll.bind(this)
@@ -70,13 +72,20 @@ class Navbar extends Component {
     }
 
 	render() {
+		const navbarClass = classNames({
+			'navbar': !this.state.scrolled,
+			'navbar-scrolled': this.state.scrolled,
+			'navbar_video':  /\d/.test(this.props.location.pathname)
+		})
+		console.log(/\d/.test(this.props.location.pathname))
 		return (
-			<nav className={this.state.scrolled ? 'navbar-scrolled' : 'navbar'}>
+			<nav 
+				className={navbarClass}>
 	          <div className="left_nav">
-	            <a href="/"
-	              	className="logo"
-	              	style={{backgroundImage: `url(../assets/netflix1600.png)`}}>
-	            </a>
+	            <Link to="/"
+		              	className="logo"
+		              	style={{backgroundImage: `url(../assets/netflix1600.png)`}}>
+	            </Link>
 	            <span id="browse">Browse</span>
 	            <span>Kids</span>
 	            <span>DVD</span>
@@ -130,4 +139,4 @@ function mapStateToProps(state) {
 
 }
 
-export default connect(null,{search})(Navbar);
+export default withRouter(connect(null,{search})(Navbar));
