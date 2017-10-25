@@ -22,9 +22,9 @@ body {
   left: 0;
   right: 0;
   height: 75vh;
-  background-size: 100% 150%;
+  background-size: 100% 120%;
   background-repeat: no-repeat;
-  background-position: top center;  
+  background-position: top;  
 }
 
 .hero_overlay {
@@ -92,7 +92,7 @@ body {
 
 .hero_description {
   width: 33%;
-  color: #999 ;
+  color: #fff ;
   font-weight: 400;
   line-height: 1.35;
   text-shadow: 0px 0px 3px #000, -1px -1px #000, 1px 1px #000;

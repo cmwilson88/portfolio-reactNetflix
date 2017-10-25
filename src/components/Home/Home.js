@@ -59,20 +59,13 @@ export default class Home extends Component {
 
     for (let i = 0, j=this.state.categories.length; i < j; i++) {
     	let item = this.state.categories[i]
-    	this.setState({
-    		[item.category]: {
-    			format: item.format,
-    			titles: []
-    		}
-    	})
     	if(i === j-1) {
     		getMoviesByCategory(item.format, item.type, item.id).then(response => {
     			this.setState({
-    				[item.category]: Object.assign({}, 
-    								this.state[item.category],
-    								{
-    									titles: response
-    								})
+    				[item.category]: {
+    									format: item.format,
+										titles: response
+    								}
     			})
     			setTimeout(() => {
     				this.setState({
@@ -83,11 +76,10 @@ export default class Home extends Component {
     	} else {
 	    	getMoviesByCategory(item.format, item.type, item.id).then(response => {
     			this.setState({
-    				[item.category]: Object.assign({}, 
-    								this.state[item.category],
-    								{
+    				[item.category]:{
+    									format: item.format,
     									titles: response
-    								})
+    								}
     			})
 	    	})
     	}
@@ -96,8 +88,8 @@ export default class Home extends Component {
 
   render() {
     let topMovie;
-    if(this.state.upcoming) {
-      topMovie = this.state.upcoming.titles[1]
+    if(this.state.netflix) {
+      topMovie = this.state.hbo.titles[0]
     } 
 
     return this.state.ready ? (
@@ -107,7 +99,7 @@ export default class Home extends Component {
 	          style={{backgroundImage: `url(https://image.tmdb.org/t/p/w1280${topMovie.backdrop_path})`}} >
 	          <div className="hero_overlay">
 	            <h1 className="hero_title">
-	              {topMovie.title}
+	              {topMovie.title || topMovie.name}
 	            </h1>
 	            <div className="hero_buttons">
 	              <Link className="video_link" to={`/${topMovie.id}`}>
