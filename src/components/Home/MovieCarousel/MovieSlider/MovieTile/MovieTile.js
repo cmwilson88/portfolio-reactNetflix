@@ -59,7 +59,7 @@ class movieTile extends Component {
   		        </div>
 		        </Link>
             <div className={this.props.moreInfoActive ? "tile__title-active" : "tile__title" }>
-		          {props.movie.title}
+		          {props.movie.title || props.movie.name}
 		        </div>
 		        <div className={this.props.moreInfoActive ? "tile__rating-active" : "tile__rating" }>
 		          <span

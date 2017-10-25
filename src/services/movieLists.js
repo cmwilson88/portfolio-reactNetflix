@@ -11,8 +11,8 @@ export function getUpcomingMovies() {
 				.then(response => response.data.results)
 }
 
-export function getMoviesByCategory(category_id) {
-	return axios.get(`${config.url}/3/discover/movie?api_key=${config.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${category_id}`)
+export function getMoviesByCategory(format, type, category_id) {
+	return axios.get(`${config.url}/3/discover/${format}?api_key=${config.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_${type}s=${category_id}`)
 				.then(response => response.data.results)	
 }
 

@@ -19,10 +19,12 @@ export default class Home extends Component {
 	      horror: [],
 	      mystery: [],
 		  categories: [
-	      	{type: 'movie', category: 'fantasy', id: 878},
-	      	{type: 'movie', category: 'comedy', id: 35},
-	      	{type: 'movie', category: 'horror', id: 27},
-	      	{type: 'movie', category: 'mystery', id: 9648}
+	      	{format: 'movie', type: 'genre', category: 'fantasy', id: 878},
+	      	{format: 'movie', type: 'genre', category: 'comedy', id: 35},
+	      	{format: 'movie', type: 'genre', category: 'horror', id: 27},
+	      	{format: 'movie', type: 'genre', category: 'mystery', id: 9648},
+	      	{format: 'tv', type: 'network', category: 'netflix', id: 213},
+	      	{format: 'tv', type: 'network', category: 'hbo', id: 49}
 	      ],
 	      ready: false
 	    }
@@ -41,17 +43,25 @@ export default class Home extends Component {
       })
     })
 
-    for (let category of this.state.categories) {
-    	getMoviesByCategory(category.id).then(response => {
-    		this.setState({
-    			[category.category]: response
+    for (let i = 0, j=this.state.categories.length; i < j; i++) {
+    	let item = this.state.categories[i]
+    	console.log(`${item.type}: ${item.category}`)
+    	if(i === j-1) {
+    		getMoviesByCategory(item.format, item.type, item.id).then(response => {
+    			this.setState({
+    				[item.category]: response,
+    				ready: true
+    			})
     		})
-    	})
+    	} else {
+	    	getMoviesByCategory(item.format, item.type, item.id).then(response => {
+	    		this.setState({
+	    			[item.category]: response
+	    		})
+	    	})
+    	}
     }
 
-    this.setState({
-    	ready: true
-    })
     // getTopFantasyMovies().then(response => {
     //   this.setState({
     //     fantasy: response
@@ -82,7 +92,6 @@ export default class Home extends Component {
 
     return this.state.ready ? (
     	<div>
-    		
 	    	<div 
 	          className="hero"
 	          style={{backgroundImage: `url(https://image.tmdb.org/t/p/w1280${topMovie.backdrop_path})`}} >
@@ -108,6 +117,12 @@ export default class Home extends Component {
 	          </div>
 	        </div>
 	        <div className="moviesContainer">
+	          <MovieCarousel
+	          	category={'Netflix'}
+	          	movies={this.state.netflix} />
+			  <MovieCarousel
+	          	category={'HBO'}
+	          	movies={this.state.hbo} />
 	          <MovieCarousel
 	            category={'Trending'}
 	            movies={this.state.popular} />
