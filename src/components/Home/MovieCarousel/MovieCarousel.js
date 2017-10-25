@@ -59,7 +59,7 @@ class MovieCarousel extends Component {
   }
 
 	render() {
-		return this.props.movies.length ? (
+		return (
 			<div className='movieCategoryRow'>
 	          <h3 className="rowHeader">{this.props.category}</h3>
 	          <div className="movieRow">
@@ -102,7 +102,7 @@ class MovieCarousel extends Component {
 	     			) : null}
 		     		</CSSTransitionGroup>
 	     </div>
-		) : 'Loading'
+		) 
 	}
 }
 
