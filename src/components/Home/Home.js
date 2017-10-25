@@ -4,20 +4,23 @@ import {Link} from 'react-router-dom'
 import MovieCarousel from './MovieCarousel/MovieCarousel'
 
 import {
-  getPopularMovies, getUpcomingMovies, getMoviesByCategory, getTopFantasyMovies, 
-  getTopComedyMovies, getTopHorrorMovies, getTopMysteryMovies} from '../../services/movieLists'
+  getPopularMovies, 
+  getUpcomingMovies, 
+  getMoviesByCategory} from '../../services/movieLists'
 
 export default class Home extends Component {
 	constructor(props) {
 		super(props)
 
 	    this.state = {
-	      popular: [],
-	      upcoming: [],
-	      fantasy: [],
-	      comedy: [],
-	      horror: [],
-	      mystery: [],
+	      popular: {
+	      	format: 'movie',
+	      	titles: []
+	      },
+	      upcoming: {
+	      	format: 'movie',
+	      	titles: []
+	      },
 		  categories: [
 	      	{format: 'movie', type: 'genre', category: 'fantasy', id: 878},
 	      	{format: 'movie', type: 'genre', category: 'comedy', id: 35},
@@ -34,60 +37,67 @@ export default class Home extends Component {
   componentWillMount() {
     getPopularMovies().then(response => {
       this.setState({
-        popular: response
+        popular: Object.assign(
+        			{}, 
+        			this.state.popular, 
+        			{
+        				titles: response
+        			})
       })
     })
     getUpcomingMovies().then(response => {
       this.setState({
-        upcoming: response
+        upcoming: Object.assign(
+        			{},
+        			this.state.upcoming,
+        			{
+        				titles: response
+        			}
+        			)
       })
     })
 
     for (let i = 0, j=this.state.categories.length; i < j; i++) {
     	let item = this.state.categories[i]
-    	console.log(`${item.type}: ${item.category}`)
+    	this.setState({
+    		[item.category]: {
+    			format: item.format,
+    			titles: []
+    		}
+    	})
     	if(i === j-1) {
     		getMoviesByCategory(item.format, item.type, item.id).then(response => {
     			this.setState({
-    				[item.category]: response,
-    				ready: true
+    				[item.category]: Object.assign({}, 
+    								this.state[item.category],
+    								{
+    									titles: response
+    								})
     			})
+    			setTimeout(() => {
+    				this.setState({
+    					ready: true
+    				})
+    			}, 100)
     		})
     	} else {
 	    	getMoviesByCategory(item.format, item.type, item.id).then(response => {
-	    		this.setState({
-	    			[item.category]: response
-	    		})
+    			this.setState({
+    				[item.category]: Object.assign({}, 
+    								this.state[item.category],
+    								{
+    									titles: response
+    								})
+    			})
 	    	})
     	}
     }
-
-    // getTopFantasyMovies().then(response => {
-    //   this.setState({
-    //     fantasy: response
-    //   })
-    // })
-    // getTopComedyMovies().then(response => {
-    //   this.setState({
-    //     comedy: response
-    //   })
-    // })
-    // getTopHorrorMovies().then(response => {
-    //   this.setState({
-    //     horror: response
-    //   })
-    // })
-    // getTopMysteryMovies().then(response => {
-    //   this.setState({
-    //     mystery: response
-    //   })
-    // })
   }
 
   render() {
     let topMovie;
     if(this.state.upcoming) {
-      topMovie = this.state.upcoming[1]
+      topMovie = this.state.upcoming.titles[1]
     } 
 
     return this.state.ready ? (
@@ -119,28 +129,36 @@ export default class Home extends Component {
 	        <div className="moviesContainer">
 	          <MovieCarousel
 	          	category={'Netflix'}
-	          	movies={this.state.netflix} />
+	          	format={'tv'}
+	          	movies={this.state.netflix.titles} />
 			  <MovieCarousel
 	          	category={'HBO'}
-	          	movies={this.state.hbo} />
+	          	format={'tv'}
+	          	movies={this.state.hbo.titles} />
 	          <MovieCarousel
 	            category={'Trending'}
-	            movies={this.state.popular} />
+	            format={'tv'}
+	            movies={this.state.popular.titles} />
 	          <MovieCarousel
 	            category={'Upcoming'}
-	            movies={this.state.upcoming} />
+	            format={'tv'}
+	            movies={this.state.upcoming.titles} />
 	          <MovieCarousel
 	            category={'Fantasy'}
-	            movies={this.state.fantasy} />
+	            format={'tv'}
+	            movies={this.state.fantasy.titles} />
 	          <MovieCarousel
 	            category={'Comedy'}
-	            movies={this.state.comedy} />
+	            format={'tv'}
+	            movies={this.state.comedy.titles} />
 	          <MovieCarousel
 	            category={'Horror'}
-	            movies={this.state.horror} />
+	            format={'tv'}
+	            movies={this.state.horror.titles} />
 	          <MovieCarousel
 	            category={'Mystery'}
-	            movies={this.state.mystery} />
+	            format={'tv'}
+	            movies={this.state.mystery.titles} />
 	        </div>
     	</div>
     ) : 'Loading'
