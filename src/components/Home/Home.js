@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import MovieCarousel from './MovieCarousel/MovieCarousel'
 
 import {
-  getPopularMovies, getUpcomingMovies, getTopFantasyMovies, 
+  getPopularMovies, getUpcomingMovies, getMoviesByCategory, getTopFantasyMovies, 
   getTopComedyMovies, getTopHorrorMovies, getTopMysteryMovies} from '../../services/movieLists'
 
 export default class Home extends Component {
@@ -12,12 +12,19 @@ export default class Home extends Component {
 		super(props)
 
 	    this.state = {
-	      movies: [],
+	      popular: [],
 	      upcoming: [],
 	      fantasy: [],
 	      comedy: [],
 	      horror: [],
-	      mystery: []
+	      mystery: [],
+		  categories: [
+	      	{type: 'movie', category: 'fantasy', id: 878},
+	      	{type: 'movie', category: 'comedy', id: 35},
+	      	{type: 'movie', category: 'horror', id: 27},
+	      	{type: 'movie', category: 'mystery', id: 9648}
+	      ],
+	      ready: false
 	    }
 	}
 
@@ -25,7 +32,7 @@ export default class Home extends Component {
   componentWillMount() {
     getPopularMovies().then(response => {
       this.setState({
-        movies: response
+        popular: response
       })
     })
     getUpcomingMovies().then(response => {
@@ -33,35 +40,47 @@ export default class Home extends Component {
         upcoming: response
       })
     })
-    getTopFantasyMovies().then(response => {
-      this.setState({
-        fantasy: response
-      })
+
+    for (let category of this.state.categories) {
+    	getMoviesByCategory(category.id).then(response => {
+    		this.setState({
+    			[category.category]: response
+    		})
+    	})
+    }
+
+    this.setState({
+    	ready: true
     })
-    getTopComedyMovies().then(response => {
-      this.setState({
-        comedy: response
-      })
-    })
-    getTopHorrorMovies().then(response => {
-      this.setState({
-        horror: response
-      })
-    })
-    getTopMysteryMovies().then(response => {
-      this.setState({
-        mystery: response
-      })
-    })
+    // getTopFantasyMovies().then(response => {
+    //   this.setState({
+    //     fantasy: response
+    //   })
+    // })
+    // getTopComedyMovies().then(response => {
+    //   this.setState({
+    //     comedy: response
+    //   })
+    // })
+    // getTopHorrorMovies().then(response => {
+    //   this.setState({
+    //     horror: response
+    //   })
+    // })
+    // getTopMysteryMovies().then(response => {
+    //   this.setState({
+    //     mystery: response
+    //   })
+    // })
   }
 
   render() {
     let topMovie;
-    if(this.state.movies) {
+    if(this.state.upcoming) {
       topMovie = this.state.upcoming[1]
     } 
 
-    return topMovie ? (
+    return this.state.ready ? (
     	<div>
     		
 	    	<div 
@@ -91,7 +110,7 @@ export default class Home extends Component {
 	        <div className="moviesContainer">
 	          <MovieCarousel
 	            category={'Trending'}
-	            movies={this.state.movies} />
+	            movies={this.state.popular} />
 	          <MovieCarousel
 	            category={'Upcoming'}
 	            movies={this.state.upcoming} />
