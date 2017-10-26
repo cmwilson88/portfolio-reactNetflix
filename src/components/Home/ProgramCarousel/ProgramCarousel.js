@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {CSSTransitionGroup} from 'react-transition-group'
 import MovieSlider from './MovieSlider/MovieSlider'
-import MovieMoreInfo from './MovieMoreInfo/MovieMoreInfo'
+import ProgramMoreInfo from './ProgramMoreInfo/ProgramMoreInfo'
 
 class ProgramCarousel extends Component {
 	constructor(props) {
@@ -95,9 +95,9 @@ class ProgramCarousel extends Component {
 				      transitionEnterTimeout={500}
 				      transitionLeave={false}>
 	     			{this.state.moreInfoActive ? (
-	     					<MovieMoreInfo
-	     						displayMovie={this.state.moreInfoMovie}
-	     						key={this.state.moreInfoMovie.id}
+	     					<ProgramMoreInfo
+	     						displayMovie={this.state.moreInfoProgram}
+	     						key={this.state.moreInfoProgram.id}
 	     					/>
 	     			) : null}
 		     		</CSSTransitionGroup>

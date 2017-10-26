@@ -7,7 +7,7 @@ import MovieOverview from './MovieOverview/MovieOverview'
 import SimilarTitles from './SimilarTitles/SimilarTitles'
 import DetailsSection from './DetailsSection/DetailsSection'
 
-class MovieMoreInfo extends Component {
+class ProgramMoreInfo extends Component {
 	constructor(props) {
 		super(props) 
 
@@ -203,4 +203,4 @@ class MovieMoreInfo extends Component {
 	}
 }
 
-export default MovieMoreInfo
+export default ProgramMoreInfo

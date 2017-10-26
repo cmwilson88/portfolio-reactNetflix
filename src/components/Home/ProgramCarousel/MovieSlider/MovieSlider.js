@@ -7,7 +7,7 @@ function MovieSlider(props){
         <MovieTile
           movie={program} 
           moreInfoActive={props.moreInfoActive}
-          moreInfoMovie={props.moreInfoMovie}
+          moreInfoMovie={props.moreInfoProgram}
           mouseEnterInfo={props.mouseEnterInfo}
           displayMoreInfo={props.displayMoreInfo}
           key={program.id}/>
