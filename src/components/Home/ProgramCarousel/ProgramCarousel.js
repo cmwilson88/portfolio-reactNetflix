@@ -3,14 +3,14 @@ import {CSSTransitionGroup} from 'react-transition-group'
 import MovieSlider from './MovieSlider/MovieSlider'
 import MovieMoreInfo from './MovieMoreInfo/MovieMoreInfo'
 
-class MovieCarousel extends Component {
+class ProgramCarousel extends Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
 			leftMargin: 0,
 			moreInfoActive: false,
-			moreInfoMovie: null
+			moreInfoProgram: null
 		}
 
 		let timeout = null;
@@ -38,21 +38,21 @@ class MovieCarousel extends Component {
     })
   }
 
-  displayMoreInfo(movie) {
+  displayMoreInfo(program) {
   	this.setState({
   		moreInfoActive: !this.state.moreInfoActive,
-  		moreInfoMovie: movie
+  		moreInfoProgram: program
   	})
   }
 
-  moreInfoMouseEnter(movie) {
+  moreInfoMouseEnter(program) {
   	if(this.timeout) {
   		clearTimeout(this.timeout)
   	}
 
 		this.timeout = setTimeout(() => {
 			this.setState({
-				moreInfoMovie: movie
+				moreInfoProgram: program
 			})
 			this.timeout = null;
 		}, 500)
@@ -74,11 +74,11 @@ class MovieCarousel extends Component {
 		            	className={this.state.moreInfoActive ? 'moviesCarousel-active' : 'moviesCarousel'} 
 		            	style={{marginLeft: `${this.state.leftMargin}px`}}>
 		              <MovieSlider 
-		              	moreInfoMovie={this.state.moreInfoMovie}
+		              	moreInfoProgram={this.state.moreInfoProgram}
 		              	moreInfoActive={this.state.moreInfoActive} 
 		              	mouseEnterInfo={this.moreInfoMouseEnter} 
 		              	displayMoreInfo={this.displayMoreInfo} 
-		              	movies={this.props.movies}/>
+		              	programs={this.props.programs}/>
 		            </div>
 		          </div>
 		          
@@ -106,4 +106,4 @@ class MovieCarousel extends Component {
 	}
 }
 
-export default MovieCarousel
+export default ProgramCarousel
