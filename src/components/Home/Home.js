@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 
-import MovieCarousel from './MovieCarousel/MovieCarousel'
+import ProgramCarousel from './ProgramCarousel/ProgramCarousel'
 
 import {
   getPopularMovies, 
@@ -13,14 +13,6 @@ export default class Home extends Component {
 		super(props)
 
 	    this.state = {
-	      popular: {
-	      	format: 'movie',
-	      	titles: []
-	      },
-	      upcoming: {
-	      	format: 'movie',
-	      	titles: []
-	      },
 		  categories: [
 	      	{format: 'movie', type: 'genre', category: 'fantasy', id: 878},
 	      	{format: 'movie', type: 'genre', category: 'comedy', id: 35},
@@ -41,7 +33,7 @@ export default class Home extends Component {
         			{}, 
         			this.state.popular, 
         			{
-        				titles: response
+        				programs: response
         			})
       })
     })
@@ -51,7 +43,7 @@ export default class Home extends Component {
         			{},
         			this.state.upcoming,
         			{
-        				titles: response
+        				programs: response
         			}
         			)
       })
@@ -64,7 +56,7 @@ export default class Home extends Component {
     			this.setState({
     				[item.category]: {
     									format: item.format,
-										titles: response
+										programs: response
     								}
     			})
     			setTimeout(() => {
@@ -78,7 +70,7 @@ export default class Home extends Component {
     			this.setState({
     				[item.category]:{
     									format: item.format,
-    									titles: response
+    									programs: response
     								}
     			})
 	    	})
@@ -88,8 +80,8 @@ export default class Home extends Component {
 
   render() {
     let topMovie;
-    if(this.state.netflix) {
-      topMovie = this.state.hbo.titles[0]
+    if(this.state.hbo) {
+      topMovie = this.state.hbo.programs[0]
     } 
 
     return this.state.ready ? (
@@ -119,38 +111,38 @@ export default class Home extends Component {
 	          </div>
 	        </div>
 	        <div className="moviesContainer">
-	          <MovieCarousel
+	          <ProgramCarousel
 	          	category={'Netflix'}
-	          	format={'tv'}
-	          	movies={this.state.netflix.titles} />
-			  <MovieCarousel
+	          	format={this.state.netflix.format}
+	          	programs={this.state.netflix.programs} />
+			  <ProgramCarousel
 	          	category={'HBO'}
-	          	format={'tv'}
-	          	movies={this.state.hbo.titles} />
-	          <MovieCarousel
+	          	format={this.state.hbo.format}
+	          	programs={this.state.hbo.programs} />
+	          <ProgramCarousel
 	            category={'Trending'}
-	            format={'tv'}
-	            movies={this.state.popular.titles} />
-	          <MovieCarousel
+	            format={this.state.popular.format}
+	            programs={this.state.popular.programs} />
+	          <ProgramCarousel
 	            category={'Upcoming'}
-	            format={'tv'}
-	            movies={this.state.upcoming.titles} />
-	          <MovieCarousel
+	            format={this.state.upcoming.format}
+	            programs={this.state.upcoming.programs} />
+	          <ProgramCarousel
 	            category={'Fantasy'}
-	            format={'tv'}
-	            movies={this.state.fantasy.titles} />
-	          <MovieCarousel
+	            format={this.state.fantasy.format}
+	            programs={this.state.fantasy.programs} />
+	          <ProgramCarousel
 	            category={'Comedy'}
-	            format={'tv'}
-	            movies={this.state.comedy.titles} />
-	          <MovieCarousel
+	            format={this.state.comedy.format}
+	            programs={this.state.comedy.programs} />
+	          <ProgramCarousel
 	            category={'Horror'}
-	            format={'tv'}
-	            movies={this.state.horror.titles} />
-	          <MovieCarousel
+	            format={this.state.horror.format}
+	            programs={this.state.horror.programs} />
+	          <ProgramCarousel
 	            category={'Mystery'}
-	            format={'tv'}
-	            movies={this.state.mystery.titles} />
+	            format={this.state.mystery.format}
+	            programs={this.state.mystery.programs} />
 	        </div>
     	</div>
     ) : 'Loading'

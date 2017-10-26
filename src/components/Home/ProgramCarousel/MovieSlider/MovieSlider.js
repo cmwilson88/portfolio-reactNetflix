@@ -2,20 +2,20 @@ import React from 'react'
 import MovieTile from './MovieTile/MovieTile'
 
 function MovieSlider(props){
-    const movies = props.movies.map((movie) => {
+    const programs = props.programs.map((program) => {
       return (
         <MovieTile
-          movie={movie} 
+          movie={program} 
           moreInfoActive={props.moreInfoActive}
           moreInfoMovie={props.moreInfoMovie}
           mouseEnterInfo={props.mouseEnterInfo}
           displayMoreInfo={props.displayMoreInfo}
-          key={movie.id}/>
+          key={program.id}/>
       )
     })
     return (
       <div>
-          {movies}
+          {programs}
       </div>
     );
   }

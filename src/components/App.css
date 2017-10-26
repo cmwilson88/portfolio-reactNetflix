@@ -95,7 +95,8 @@ body {
   color: #fff ;
   font-weight: 400;
   line-height: 1.35;
-  text-shadow: 0px 0px 3px #000, -1px -1px #000, 1px 1px #000;
+  letter-spacing: .75px;
+  text-shadow: 0px 0px 3px #000, -.5px -.5px #000, .5px .5px #000;
 }
 
 
