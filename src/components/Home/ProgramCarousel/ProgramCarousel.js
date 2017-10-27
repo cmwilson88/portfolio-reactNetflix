@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {CSSTransitionGroup} from 'react-transition-group'
-import MovieSlider from './MovieSlider/MovieSlider'
+import {CSSTransitionGroup} from 'react-transition-group';
+import ProgramSlider from './ProgramSlider/programSlider'
 import ProgramMoreInfo from './ProgramMoreInfo/ProgramMoreInfo'
 
 class ProgramCarousel extends Component {
@@ -73,7 +73,7 @@ class ProgramCarousel extends Component {
 		            <div 
 		            	className={this.state.moreInfoActive ? 'moviesCarousel-active' : 'moviesCarousel'} 
 		            	style={{marginLeft: `${this.state.leftMargin}px`}}>
-		              <MovieSlider 
+		              <ProgramSlider 
 		              	moreInfoProgram={this.state.moreInfoProgram}
 		              	moreInfoActive={this.state.moreInfoActive} 
 		              	mouseEnterInfo={this.moreInfoMouseEnter} 
@@ -96,7 +96,7 @@ class ProgramCarousel extends Component {
 				      transitionLeave={false}>
 	     			{this.state.moreInfoActive ? (
 	     					<ProgramMoreInfo
-	     						displayMovie={this.state.moreInfoProgram}
+	     						displayProgram={this.state.moreInfoProgram}
 	     						key={this.state.moreInfoProgram.id}
 	     					/>
 	     			) : null}

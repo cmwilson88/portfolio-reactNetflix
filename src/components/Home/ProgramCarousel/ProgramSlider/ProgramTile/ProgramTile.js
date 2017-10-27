@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import './movieTile.css'
+import './programTile.css'
 
-class movieTile extends Component {
+class programTile extends Component {
 	constructor(props) {
       super(props)
 
@@ -73,4 +73,4 @@ class movieTile extends Component {
     }
 }
 
-export default movieTile
+export default programTile
