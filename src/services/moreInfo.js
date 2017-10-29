@@ -1,9 +1,12 @@
 import axios from 'axios'
 import config from '../config'
 
-export function getMovieInfo(id) {
-	return axios.get(`${config.url}/3/movie/${id}?api_key=${config.API_KEY}&append_to_response=recommendations,credits,keywords,reviews,images`)
-			.then(response => response.data).catch(err => console.log(err))
+export function getMovieInfo(format,id) {
+	console.log
+	return axios.get(`${config.url}/3/${format}/${id}?api_key=${config.API_KEY}&append_to_response=recommendations,credits,keywords,reviews,images`)
+			.then(response => {
+				console.log(response)
+				return response.data}).catch(err => console.log(err))
 }
 
 export function getMovieVideos(id) {

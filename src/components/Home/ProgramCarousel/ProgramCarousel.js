@@ -15,10 +15,10 @@ class ProgramCarousel extends Component {
 
 		let timeout = null;
   	
-  		this.moveRowRight = this.moveRowRight.bind(this)
-  		this.moveRowLeft = this.moveRowLeft.bind(this)
-  		this.moreInfoMouseEnter = this.moreInfoMouseEnter.bind(this)
-  		this.displayMoreInfo = this.displayMoreInfo.bind(this)
+		this.moveRowRight = this.moveRowRight.bind(this)
+		this.moveRowLeft = this.moveRowLeft.bind(this)
+		this.moreInfoMouseEnter = this.moreInfoMouseEnter.bind(this)
+		this.displayMoreInfo = this.displayMoreInfo.bind(this)
 	}
 
 	moveRowRight() {
@@ -94,13 +94,14 @@ class ProgramCarousel extends Component {
 				      transitionName="example"
 				      transitionEnterTimeout={500}
 				      transitionLeave={false}>
-	     			{this.state.moreInfoActive ? (
-	     					<ProgramMoreInfo
-	     						displayMovie={this.state.moreInfoProgram}
-	     						key={this.state.moreInfoProgram.id}
-	     					/>
-	     			) : null}
-		     		</CSSTransitionGroup>
+								{this.state.moreInfoActive ? (
+									<ProgramMoreInfo
+										displayProgram={this.state.moreInfoProgram}
+										format={this.props.format}
+										key={this.state.moreInfoProgram.id}
+									/>
+								) : null}
+						 </CSSTransitionGroup>
 	     </div>
 		) 
 	}

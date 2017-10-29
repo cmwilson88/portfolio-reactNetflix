@@ -33,6 +33,7 @@ export default class Home extends Component {
         			{}, 
         			this.state.popular, 
         			{
+								format: 'movie',
         				programs: response
         			})
       })
@@ -43,9 +44,9 @@ export default class Home extends Component {
         			{},
         			this.state.upcoming,
         			{
+								format: 'movie',
         				programs: response
-        			}
-        			)
+        			})
       })
     })
 
@@ -115,7 +116,7 @@ export default class Home extends Component {
 	          	category={'Netflix'}
 	          	format={this.state.netflix.format}
 	          	programs={this.state.netflix.programs} />
-			  <ProgramCarousel
+			 			<ProgramCarousel
 	          	category={'HBO'}
 	          	format={this.state.hbo.format}
 	          	programs={this.state.hbo.programs} />

@@ -17,7 +17,7 @@ export default function MovieOverview(props) {
 				<span>{props.releaseYear}</span>
 				<span>{props.runtime}</span>
 			</section>
-			<p className="mi_section movie_info_overview">{props.detailedMovie.overview}</p>
+			<p className="mi_section movie_info_overview">{props.detailedProgram.overview}</p>
 			<br/>
 			<div className="mi_section">
 				{props.cast ? (
@@ -53,7 +53,7 @@ export default function MovieOverview(props) {
 					</section>
 				) : null}
 			</div>
-			<p className="mi_section">{props.detailedMovie.tagline}</p>
+			<p className="mi_section">{props.detailedProgram.tagline}</p>
 		</div>
 	)
 }
