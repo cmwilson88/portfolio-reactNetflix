@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getMovieInfo} from '../../../../services/moreInfo'
+import {getMovieInfo, getTVInfo} from '../../../../services/moreInfo'
 import {CSSTransitionGroup} from 'react-transition-group'
 import './movieMoreInfo.css'
 
@@ -18,14 +18,14 @@ class ProgramMoreInfo extends Component {
 			recommended: false,
 			details: false,
 
-			cast: null,
-			directors: null,
-			genres: null,
+			// cast: null,
+			// directors: null,
+			// genres: null,
 
-			similar: null,
+			// similar: null,
 
-			keywords: null,
-			reviews: null
+			// keywords: null,
+			// reviews: null
 		}
 
 	}
@@ -43,21 +43,10 @@ class ProgramMoreInfo extends Component {
 				similar: response.recommendations.results
 					// .sort((a,b) => b.popularity - a.popularity)
 					.splice(0,4),
-				// keywords: response.keywords.keywords
-				// 	.splice(0,10)
-				// 	.map(keyword => ({
-				// 		...keyword, 
-				// 		name: keyword.name
-				// 					.split(' ')
-				// 					.map(word => {
-				// 						return word[0].toUpperCase() 
-				// 								+ word.substr(1)
-				// 							})
-				// 					.join(' ')
-				// })),
-				// reviews: response.reviews.results.length 
-				// 		? response.reviews.results 
-				// 		: null
+				keywords: response.keywords.results,
+				reviews: this.props.format === 'movie' && response.reviews.results.length 
+						? response.reviews.results 
+						: null
 			})
 		}).catch(err => console.log(err))
 	}
@@ -88,8 +77,21 @@ class ProgramMoreInfo extends Component {
 		let mainCast = [];
 		let directors;
 		let genres;
-			
-
+		let keywords;
+		if(this.state.keywords) {
+			keywords = this.state.keywords.splice(0,10)
+							.map(keyword => ({
+								...keyword, 
+								name: keyword.name
+											.split(' ')
+											.map(word => {
+												return word[0].toUpperCase() 
+														+ word.substr(1)
+													})
+											.join(' ')
+								}));
+		}
+							
 		if(this.state.cast) {
 			for(let i = 0; i < 5; i++) {
 				mainCast.push(
@@ -165,7 +167,7 @@ class ProgramMoreInfo extends Component {
 			     					directors={this.state.directors}
 			     					cast={this.state.cast}
 			     					genres={this.state.genres}
-			     					keywords={this.state.keywords}
+			     					keywords={keywords}
 			     					reviews={this.state.reviews}/>
 			     			) : null}
 			     		</CSSTransitionGroup>
