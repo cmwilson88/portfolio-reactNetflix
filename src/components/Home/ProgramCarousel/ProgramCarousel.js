@@ -96,7 +96,7 @@ class ProgramCarousel extends Component {
 				      transitionLeave={false}>
 	     			{this.state.moreInfoActive ? (
 	     					<ProgramMoreInfo
-	     						displayProgram={this.state.moreInfoProgram}
+	     						displayMovie={this.state.moreInfoProgram}
 	     						key={this.state.moreInfoProgram.id}
 	     					/>
 	     			) : null}

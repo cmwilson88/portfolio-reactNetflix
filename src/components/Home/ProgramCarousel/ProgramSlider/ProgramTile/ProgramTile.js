@@ -10,32 +10,22 @@ class programTile extends Component {
         tileActive: false
       }
 
-      this.setActiveMovieTile = this.setActiveMovieTile.bind(this)
+      this.setActiveProgramTile = this.setActiveProgramTile.bind(this)
     }
 
-    setActiveMovieTile() {
-      if(this.props.moreInfo) {
-        this.setState({
-          tileActive: true
-        })
-      } else {
-        this.setState({
-          tileActive: false
-        })
-      }
+    setActiveProgramTile() {
+      this.props.moreInfo
+      ?  this.setState({tileActive: true})
+      :  this.setState({tileActive: false})
     }
 
     componentWillReceiveProps(nextProps) {
     	if(nextProps.moreInfoActive) {
-    		if(nextProps.moreInfoMovie.id === this.props.movie.id) {
-    			this.setState({
-    				tileActive: true
-    			})
+    		if(nextProps.moreInfoProgram.id === this.props.program.id) {
+    			this.setState({tileActive: true})
     		} 
     	} else {
-    			this.setState({
-    				tileActive: false
-    			})
+    			this.setState({tileActive: false})
     		}
     }
 
@@ -43,29 +33,34 @@ class programTile extends Component {
     	const props = this.props;
 		return (
 		  <section  
-		  	  onMouseEnter={() => {
-		  	  	props.mouseEnterInfo(props.movie)
-		  	  }}
-		  	  onClick={() => {
-		  	  	props.displayMoreInfo(props.movie)
-		  	  }}
-		  	  className={this.state.tileActive && props.moreInfoMovie.id === props.movie.id
-	                        ? 'movieTile-active' : 'movieTile'} 
-	          style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${props.movie.backdrop_path}`}}>
+		  	  onMouseEnter={() => {props.mouseEnterInfo(props.program)}}
+		  	  onClick={() => {props.displayMoreInfo(props.program)}}
+	        style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${props.program.backdrop_path}`}}
+		  	  className={this.state.tileActive && props.moreInfoProgram.id === props.program.id
+	                        ? 'movieTile-active' : 'movieTile'}> 
 		      <div className="tile__details">
-		        <Link className="video_link" to={`/${props.movie.id}`}> 
+		        <Link className="video_link" to={`/${props.program.id}`}> 
               <div className="tile__button">
   		            <i className="fa fa-play"></i>
   		        </div>
 		        </Link>
-            <div className={this.props.moreInfoActive ? "tile__title-active" : "tile__title" }>
-		          {props.movie.title || props.movie.name}
+            <div 
+							className={this.props.moreInfoActive 
+								? "tile__title-active" 
+								: "tile__title" }>
+		          {props.program.title || props.program.name}
 		        </div>
-		        <div className={this.props.moreInfoActive ? "tile__rating-active" : "tile__rating" }>
+						<div 
+							className={this.props.moreInfoActive 
+								? "tile__rating-active" 
+								: "tile__rating" }>
 		          <span
-		            style={{
-		              color: props.movie.vote_average >= 7 ? 'green' : props.movie.vote_averrating= 4 ? 'orange' : 'red'
-		            }}>{props.movie.vote_average}</span> / 10
+		            style={{color: props.program.vote_average >= 7 
+													? 'green' 
+													: props.program.vote_average >= 4 
+														? 'orange' 
+														: 'red'}}>
+								{props.program.vote_average}</span> / 10
 		        </div> 
 		      </div>
 		  </section>

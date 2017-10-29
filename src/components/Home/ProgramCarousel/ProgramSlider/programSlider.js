@@ -5,9 +5,9 @@ function ProgramSlider(props){
     const programs = props.programs.map((program) => {
       return (
         <ProgramTile
-          movie={program} 
+          program={program} 
           moreInfoActive={props.moreInfoActive}
-          moreInfoMovie={props.moreInfoProgram}
+          moreInfoProgram={props.moreInfoProgram}
           mouseEnterInfo={props.mouseEnterInfo}
           displayMoreInfo={props.displayMoreInfo}
           key={program.id}/>
