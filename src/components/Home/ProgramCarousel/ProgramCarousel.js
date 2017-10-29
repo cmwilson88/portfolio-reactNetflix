@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {CSSTransitionGroup} from 'react-transition-group'
-import MovieSlider from './MovieSlider/MovieSlider'
-import MovieMoreInfo from './MovieMoreInfo/MovieMoreInfo'
+import {CSSTransitionGroup} from 'react-transition-group';
+import ProgramSlider from './ProgramSlider/programSlider'
+import ProgramMoreInfo from './ProgramMoreInfo/ProgramMoreInfo'
 
 class ProgramCarousel extends Component {
 	constructor(props) {
@@ -15,10 +15,10 @@ class ProgramCarousel extends Component {
 
 		let timeout = null;
   	
-  		this.moveRowRight = this.moveRowRight.bind(this)
-  		this.moveRowLeft = this.moveRowLeft.bind(this)
-  		this.moreInfoMouseEnter = this.moreInfoMouseEnter.bind(this)
-  		this.displayMoreInfo = this.displayMoreInfo.bind(this)
+		this.moveRowRight = this.moveRowRight.bind(this)
+		this.moveRowLeft = this.moveRowLeft.bind(this)
+		this.moreInfoMouseEnter = this.moreInfoMouseEnter.bind(this)
+		this.displayMoreInfo = this.displayMoreInfo.bind(this)
 	}
 
 	moveRowRight() {
@@ -73,7 +73,7 @@ class ProgramCarousel extends Component {
 		            <div 
 		            	className={this.state.moreInfoActive ? 'moviesCarousel-active' : 'moviesCarousel'} 
 		            	style={{marginLeft: `${this.state.leftMargin}px`}}>
-		              <MovieSlider 
+		              <ProgramSlider 
 		              	moreInfoProgram={this.state.moreInfoProgram}
 		              	moreInfoActive={this.state.moreInfoActive} 
 		              	mouseEnterInfo={this.moreInfoMouseEnter} 
@@ -94,13 +94,14 @@ class ProgramCarousel extends Component {
 				      transitionName="example"
 				      transitionEnterTimeout={500}
 				      transitionLeave={false}>
-	     			{this.state.moreInfoActive ? (
-	     					<MovieMoreInfo
-	     						displayMovie={this.state.moreInfoMovie}
-	     						key={this.state.moreInfoMovie.id}
-	     					/>
-	     			) : null}
-		     		</CSSTransitionGroup>
+								{this.state.moreInfoActive ? (
+									<ProgramMoreInfo
+										displayProgram={this.state.moreInfoProgram}
+										format={this.props.format}
+										key={this.state.moreInfoProgram.id}
+									/>
+								) : null}
+						 </CSSTransitionGroup>
 	     </div>
 		) 
 	}

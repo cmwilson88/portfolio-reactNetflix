@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {getMovieInfo} from '../../../../services/moreInfo'
-import './movieMoreInfo.css'
 import {CSSTransitionGroup} from 'react-transition-group'
+import './movieMoreInfo.css'
 
 import MovieOverview from './MovieOverview/MovieOverview'
 import SimilarTitles from './SimilarTitles/SimilarTitles'
 import DetailsSection from './DetailsSection/DetailsSection'
 
-class MovieMoreInfo extends Component {
+class ProgramMoreInfo extends Component {
 	constructor(props) {
 		super(props) 
 
 		this.state = {
-			detailedMovie: props.displayMovie,
+			detailedProgram: props.displayProgram,
 			images: null,
 			overview: true,
 			recommended: false,
@@ -31,9 +31,9 @@ class MovieMoreInfo extends Component {
 	}
 
 	componentDidMount() {
-		getMovieInfo(this.props.displayMovie.id).then(response => {
+		getMovieInfo(this.props.format, this.props.displayProgram.id).then(response => {
 			this.setState({
-				detailedMovie: response,
+				detailedProgram: response,
 				images: response.images.backdrops
 					.filter(img => img.width >1200 && img.width < 2000)[0],
 				cast: response.credits.cast,
@@ -43,21 +43,21 @@ class MovieMoreInfo extends Component {
 				similar: response.recommendations.results
 					// .sort((a,b) => b.popularity - a.popularity)
 					.splice(0,4),
-				keywords: response.keywords.keywords
-					.splice(0,10)
-					.map(keyword => ({
-						...keyword, 
-						name: keyword.name
-									.split(' ')
-									.map(word => {
-										return word[0].toUpperCase() 
-												+ word.substr(1)
-											})
-									.join(' ')
-				})),
-				reviews: response.reviews.results.length 
-						? response.reviews.results 
-						: null
+				// keywords: response.keywords.keywords
+				// 	.splice(0,10)
+				// 	.map(keyword => ({
+				// 		...keyword, 
+				// 		name: keyword.name
+				// 					.split(' ')
+				// 					.map(word => {
+				// 						return word[0].toUpperCase() 
+				// 								+ word.substr(1)
+				// 							})
+				// 					.join(' ')
+				// })),
+				// reviews: response.reviews.results.length 
+				// 		? response.reviews.results 
+				// 		: null
 			})
 		}).catch(err => console.log(err))
 	}
@@ -76,11 +76,15 @@ class MovieMoreInfo extends Component {
 
 
 	render() {
-		const detailedMovie = this.state.detailedMovie
-		const releaseYear = detailedMovie.release_date.substr(0,4)
+		const detailedProgram = this.state.detailedProgram
+		let releaseYear
+		let runtime 
+		if(this.props.format === 'movie') {
+			releaseYear = detailedProgram.release_date.substr(0,4)
+			runtime = this.calculateRuntime(detailedProgram.runtime)
+		}
 		
-		let runtime = this.calculateRuntime(detailedMovie.runtime)
-		let match = detailedMovie.vote_average * 10
+		let match = detailedProgram.vote_average * 10
 		let mainCast = [];
 		let directors;
 		let genres;
@@ -131,9 +135,9 @@ class MovieMoreInfo extends Component {
 	 			className="moreInfo" 
 	 			>
 	 			<div className="moreInfoBG"
-	 				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${detailedMovie.backdrop_path})`}}>
+	 				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${detailedProgram.backdrop_path})`}}>
 	     			<div className={this.state.overview ? 'moreInfoOverlay' : 'moreInfoOverlayDark'}>
-		     		<h1 className="movie_info_title">{detailedMovie.title}</h1>
+		     		<h1 className="movie_info_title">{detailedProgram.title || detailedProgram.name}</h1>
 		     			<div className="moreInfoContent">
 		     			<CSSTransitionGroup
 		     				transitionName="transition_mInfoContent"
@@ -141,7 +145,7 @@ class MovieMoreInfo extends Component {
 		     				transitionLeave={false}>
 			     			{this.state.overview ? (
 			     				<MovieOverview 
-			     					detailedMovie={detailedMovie}
+			     					detailedProgram={detailedProgram}
 			     					releaseYear={releaseYear}
 			     					runtime={runtime}
 			     					match={match}
@@ -203,4 +207,4 @@ class MovieMoreInfo extends Component {
 	}
 }
 
-export default MovieMoreInfo
+export default ProgramMoreInfo

@@ -1,13 +1,13 @@
 import React from 'react'
-import MovieTile from './MovieTile/MovieTile'
+import ProgramTile from "./ProgramTile/ProgramTile";
 
-function MovieSlider(props){
+function ProgramSlider(props){
     const programs = props.programs.map((program) => {
       return (
-        <MovieTile
-          movie={program} 
+        <ProgramTile
+          program={program} 
           moreInfoActive={props.moreInfoActive}
-          moreInfoMovie={props.moreInfoMovie}
+          moreInfoProgram={props.moreInfoProgram}
           mouseEnterInfo={props.mouseEnterInfo}
           displayMoreInfo={props.displayMoreInfo}
           key={program.id}/>
@@ -20,4 +20,4 @@ function MovieSlider(props){
     );
   }
 
-export default MovieSlider
+export default ProgramSlider
