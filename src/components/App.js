@@ -5,7 +5,7 @@ import './App.css';
 import Navbar from './Navbar/Navbar'
 import Home from './Home/Home'
 import SearchResults from './SearchResults/SearchResults'
-import MovieDisplay from './MovieDisplay/MovieDisplay'
+import ProgramDisplay from './MovieDisplay/MovieDisplay'
 
 function App() {
   return (
@@ -14,7 +14,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/search" component={SearchResults} />
-        <Route path="/:id" component={MovieDisplay} />
+        <Route path="/movie/:id" component={ProgramDisplay} />
+        <Route path="/tv/:id" component={ProgramDisplay} />
       </Switch>
     </div>
   )

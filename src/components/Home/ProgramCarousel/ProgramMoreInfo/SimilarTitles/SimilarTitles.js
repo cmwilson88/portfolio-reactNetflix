@@ -4,6 +4,7 @@ import './similarTitles.css';
 
 export default function SimilarTitles(props) {
 	let similar = props.similar.map((program, index) => {
+		let format = program.release_date ? 'movie' : 'tv'
 		let releaseYear = program.release_date ? program.release_date.substr(0,4) : null
 		const match = program.vote_average * 10
 		return (
@@ -12,7 +13,7 @@ export default function SimilarTitles(props) {
 					className="similar_media"
 					style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${program.backdrop_path}`}}>
 					<div className="similar_media_overlay">
-						<Link className="video_link" to={`/${program.id}`}>
+						<Link className="video_link" to={`/${format}/${program.id}`}>
 							<div className="tile__button">
 	            				<i className="fa fa-play"></i>
 	        				</div>
@@ -31,8 +32,7 @@ export default function SimilarTitles(props) {
 					? 'orange' 
 					: 'red'
 						}}>
-						{match}% Match
-				</p>
+						{match}% Match</p>
 				<p className="similar_overview">{program.overview.substr(0,150).trim() + '...'}</p>
 			</div>
 		)
