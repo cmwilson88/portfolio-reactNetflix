@@ -24,10 +24,11 @@ export default function DetailsSection(props) {
 	return (
 		<section className="details_container">
 			<div className="details_column">
-
+			{props.directors ? (
 				<DetailContent
 					content={props.directors}
 					title="Director"/>
+			) : null}
 
 				<h1>Cast</h1>
 				<ul>
@@ -40,10 +41,6 @@ export default function DetailsSection(props) {
 				<DetailContent 
 					content={props.genres}
 					title="Genre"/>
-
-				<DetailContent
-					content={props.keywords}
-					title="Keyword"/>
 			</div>
 
 			<div className="details_column">
@@ -98,7 +95,7 @@ function DetailReviews(props) {
 		<div className="detail_reviews">
 			{reviews  
 				? reviews
-				: 'There are no reviews for this movie!'
+				: 'There are no reviews for this program!'
 			}
 		</div>	
 

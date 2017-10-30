@@ -10,6 +10,7 @@ function ProgramSlider(props){
           moreInfoProgram={props.moreInfoProgram}
           mouseEnterInfo={props.mouseEnterInfo}
           displayMoreInfo={props.displayMoreInfo}
+          format={props.format}
           key={program.id}/>
       )
     })

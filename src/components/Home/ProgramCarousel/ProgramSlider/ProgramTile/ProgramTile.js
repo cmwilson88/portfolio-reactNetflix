@@ -30,7 +30,7 @@ class programTile extends Component {
     }
 
     render() {
-    	const props = this.props;
+			const props = this.props;
 		return (
 		  <section  
 		  	  onMouseEnter={() => {props.mouseEnterInfo(props.program)}}
@@ -39,7 +39,7 @@ class programTile extends Component {
 		  	  className={this.state.tileActive && props.moreInfoProgram.id === props.program.id
 	                        ? 'movieTile-active' : 'movieTile'}> 
 		      <div className="tile__details">
-		        <Link className="video_link" to={`/${props.program.id}`}> 
+		        <Link className="video_link" to={`/${props.format}/${props.program.id}`}> 
               <div className="tile__button">
   		            <i className="fa fa-play"></i>
   		        </div>

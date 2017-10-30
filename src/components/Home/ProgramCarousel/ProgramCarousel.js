@@ -78,6 +78,7 @@ class ProgramCarousel extends Component {
 		              	moreInfoActive={this.state.moreInfoActive} 
 		              	mouseEnterInfo={this.moreInfoMouseEnter} 
 		              	displayMoreInfo={this.displayMoreInfo} 
+										format={this.props.format}
 		              	programs={this.props.programs}/>
 		            </div>
 		          </div>

@@ -1,7 +1,7 @@
-import {searchMovies} from '../services/moreInfo'
+import {searchPrograms} from '../services/moreInfo'
 
 const initialState = {
-	searchMovies: [],
+	searchResults: [],
 	searchTerm: ''
 }
 
@@ -20,7 +20,7 @@ export default function reducer(state=initialState, action) {
 				{}, 
 				state, 
 				{
-					searchMovies: action.payload.movies.filter(movie => movie.backdrop_path ? true : false),
+					searchResults: action.payload.programs.filter(program => program.backdrop_path && program.overview ? true : false),
 					searchTerm: action.payload.searchTerm.split(' ')
 										.map(word => word[0].toUpperCase() + word.substr(1))
 										.join(' ')
@@ -34,7 +34,7 @@ export default function reducer(state=initialState, action) {
 const SEARCH_MOVIES = 'SEARCH_MOVIES';
 
 export function search(term) {
-	let promise = searchMovies(term)
+	let promise = searchPrograms(term)
 	return {
 		type: SEARCH_MOVIES,
 		payload: promise
