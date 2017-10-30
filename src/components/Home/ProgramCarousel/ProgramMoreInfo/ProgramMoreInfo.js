@@ -16,16 +16,6 @@ class ProgramMoreInfo extends Component {
 			overview: true,
 			recommended: false,
 			details: false,
-			
-			// cast: null,
-			// directors: null,
-			// genres: null,
-			
-			// similar: null,
-			
-			// images: null,
-			// keywords: null,
-			// reviews: null
 		}
 
 	}
@@ -41,10 +31,7 @@ class ProgramMoreInfo extends Component {
 					directors: response.credits.crew
 							.filter(item => item.job === 'Director'),
 					genres: response.genres,
-					similar: response.recommendations.results
-						// .sort((a,b) => b.popularity - a.popularity)
-						.splice(0,4),
-					keywords: response.keywords.keywords,
+					similar: response.recommendations.results.splice(0,4),
 					reviews: this.props.format === 'movie' && response.reviews.results.length 
 							? response.reviews.results 
 							: null
@@ -52,14 +39,11 @@ class ProgramMoreInfo extends Component {
 			}).catch(err => console.log(err))
 		} else {
 			getTVInfo(this.props.displayProgram.id).then(response => {
-				console.log(response.keywords.results)
 				this.setState({
 					detailedProgram: response,
-					// images: response.images.backdrops.filter(img => img.width > 1200 && img.width < 2000)[0],
 					cast: response.credits.cast,
 					genres: response.genres,
-					similar: response.recommendations.results,
-					keywords: response.keywords.results
+					similar: response.recommendations.results.splice(0,4)
 				})
 			})
 		}
@@ -181,7 +165,6 @@ class ProgramMoreInfo extends Component {
 			     					directors={this.state.directors}
 			     					cast={this.state.cast}
 			     					genres={this.state.genres}
-			     					keywords={keywords}
 			     					reviews={this.state.reviews}/>
 			     			) : null}
 			     		</CSSTransitionGroup>

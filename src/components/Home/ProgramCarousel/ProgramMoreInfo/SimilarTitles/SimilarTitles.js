@@ -3,23 +3,27 @@ import {Link} from 'react-router-dom'
 import './similarTitles.css';
 
 export default function SimilarTitles(props) {
-	let similar = props.similar.map((movie, index) => {
-		const releaseYear = movie.release_date.substr(0,4)
-		const match = movie.vote_average * 10
+	let similar = props.similar.map((program, index) => {
+		let releaseYear = program.release_date ? program.release_date.substr(0,4) : null
+		const match = program.vote_average * 10
 		return (
-			<div key={movie.id} className="similar_tile">
+			<div key={program.id} className="similar_tile">
 				<div 
 					className="similar_media"
-					style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}}>
+					style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${program.backdrop_path}`}}>
 					<div className="similar_media_overlay">
-						<Link className="video_link" to={`/${movie.id}`}>
+						<Link className="video_link" to={`/${program.id}`}>
 							<div className="tile__button">
 	            				<i className="fa fa-play"></i>
 	        				</div>
         				</Link>
 					</div>
 				</div>
-				<p>{movie.title} - {releaseYear}</p>
+				{program.title ? (
+					<p>{program.title} - {releaseYear}</p>
+				) : (
+					<p>{program.name}</p>
+				)}
 				<p style={{
 					color: match >= 70 
 					? 'green' 
@@ -29,7 +33,7 @@ export default function SimilarTitles(props) {
 						}}>
 						{match}% Match
 				</p>
-				<p className="similar_overview">{movie.overview.substr(0,150).trim() + '...'}</p>
+				<p className="similar_overview">{program.overview.substr(0,150).trim() + '...'}</p>
 			</div>
 		)
 	})	
