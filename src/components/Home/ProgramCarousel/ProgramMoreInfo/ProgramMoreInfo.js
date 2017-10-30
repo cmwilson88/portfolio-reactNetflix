@@ -13,17 +13,17 @@ class ProgramMoreInfo extends Component {
 
 		this.state = {
 			detailedProgram: props.displayProgram,
-			images: null,
 			overview: true,
 			recommended: false,
 			details: false,
-
+			
 			// cast: null,
 			// directors: null,
 			// genres: null,
-
+			
 			// similar: null,
-
+			
+			// images: null,
 			// keywords: null,
 			// reviews: null
 		}
@@ -31,24 +31,38 @@ class ProgramMoreInfo extends Component {
 	}
 
 	componentDidMount() {
-		getMovieInfo(this.props.format, this.props.displayProgram.id).then(response => {
-			this.setState({
-				detailedProgram: response,
-				images: response.images.backdrops
-					.filter(img => img.width >1200 && img.width < 2000)[0],
-				cast: response.credits.cast,
-				directors: response.credits.crew
-						.filter(item => item.job === 'Director'),
-				genres: response.genres,
-				similar: response.recommendations.results
-					// .sort((a,b) => b.popularity - a.popularity)
-					.splice(0,4),
-				keywords: response.keywords.results,
-				reviews: this.props.format === 'movie' && response.reviews.results.length 
-						? response.reviews.results 
-						: null
+		if(this.props.format === 'movie') {
+			getMovieInfo(this.props.displayProgram.id).then(response => {
+				this.setState({
+					detailedProgram: response,
+					images: response.images.backdrops
+						.filter(img => img.width >1200 && img.width < 2000)[0],
+					cast: response.credits.cast,
+					directors: response.credits.crew
+							.filter(item => item.job === 'Director'),
+					genres: response.genres,
+					similar: response.recommendations.results
+						// .sort((a,b) => b.popularity - a.popularity)
+						.splice(0,4),
+					keywords: response.keywords.keywords,
+					reviews: this.props.format === 'movie' && response.reviews.results.length 
+							? response.reviews.results 
+							: null
+				})
+			}).catch(err => console.log(err))
+		} else {
+			getTVInfo(this.props.displayProgram.id).then(response => {
+				console.log(response.keywords.results)
+				this.setState({
+					detailedProgram: response,
+					// images: response.images.backdrops.filter(img => img.width > 1200 && img.width < 2000)[0],
+					cast: response.credits.cast,
+					genres: response.genres,
+					similar: response.recommendations.results,
+					keywords: response.keywords.results
+				})
 			})
-		}).catch(err => console.log(err))
+		}
 	}
 
 	calculateRuntime(x) {

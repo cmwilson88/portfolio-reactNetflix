@@ -1,10 +1,18 @@
 import axios from 'axios'
 import config from '../config'
 
-export function getMovieInfo(format,id) {
-	return axios.get(`${config.url}/3/${format}/${id}?api_key=${config.API_KEY}&append_to_response=recommendations,credits,keywords,reviews,images`)
+export function getMovieInfo(id) {
+	console.log(`movie`)
+	return axios.get(`${config.url}/3/movie/${id}?api_key=${config.API_KEY}&append_to_response=recommendations,credits,keywords,images,reviews`)
+			.then(response => response.data).catch(err => console.log(err))
+}
+
+export function getTVInfo(id) {
+	console.log(`tv`)
+	console.log(`${config.url}/3/tv/${id}?api_key=${config.API_KEY}&append_to_response=recommendations,credits,keywords`)
+	return axios.get(`${config.url}/3/tv/${id}?api_key=${config.API_KEY}&append_to_response=recommendations,credits,keywords,images`)
 			.then(response => {
-				console.log(response)
+				console.log(response.data.keywords.results) 
 				return response.data}).catch(err => console.log(err))
 }
 
