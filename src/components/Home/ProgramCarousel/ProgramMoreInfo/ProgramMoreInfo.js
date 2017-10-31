@@ -45,12 +45,14 @@ class ProgramMoreInfo extends Component {
 			}).catch(err => console.log(err))
 		} else {
 			getTVInfo(this.props.displayProgram.id).then(response => {
+				console.log(response)
 				this.setState({
 					detailedProgram: response,
 					cast: response.credits.cast.length ? response.credits.cast : null,
 					genres: response.genres,
 					images: response.images.backdrops
-						.filter(img => img.width >1200 && img.width < 2000).splice(1,5),
+						.filter(img => img.width >1200 && img.width < 2000).splice(1,5)
+						.map(img => (new Image()).src = `https://image.tmdb.org/t/p/w780${img.file_path}`),
 					similar: response.recommendations.results.splice(0,4)
 				})
 			})
@@ -126,7 +128,8 @@ class ProgramMoreInfo extends Component {
 		// }
 							
 		if(this.state.cast && typeof Array.isArray(this.state.cast)) {
-			for(let i = 0; i < 5; i++) {
+			let limit = this.state.cast.length < 5 ? this.state.cast.length : 5
+			for(let i = 0; i < limit; i++) {
 				mainCast.push(
 						<li key={this.state.cast[i].id}>
 							<a href="/">
