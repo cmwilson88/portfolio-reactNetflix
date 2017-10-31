@@ -22,7 +22,9 @@ export default class Home extends Component {
 	      	{format: 'tv', type: 'network', category: 'hbo', id: 49}
 	      ],
 	      ready: false
-	    }
+			}
+			
+			this.getRandomFeature = this.getRandomFeature.bind(this)
 	}
 
 
@@ -56,7 +58,7 @@ export default class Home extends Component {
     		getMoviesByCategory(item.format, item.type, item.id).then(response => {
     			this.setState({
     				[item.category]: {
-    									format: item.format,
+    								format: item.format,
 										programs: response
     								}
     			})
@@ -76,26 +78,44 @@ export default class Home extends Component {
     			})
 	    	})
     	}
-    }
-  }
+		}
+	}
+	
+	generateRandom(min, max) {
+			min = Math.ceil(min)
+			max = Math.floor(max)
+			return Math.floor(Math.random() * (max-min)) + min;
+	}
+
+	getRandomFeature() {
+		let targetedCategories = Object.keys(this.state)
+																	.filter(cat => cat === 'netflix' || cat === 'hbo' || cat==='popular')
+		let catIndex = this.generateRandom(0, targetedCategories.length);
+		let selectedCategory = this.state[targetedCategories[catIndex]];
+		let progIndex = this.generateRandom(0,selectedCategory.programs.length)
+		return {
+			format: selectedCategory.format,
+			program: selectedCategory.programs[progIndex]
+		}
+	}
 
   render() {
-    let topMovie;
-    if(this.state.hbo) {
-      topMovie = this.state.hbo.programs[0]
-    } 
+		let featuredTitle
+		if(this.state.ready) {
+			featuredTitle = this.getRandomFeature()
+		}
 
     return this.state.ready ? (
     	<div>
 	    	<div 
 	          className="hero"
-	          style={{backgroundImage: `url(https://image.tmdb.org/t/p/w1280${topMovie.backdrop_path})`}} >
+	          style={{backgroundImage: `url(https://image.tmdb.org/t/p/w1280${featuredTitle.program.backdrop_path})`}} >
 	          <div className="hero_overlay">
 	            <h1 className="hero_title">
-	              {topMovie.title || topMovie.name}
+	              {featuredTitle.program.title || featuredTitle.program.name}
 	            </h1>
 	            <div className="hero_buttons">
-	              <Link className="video_link" to={`/${this.state.hbo.format}/${topMovie.id}`}>
+	              <Link className="video_link" to={`/${featuredTitle.format}/${featuredTitle.program.id}`}>
 		              <div className="hero_play">
 		                <i className="fa fa-play"></i>
 		                Play
@@ -107,7 +127,11 @@ export default class Home extends Component {
 	              </div>
 	            </div>
 	            <p className="hero_description">
-	              {topMovie.overview}
+								{featuredTitle.program.overview.length > 350 ? (
+									featuredTitle.program.overview.substr(0,350).trim() + '...'
+								) : (
+									featuredTitle.program.overview
+								)}
 	            </p>
 	          </div>
 	        </div>

@@ -4,7 +4,7 @@ import './detailsSection.css'
 export default function DetailsSection(props) {
 	let moreCast = [];
 	let limit = 0;
-	if(props) {
+	if(props.cast) {
 		if(props.cast.length >=10) {
 			limit = 10
 		} else {
@@ -19,6 +19,8 @@ export default function DetailsSection(props) {
 				</li>
 			)
 		}
+	} else {
+		moreCast = 'No cast available for this title'
 	}
 
 	return (

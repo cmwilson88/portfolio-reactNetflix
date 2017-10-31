@@ -5,7 +5,7 @@ import './App.css';
 import Navbar from './Navbar/Navbar'
 import Home from './Home/Home'
 import SearchResults from './SearchResults/SearchResults'
-import ProgramDisplay from './MovieDisplay/MovieDisplay'
+import ProgramDisplay from './ProgramDisplay/ProgramDisplay'
 
 function App() {
   return (

@@ -13,7 +13,7 @@
   background-repeat: no-repeat;
   
   height: 100%;
-  transition: 500ms background;
+  transition: 1000ms background ease-in-out;
 }
 
 .moreInfoContent {

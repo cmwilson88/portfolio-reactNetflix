@@ -74,6 +74,7 @@ class Navbar extends Component {
 			'navbar-scrolled': this.state.scrolled,
 			'navbar_video':  /\d/.test(this.props.location.pathname)
 		})
+		
 		return (
 			<nav 
 				className={navbarClass}>
