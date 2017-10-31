@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {getProgramVideos} from '../../services/moreInfo'
-import './movieDisplay.css'
+import './programDisplay.css'
 
-export default class MovieDisplay extends Component {
+export default class ProgramDisplay extends Component {
 	constructor() {
 		super()
 
