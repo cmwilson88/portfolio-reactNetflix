@@ -31,7 +31,8 @@ class ProgramMoreInfo extends Component {
 				this.setState({
 					detailedProgram: response,
 					images: response.images.backdrops
-						.filter(img => img.width >1200 && img.width < 2000).splice(1,5),
+						.filter(img => img.width >1200 && img.width < 2000).splice(1,5)
+						.map(img => (new Image()).src = `https://image.tmdb.org/t/p/w780${img.file_path}`),
 					cast: response.credits.cast,
 					directors: response.credits.crew
 							.filter(item => item.job === 'Director'),
@@ -70,12 +71,13 @@ class ProgramMoreInfo extends Component {
 
 	cycleImages() {
 		let i = 0;
+		let arr = [];
 		this.interval = setInterval(() => {
 			if(this.state.images.length < 2) {
 				clearInterval(this.interval)
 			} else {
 				this.setState({
-					backdropImg: this.state.images[i].file_path
+					backdropImg: this.state.images[i]
 				})
 				console.log(this.state.detailedProgram.title || this.state.detailedProgram.name)
 				console.log(this.state.backdropImg)
@@ -164,12 +166,19 @@ class ProgramMoreInfo extends Component {
 			})
 		}
 
+		let moreInfoBackgroundImg;
+		if(this.state.backdropImg) {
+			moreInfoBackgroundImg = this.state.backdropImg
+		} else {
+			moreInfoBackgroundImg = `https://image.tmdb.org/t/p/w780${detailedProgram.backdrop_path}`
+		}
+
 		return (
 	 		<section 
 	 			className="moreInfo" 
 	 			>
 	 			<div className="moreInfoBG"
-	 				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${this.state.backdropImg ? this.state.backdropImg : detailedProgram.backdrop_path})`}}>
+	 				style={{backgroundImage: `url(${moreInfoBackgroundImg})`}}>
 	     			<div className={this.state.overview ? 'moreInfoOverlay' : 'moreInfoOverlayDark'}>
 		     		<h1 className="movie_info_title">{detailedProgram.title || detailedProgram.name}</h1>
 		     			<div className="moreInfoContent">
