@@ -6,7 +6,7 @@ export default function SimilarTitles(props) {
 	let similar = props.similar.map((program, index) => {
 		let format = program.release_date ? 'movie' : 'tv'
 		let releaseYear = program.release_date ? program.release_date.substr(0,4) : null
-		const match = program.vote_average * 10
+		const match = (program.vote_average * 10).toFixed(0)
 		return (
 			<div key={program.id} className="similar_tile">
 				<div 

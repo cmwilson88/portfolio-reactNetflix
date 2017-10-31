@@ -9,7 +9,7 @@ function SearchResults(props) {
 		let searchResults = props.searchResults.map((program, index) => {
 			const releaseYear = program.release_date ? program.release_date.substr(0,4) : null
 			const format = program.release_date ? 'movie' : 'tv'
-			const match = program.vote_average * 10
+			const match = (program.vote_average * 10).toFixed(0)
 			return (
 				<div key={program.id} className="similar_tile search_tile">
 					<div 

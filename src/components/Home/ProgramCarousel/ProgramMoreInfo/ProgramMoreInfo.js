@@ -16,17 +16,22 @@ class ProgramMoreInfo extends Component {
 			overview: true,
 			recommended: false,
 			details: false,
+
+			backdropImg: null
 		}
+
+		let interval = null;
 
 	}
 
 	componentDidMount() {
 		if(this.props.format === 'movie') {
 			getMovieInfo(this.props.displayProgram.id).then(response => {
+				console.log(response.images)
 				this.setState({
 					detailedProgram: response,
 					images: response.images.backdrops
-						.filter(img => img.width >1200 && img.width < 2000)[0],
+						.filter(img => img.width >1200 && img.width < 2000).splice(1,5),
 					cast: response.credits.cast,
 					directors: response.credits.crew
 							.filter(item => item.job === 'Director'),
@@ -43,10 +48,13 @@ class ProgramMoreInfo extends Component {
 					detailedProgram: response,
 					cast: response.credits.cast.length ? response.credits.cast : null,
 					genres: response.genres,
+					images: response.images.backdrops
+						.filter(img => img.width >1200 && img.width < 2000).splice(1,5),
 					similar: response.recommendations.results.splice(0,4)
 				})
 			})
 		}
+		this.cycleImages()
 	}
 
 	calculateRuntime(x) {
@@ -59,6 +67,30 @@ class ProgramMoreInfo extends Component {
 		minutes = Math.ceil(x);
 		return `${hours}h ${minutes}m`
 	};
+
+	cycleImages() {
+		let i = 0;
+		this.interval = setInterval(() => {
+			if(this.state.images.length < 2) {
+				clearInterval(this.interval)
+			} else {
+				this.setState({
+					backdropImg: this.state.images[i].file_path
+				})
+				console.log(this.state.detailedProgram.title || this.state.detailedProgram.name)
+				console.log(this.state.backdropImg)
+				if(i === this.state.images.length-1) {
+					i = 0;
+				} else {
+					i++
+				}
+			}
+		},3000)
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.interval)
+	}
 
 
 
@@ -75,20 +107,21 @@ class ProgramMoreInfo extends Component {
 		let mainCast = [];
 		let directors;
 		let genres;
-		let keywords;
-		if(this.state.keywords) {
-			keywords = this.state.keywords.splice(0,10)
-							.map(keyword => ({
-								...keyword, 
-								name: keyword.name
-											.split(' ')
-											.map(word => {
-												return word[0].toUpperCase() 
-														+ word.substr(1)
-													})
-											.join(' ')
-								}));
-		}
+		// REMOVED UNTIL I CAN FIGURE OUT WHAT'S GOING ON WITH API REQUEST
+		// let keywords;
+		// if(this.state.keywords) {
+		// 	keywords = this.state.keywords.splice(0,10)
+		// 					.map(keyword => ({
+		// 						...keyword, 
+		// 						name: keyword.name
+		// 									.split(' ')
+		// 									.map(word => {
+		// 										return word[0].toUpperCase() 
+		// 												+ word.substr(1)
+		// 											})
+		// 									.join(' ')
+		// 						}));
+		// }
 							
 		if(this.state.cast && typeof Array.isArray(this.state.cast)) {
 			for(let i = 0; i < 5; i++) {
@@ -131,13 +164,12 @@ class ProgramMoreInfo extends Component {
 			})
 		}
 
-
 		return (
 	 		<section 
 	 			className="moreInfo" 
 	 			>
 	 			<div className="moreInfoBG"
-	 				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${detailedProgram.backdrop_path})`}}>
+	 				style={{backgroundImage: `url(https://image.tmdb.org/t/p/w780${this.state.backdropImg ? this.state.backdropImg : detailedProgram.backdrop_path})`}}>
 	     			<div className={this.state.overview ? 'moreInfoOverlay' : 'moreInfoOverlayDark'}>
 		     		<h1 className="movie_info_title">{detailedProgram.title || detailedProgram.name}</h1>
 		     			<div className="moreInfoContent">

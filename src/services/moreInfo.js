@@ -2,13 +2,13 @@ import axios from 'axios'
 import config from '../config'
 
 export function getMovieInfo(id) {
-	return axios.get(`${config.url}/3/movie/${id}?api_key=${config.API_KEY}&language=en-US&append_to_response=recommendations,credits,images,reviews`)
+	return axios.get(`${config.url}/3/movie/${id}?api_key=${config.API_KEY}&language=en-US&append_to_response=recommendations,credits,images,reviews&include_image_language=en,null`)
 			.then(response => {
 				return response.data}).catch(err => console.log(err))
 }
 
 export function getTVInfo(id) {
-	return axios.get(`${config.url}/3/tv/${id}?api_key=${config.API_KEY}&append_to_response=credits,recommendations`)
+	return axios.get(`${config.url}/3/tv/${id}?api_key=${config.API_KEY}&append_to_response=credits,recommendations,images`)
 	.then(response => {
 				return response.data}).catch(err => console.log(err))
 }
