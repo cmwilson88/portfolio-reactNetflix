@@ -41,7 +41,7 @@ class ProgramMoreInfo extends Component {
 			getTVInfo(this.props.displayProgram.id).then(response => {
 				this.setState({
 					detailedProgram: response,
-					cast: response.credits.cast,
+					cast: response.credits.cast.length ? response.credits.cast : null,
 					genres: response.genres,
 					similar: response.recommendations.results.splice(0,4)
 				})
@@ -90,7 +90,7 @@ class ProgramMoreInfo extends Component {
 								}));
 		}
 							
-		if(this.state.cast) {
+		if(this.state.cast && typeof Array.isArray(this.state.cast)) {
 			for(let i = 0; i < 5; i++) {
 				mainCast.push(
 						<li key={this.state.cast[i].id}>
@@ -101,6 +101,8 @@ class ProgramMoreInfo extends Component {
 						</li>
 				)
 			}
+		} else {
+			mainCast = 'No cast available for this title'
 		}
 
 		if(this.state.directors) {
