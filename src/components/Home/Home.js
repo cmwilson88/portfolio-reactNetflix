@@ -22,7 +22,9 @@ export default class Home extends Component {
 	      	{format: 'tv', type: 'network', category: 'hbo', id: 49}
 	      ],
 	      ready: false
-	    }
+			}
+			
+			this.getRandomFeature = this.getRandomFeature.bind(this)
 	}
 
 
@@ -82,36 +84,38 @@ export default class Home extends Component {
 	generateRandom(min, max) {
 			min = Math.ceil(min)
 			max = Math.floor(max)
-		return Math.floor(Math.random() * (max-min)) + min;
+			return Math.floor(Math.random() * (max-min)) + min;
+	}
+
+	getRandomFeature() {
+		let targetedCategories = Object.keys(this.state)
+																	.filter(cat => cat === 'netflix' || cat === 'hbo' || cat==='popular')
+		let catIndex = this.generateRandom(0, targetedCategories.length);
+		let selectedCategory = this.state[targetedCategories[catIndex]];
+		let progIndex = this.generateRandom(0,selectedCategory.programs.length)
+		return {
+			format: selectedCategory.format,
+			program: selectedCategory.programs[progIndex]
+		}
 	}
 
   render() {
-		let featuredTitle;
-		let featuredFormat;
+		let featuredTitle
 		if(this.state.ready) {
-			let arr = Object.keys(this.state)
-			let randCatIndex = this.generateRandom(2, arr.length)
-			let selectedCategory = this.state[arr[randCatIndex]]
-			let randProgramIndex = this.generateRandom(0, selectedCategory.programs.length)
-			featuredFormat = selectedCategory.format
-			featuredTitle = selectedCategory.programs[randProgramIndex]
+			featuredTitle = this.getRandomFeature()
 		}
-    let topMovie;
-    if(this.state.hbo) {
-      topMovie = this.state.hbo.programs[13]
-    } 
 
     return this.state.ready ? (
     	<div>
 	    	<div 
 	          className="hero"
-	          style={{backgroundImage: `url(https://image.tmdb.org/t/p/w1280${featuredTitle.backdrop_path})`}} >
+	          style={{backgroundImage: `url(https://image.tmdb.org/t/p/w1280${featuredTitle.program.backdrop_path})`}} >
 	          <div className="hero_overlay">
 	            <h1 className="hero_title">
-	              {featuredTitle.title || featuredTitle.name}
+	              {featuredTitle.program.title || featuredTitle.program.name}
 	            </h1>
 	            <div className="hero_buttons">
-	              <Link className="video_link" to={`/${featuredFormat}/${featuredTitle.id}`}>
+	              <Link className="video_link" to={`/${featuredTitle.format}/${featuredTitle.program.id}`}>
 		              <div className="hero_play">
 		                <i className="fa fa-play"></i>
 		                Play
@@ -123,10 +127,10 @@ export default class Home extends Component {
 	              </div>
 	            </div>
 	            <p className="hero_description">
-								{featuredTitle.overview.length > 350 ? (
-									featuredTitle.overview.substr(0,350).trim() + '...'
+								{featuredTitle.program.overview.length > 350 ? (
+									featuredTitle.program.overview.substr(0,350).trim() + '...'
 								) : (
-									featuredTitle.overview
+									featuredTitle.program.overview
 								)}
 	            </p>
 	          </div>
