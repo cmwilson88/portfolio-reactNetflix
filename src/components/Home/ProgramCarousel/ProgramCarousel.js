@@ -63,11 +63,13 @@ class ProgramCarousel extends Component {
 			<div className='movieCategoryRow'>
 	          <h3 className="rowHeader">{this.props.category}</h3>
 	          <div className="movieRow">
-		          <span 
-		            className="rowButton leftRowButton"
-		            onClick={() => this.moveRowLeft()}>
-		            	<i className="fa fa-chevron-left"></i>
-		            </span>
+							{this.state.leftMargin < 0 ? (
+								<span 
+									className="rowButton leftRowButton"
+									onClick={() => this.moveRowLeft()}>
+										<i className="fa fa-chevron-left"></i>
+									</span>
+							) : null}
 		          
 		          <div className="row">
 		            <div 

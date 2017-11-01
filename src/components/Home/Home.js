@@ -5,8 +5,9 @@ import ProgramCarousel from './ProgramCarousel/ProgramCarousel'
 
 import {
   getPopularMovies, 
-  getUpcomingMovies, 
-  getMoviesByCategory} from '../../services/movieLists'
+	getUpcomingMovies,
+	getTVTopRated, 
+  getProgramsByType} from '../../services/movieLists'
 
 export default class Home extends Component {
 	constructor(props) {
@@ -19,7 +20,7 @@ export default class Home extends Component {
 	      	{format: 'movie', type: 'genre', category: 'horror', id: 27},
 	      	{format: 'movie', type: 'genre', category: 'mystery', id: 9648},
 	      	{format: 'tv', type: 'network', category: 'netflix', id: 213},
-	      	{format: 'tv', type: 'network', category: 'hbo', id: 49}
+					{format: 'tv', type: 'network', category: 'hbo', id: 49},
 	      ],
 	      ready: false
 			}
@@ -31,31 +32,34 @@ export default class Home extends Component {
   componentWillMount() {
     getPopularMovies().then(response => {
       this.setState({
-        popular: Object.assign(
-        			{}, 
-        			this.state.popular, 
-        			{
-								format: 'movie',
-        				programs: response
-        			})
+					popular:	{
+							format: 'movie',
+							programs: response
+						}
       })
     })
     getUpcomingMovies().then(response => {
       this.setState({
-        upcoming: Object.assign(
-        			{},
-        			this.state.upcoming,
-        			{
-								format: 'movie',
-        				programs: response
-        			})
+					upcoming:	{
+							format: 'movie',
+							programs: response
+						}
       })
-    })
+		})
+		getTVTopRated().then(response => {
+			console.log(response)
+			this.setState({
+					topTV: {
+						format: 'tv',
+						programs: response
+					}
+			})
+		})
 
     for (let i = 0, j=this.state.categories.length; i < j; i++) {
     	let item = this.state.categories[i]
     	if(i === j-1) {
-    		getMoviesByCategory(item.format, item.type, item.id).then(response => {
+    		getProgramsByType(item.format, item.type, item.id).then(response => {
     			this.setState({
     				[item.category]: {
     								format: item.format,
@@ -69,7 +73,7 @@ export default class Home extends Component {
     			}, 100)
     		})
     	} else {
-	    	getMoviesByCategory(item.format, item.type, item.id).then(response => {
+	    	getProgramsByType(item.format, item.type, item.id).then(response => {
     			this.setState({
     				[item.category]:{
     									format: item.format,
@@ -137,35 +141,39 @@ export default class Home extends Component {
 	        </div>
 	        <div className="moviesContainer">
 	          <ProgramCarousel
-	          	category={'Netflix'}
+	          	category={'Netflix Hits'}
 	          	format={this.state.netflix.format}
 	          	programs={this.state.netflix.programs} />
+	          <ProgramCarousel
+	            category={'Trending Movies'}
+	            format={this.state.popular.format}
+	            programs={this.state.popular.programs} />
 			 			<ProgramCarousel
-	          	category={'HBO'}
+	          	category={'Best of HBO'}
 	          	format={this.state.hbo.format}
 	          	programs={this.state.hbo.programs} />
 	          <ProgramCarousel
-	            category={'Trending'}
-	            format={this.state.popular.format}
-	            programs={this.state.popular.programs} />
-	          <ProgramCarousel
-	            category={'Upcoming'}
+	            category={'Upcoming Releases'}
 	            format={this.state.upcoming.format}
 	            programs={this.state.upcoming.programs} />
 	          <ProgramCarousel
-	            category={'Fantasy'}
+	            category={'Halloween Favorites'}
+	            format={this.state.horror.format}
+	            programs={this.state.horror.programs} />
+						<ProgramCarousel
+								category={`Top TV Picks`}
+								format={this.state.topTV.format}
+								programs={this.state.topTV.programs} />
+	          <ProgramCarousel
+	            category={'Popular Fantasy'}
 	            format={this.state.fantasy.format}
 	            programs={this.state.fantasy.programs} />
 	          <ProgramCarousel
-	            category={'Comedy'}
+	            category={'Laugh Out Loud Hits'}
 	            format={this.state.comedy.format}
 	            programs={this.state.comedy.programs} />
 	          <ProgramCarousel
-	            category={'Horror'}
-	            format={this.state.horror.format}
-	            programs={this.state.horror.programs} />
-	          <ProgramCarousel
-	            category={'Mystery'}
+	            category={'Thrilling Mysteries'}
 	            format={this.state.mystery.format}
 	            programs={this.state.mystery.programs} />
 	        </div>

@@ -170,7 +170,7 @@ class ProgramMoreInfo extends Component {
 		}
 
 		let moreInfoBackgroundImg;
-		if(this.state.backdropImg) {
+		if(this.state.backdropImg && this.state.overview) {
 			moreInfoBackgroundImg = this.state.backdropImg
 		} else {
 			moreInfoBackgroundImg = `https://image.tmdb.org/t/p/w780${detailedProgram.backdrop_path}`
