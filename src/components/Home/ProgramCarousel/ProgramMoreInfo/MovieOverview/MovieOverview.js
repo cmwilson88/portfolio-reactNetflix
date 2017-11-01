@@ -17,7 +17,10 @@ export default function MovieOverview(props) {
 				<span>{props.releaseYear}</span>
 				<span>{props.runtime}</span>
 			</section>
-			<p className="mi_section movie_info_overview">{props.detailedProgram.overview}</p>
+			<p className="mi_section movie_info_overview">
+				{props.detailedProgram.overview.length > 750 
+					? props.detailedProgram.overview.substr(0,750) + '...' 
+					: props.detailedProgram.overview}</p>
 			<br/>
 			<div className="mi_section">
 				{props.cast ? (
