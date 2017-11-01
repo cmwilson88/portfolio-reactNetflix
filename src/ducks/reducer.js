@@ -7,6 +7,7 @@ const initialState = {
 
 export default function reducer(state=initialState, action) {
 	switch(action.type) {
+		// Promise Middleware.  When search promise is resolving, search term = 'Loading'
 		case SEARCH_MOVIES + '_PENDING':
 			return Object.assign(
 				{},
@@ -15,6 +16,8 @@ export default function reducer(state=initialState, action) {
 					searchTerm: 'Loading'
 				}
 			)	
+		/* Promise Middelware.  When search is fulfilled, capitalize each word in the search term 
+		and filter programs that have a backdrop image and an overview to make the display look nicer*/
 		case SEARCH_MOVIES + '_FULFILLED':
 			return Object.assign(
 				{}, 
@@ -35,6 +38,7 @@ const SEARCH_MOVIES = 'SEARCH_MOVIES';
 
 export function search(term) {
 	let promise = searchPrograms(term)
+	// Set payload equal to the response object returned from the searchPrograms axios request.
 	return {
 		type: SEARCH_MOVIES,
 		payload: promise
