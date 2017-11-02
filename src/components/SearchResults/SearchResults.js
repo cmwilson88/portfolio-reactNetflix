@@ -7,9 +7,17 @@ import './searchResults.css'
 
 function SearchResults(props) {
 		let searchResults = props.searchResults.map((program, index) => {
+			/*
+				TV results from the API do not have a release_date property, therefore allowing
+				us to determine the format by the presence of a release_date poperty.
+			*/
+			// Grab just the year for relase date.
 			const releaseYear = program.release_date ? program.release_date.substr(0,4) : null
+			// Format is used to link to the media player. 
 			const format = program.release_date ? 'movie' : 'tv'
 			const match = (program.vote_average * 10).toFixed(0)
+			
+			// Render individual search item tile
 			return (
 				<div key={program.id} className="similar_tile search_tile">
 					<div 
@@ -54,6 +62,7 @@ function SearchResults(props) {
 	)
 }
 
+// Helper function to Import the current state of Redux store
 function mapStateToProps(state) {
 	return {
 		searchResults: state.searchResults,
@@ -61,4 +70,5 @@ function mapStateToProps(state) {
 	}
 }
 
+// 'Connect' Redux State to import the Redux State
 export default connect(mapStateToProps)(SearchResults)

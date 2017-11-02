@@ -8,7 +8,7 @@ export function getMovieInfo(id) {
 
 export function getTVInfo(id) {
 	return axios.get(`${config.url}/3/tv/${id}?api_key=${config.API_KEY}&append_to_response=credits,recommendations,images`)
-	.then(response => return response.data).catch(err => console.log(err))
+	.then(response => response.data).catch(err => console.log(err))
 }
 
 export function getProgramVideos(format,id) {
